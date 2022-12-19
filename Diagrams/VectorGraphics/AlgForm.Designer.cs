@@ -82,7 +82,7 @@
             this.fileToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(739, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(676, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -411,7 +411,7 @@
             this.dbDiagram.Location = new System.Drawing.Point(137, 24);
             this.dbDiagram.Name = "dbDiagram";
             this.dbDiagram.SelectedFigure = null;
-            this.dbDiagram.Size = new System.Drawing.Size(602, 622);
+            this.dbDiagram.Size = new System.Drawing.Size(539, 622);
             this.dbDiagram.TabIndex = 3;
             this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
@@ -421,7 +421,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 646);
+            this.ClientSize = new System.Drawing.Size(676, 646);
             this.Controls.Add(this.dbDiagram);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuStrip1);

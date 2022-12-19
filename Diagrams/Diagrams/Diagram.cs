@@ -88,6 +88,7 @@ namespace Diagrams
     [Serializable]
     public abstract class SolidFigure: Figure
     {
+        public Block block;
         //размер новой фигуры, по умолчанию
         public static int defaultSize;
         //заливка фигуры
