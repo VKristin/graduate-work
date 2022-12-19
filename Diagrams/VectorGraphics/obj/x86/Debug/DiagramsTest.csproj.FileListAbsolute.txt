@@ -1,0 +1,58 @@
+C:\Projects_CSharp\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.exe
+C:\Projects_CSharp\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.pdb
+C:\Projects_CSharp\Diagrams\VectorGraphics\bin\Debug\Diagrams.dll
+C:\Projects_CSharp\Diagrams\VectorGraphics\bin\Debug\Diagrams.pdb
+C:\Projects_CSharp\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csprojResolveAssemblyReference.cache
+C:\Projects_CSharp\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.Form1.resources
+C:\Projects_CSharp\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.Properties.Resources.resources
+C:\Projects_CSharp\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.GenerateResource.Cache
+C:\Projects_CSharp\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.exe
+C:\Projects_CSharp\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.pdb
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.exe
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.pdb
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\bin\Debug\Diagrams.dll
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\bin\Debug\Diagrams.pdb
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.AssemblyReference.cache
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.Form1.resources
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.Properties.Resources.resources
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.GenerateResource.cache
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CoreCompileInputs.cache
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CopyComplete
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.exe
+D:\User\Downloads\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.pdb
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.exe
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.pdb
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\bin\Debug\Diagrams.dll
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\bin\Debug\Diagrams.pdb
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.AssemblyReference.cache
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.Properties.Resources.resources
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.GenerateResource.cache
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CoreCompileInputs.cache
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CopyComplete
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.exe
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.pdb
+D:\User\Desktop\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.AlgForm.resources
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.exe
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\bin\Debug\Diagrams.dll
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\bin\Debug\Diagrams.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.AssemblyReference.cache
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.AlgForm.resources
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.Properties.Resources.resources
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.GenerateResource.cache
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CoreCompileInputs.cache
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CopyComplete
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.exe
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.exe
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\bin\Debug\Diagrams.dll
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\bin\Debug\Diagrams.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.AssemblyReference.cache
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.AlgForm.resources
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.Properties.Resources.resources
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.GenerateResource.cache
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CoreCompileInputs.cache
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CopyComplete
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.exe
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.pdb
