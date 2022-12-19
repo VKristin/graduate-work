@@ -30,7 +30,7 @@ namespace Diagrams
         Block trueBlock;
         Block falseBlock;
 
-        public IfBlock(Block nextBlock, Block trueBlock, Block falseBlock, SolidFigure solidFigure) : base(nextBlock, solidFigure)
+        public IfBlock(Block nextBlock, Block trueBlock, Block falseBlock, ref SolidFigure solidFigure) : base(nextBlock, solidFigure)
         {
             this.trueBlock = trueBlock;
             figure = solidFigure;
@@ -57,7 +57,7 @@ namespace Diagrams
     public class ActionBlock : Block //блок действия
     {
         byte action; //номер команды, которую необходимо выполнить
-        public ActionBlock(Block nextBlock, byte action, SolidFigure solidFigure) : base(nextBlock, solidFigure)
+        public ActionBlock(Block nextBlock, byte action, ref SolidFigure solidFigure) : base(nextBlock, solidFigure)
         {
             this.action = action;
         }
@@ -65,8 +65,8 @@ namespace Diagrams
     public class WhileBlock : Block //блок предусловия
     {
         byte condition; //номер условия
-        Block trueBlock;
-        public WhileBlock(Block nextBlock, byte condition, SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
+        public Block trueBlock;
+        public WhileBlock(Block nextBlock, byte condition, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
         {
             this.condition = condition;
             figure = solidFigure;
@@ -75,8 +75,8 @@ namespace Diagrams
     public class DoWhileBlock : Block //блок постусловия
     {
         byte condition; //номер условия
-        Block trueBlock;
-        public DoWhileBlock(Block nextBlock, byte condition, SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
+        public Block trueBlock;
+        public DoWhileBlock(Block nextBlock, byte condition, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
         {
             this.condition = condition;
         }
@@ -84,8 +84,8 @@ namespace Diagrams
     public class ForBlock : Block //блок цикла с параметром
     {
         int numOfRep; //количество повторов
-        Block trueBlock;
-        public ForBlock(Block nextBlock, int numOfRep, SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
+        public Block trueBlock;
+        public ForBlock(Block nextBlock, int numOfRep, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
         {
             this.numOfRep = numOfRep;
         }
@@ -93,8 +93,8 @@ namespace Diagrams
     public class IfWithoutElseBlock: Block //блок условия без альтернативы
     {
         byte condition; //номер условия
-        Block trueBlock;
-        public IfWithoutElseBlock(Block nextBlock, byte condition, SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
+        public Block trueBlock;
+        public IfWithoutElseBlock(Block nextBlock, byte condition, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
         {
             this.condition = condition;
         }

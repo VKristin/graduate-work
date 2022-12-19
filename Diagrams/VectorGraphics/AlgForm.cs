@@ -201,7 +201,7 @@ namespace Diagrams
 
         private void btm2_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(4);
+            dbDiagram.CreateMarkers(4, block);
             dbDiagram.Invalidate();
         }
 
@@ -217,7 +217,7 @@ namespace Diagrams
 
         private void btm5_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(1);
+            dbDiagram.CreateMarkers(1, block);
             dbDiagram.Invalidate();
         }
 
@@ -228,25 +228,25 @@ namespace Diagrams
 
         private void btm3_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(5);
+            dbDiagram.CreateMarkers(5, block);
             dbDiagram.Invalidate();
         }
 
         private void btm4_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(6);
+            dbDiagram.CreateMarkers(6, block);
             dbDiagram.Invalidate();
         }
 
         private void btm6_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(7);
+            dbDiagram.CreateMarkers(7, block);
             dbDiagram.Invalidate();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(8);
+            dbDiagram.CreateMarkers(8, block);
             dbDiagram.Invalidate();
         }
 
