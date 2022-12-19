@@ -65,7 +65,8 @@ namespace Diagrams
     public class WhileBlock : Block //блок предусловия
     {
         byte condition; //номер условия
-        public WhileBlock(Block nextBlock, byte condition, SolidFigure solidFigure) : base(nextBlock, solidFigure)
+        Block trueBlock;
+        public WhileBlock(Block nextBlock, byte condition, SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
         {
             this.condition = condition;
             figure = solidFigure;
@@ -74,7 +75,8 @@ namespace Diagrams
     public class DoWhileBlock : Block //блок постусловия
     {
         byte condition; //номер условия
-        public DoWhileBlock(Block nextBlock, byte condition, SolidFigure solidFigure) : base(nextBlock, solidFigure)
+        Block trueBlock;
+        public DoWhileBlock(Block nextBlock, byte condition, SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
         {
             this.condition = condition;
         }
@@ -82,7 +84,8 @@ namespace Diagrams
     public class ForBlock : Block //блок цикла с параметром
     {
         int numOfRep; //количество повторов
-        public ForBlock(Block nextBlock, int numOfRep, SolidFigure solidFigure) : base(nextBlock, solidFigure)
+        Block trueBlock;
+        public ForBlock(Block nextBlock, int numOfRep, SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
         {
             this.numOfRep = numOfRep;
         }
@@ -90,7 +93,8 @@ namespace Diagrams
     public class IfWithoutElseBlock: Block //блок условия без альтернативы
     {
         byte condition; //номер условия
-        public IfWithoutElseBlock(Block nextBlock, byte condition, SolidFigure solidFigure) : base(nextBlock, solidFigure)
+        Block trueBlock;
+        public IfWithoutElseBlock(Block nextBlock, byte condition, SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
         {
             this.condition = condition;
         }

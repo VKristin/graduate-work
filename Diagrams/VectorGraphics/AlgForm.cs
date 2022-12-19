@@ -15,7 +15,7 @@ namespace Diagrams
 {
     public partial class AlgForm : Form
     {
-        Block blocks;
+        Block block;
         DrawForm drawForm;
         public AlgForm()
         {
@@ -50,6 +50,7 @@ namespace Diagrams
             SolidFigure figure = null;
             Block figureSt = null;
             Block figureEnd = null;
+            List<Block> blocks = new List<Block>();
             for (int i = 0; i < 2; i++)
             {
                 figure = new EllipseFigure();
@@ -68,6 +69,7 @@ namespace Diagrams
                 dbDiagram.Diagram.figures.Add(figure);
             }
             figureSt.nextBlock = figureEnd;
+            block = figureSt;
             LedgeLineFigure line = new LedgeLineFigure();
             line.From = dbDiagram.Diagram.figures[0] as SolidFigure;
             line.To = dbDiagram.Diagram.figures[1] as SolidFigure;
@@ -99,7 +101,7 @@ namespace Diagrams
 
         private void dbDiagram_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            dbDiagram.SelectedBeginEditText(this, blocks);
+            dbDiagram.SelectedBeginEditText(this, block);
             /*EditBlock editBlock = new EditBlock(blocks);
             editBlock.Owner = this; //Передаём вновь созданной форме её владельца.
             editBlock.Show();*/
@@ -165,7 +167,7 @@ namespace Diagrams
 
         private void editTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dbDiagram.SelectedBeginEditText(this, blocks);
+            dbDiagram.SelectedBeginEditText(this, block);
         }
 
         private void sendToBackToolStripMenuItem_Click(object sender, EventArgs e)

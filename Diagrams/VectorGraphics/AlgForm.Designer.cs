@@ -82,7 +82,7 @@
             this.fileToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(931, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(676, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -319,7 +319,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(173, 622);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(137, 622);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // btm1
@@ -327,7 +327,7 @@
             this.btm1.BackColor = System.Drawing.Color.Lavender;
             this.btm1.Location = new System.Drawing.Point(3, 3);
             this.btm1.Name = "btm1";
-            this.btm1.Size = new System.Drawing.Size(167, 45);
+            this.btm1.Size = new System.Drawing.Size(134, 45);
             this.btm1.TabIndex = 5;
             this.btm1.Text = "Вызов подпрограммы";
             this.btm1.UseVisualStyleBackColor = false;
@@ -338,7 +338,7 @@
             this.btm2.BackColor = System.Drawing.Color.Lavender;
             this.btm2.Location = new System.Drawing.Point(3, 54);
             this.btm2.Name = "btm2";
-            this.btm2.Size = new System.Drawing.Size(167, 45);
+            this.btm2.Size = new System.Drawing.Size(134, 45);
             this.btm2.TabIndex = 6;
             this.btm2.Text = "Развилка";
             this.btm2.UseVisualStyleBackColor = false;
@@ -349,7 +349,7 @@
             this.btm3.BackColor = System.Drawing.Color.Lavender;
             this.btm3.Location = new System.Drawing.Point(3, 105);
             this.btm3.Name = "btm3";
-            this.btm3.Size = new System.Drawing.Size(167, 45);
+            this.btm3.Size = new System.Drawing.Size(134, 45);
             this.btm3.TabIndex = 7;
             this.btm3.Text = "Цикл с предусловием";
             this.btm3.UseVisualStyleBackColor = false;
@@ -360,7 +360,7 @@
             this.btm7.BackColor = System.Drawing.Color.Lavender;
             this.btm7.Location = new System.Drawing.Point(3, 156);
             this.btm7.Name = "btm7";
-            this.btm7.Size = new System.Drawing.Size(167, 45);
+            this.btm7.Size = new System.Drawing.Size(134, 45);
             this.btm7.TabIndex = 11;
             this.btm7.Text = "Цикл с постусловием";
             this.btm7.UseVisualStyleBackColor = false;
@@ -371,7 +371,7 @@
             this.btm4.BackColor = System.Drawing.Color.Lavender;
             this.btm4.Location = new System.Drawing.Point(3, 207);
             this.btm4.Name = "btm4";
-            this.btm4.Size = new System.Drawing.Size(167, 45);
+            this.btm4.Size = new System.Drawing.Size(134, 45);
             this.btm4.TabIndex = 8;
             this.btm4.Text = "Цикл с счётчиком";
             this.btm4.UseVisualStyleBackColor = false;
@@ -382,7 +382,7 @@
             this.btm5.BackColor = System.Drawing.Color.Lavender;
             this.btm5.Location = new System.Drawing.Point(3, 258);
             this.btm5.Name = "btm5";
-            this.btm5.Size = new System.Drawing.Size(167, 45);
+            this.btm5.Size = new System.Drawing.Size(134, 45);
             this.btm5.TabIndex = 9;
             this.btm5.Text = "Действие";
             this.btm5.UseVisualStyleBackColor = false;
@@ -393,7 +393,7 @@
             this.btm6.BackColor = System.Drawing.Color.Lavender;
             this.btm6.Location = new System.Drawing.Point(3, 309);
             this.btm6.Name = "btm6";
-            this.btm6.Size = new System.Drawing.Size(167, 45);
+            this.btm6.Size = new System.Drawing.Size(134, 45);
             this.btm6.TabIndex = 10;
             this.btm6.Text = "Условие";
             this.btm6.UseVisualStyleBackColor = false;
@@ -408,10 +408,10 @@
             this.dbDiagram.Diagram = null;
             this.dbDiagram.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dbDiagram.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagram.Location = new System.Drawing.Point(173, 24);
+            this.dbDiagram.Location = new System.Drawing.Point(137, 24);
             this.dbDiagram.Name = "dbDiagram";
             this.dbDiagram.SelectedFigure = null;
-            this.dbDiagram.Size = new System.Drawing.Size(758, 622);
+            this.dbDiagram.Size = new System.Drawing.Size(539, 622);
             this.dbDiagram.TabIndex = 3;
             this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
@@ -421,7 +421,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 646);
+            this.ClientSize = new System.Drawing.Size(676, 646);
             this.Controls.Add(this.dbDiagram);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuStrip1);

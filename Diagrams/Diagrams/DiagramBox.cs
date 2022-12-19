@@ -21,6 +21,7 @@ namespace Diagrams
         //фигура или маркер, который тащится мышью
         Figure draggedFigure = null;
 
+
         public List<Marker> markers = new List<Marker>();
         Pen selectRectPen;
         byte insertFigure = 0;
@@ -53,8 +54,6 @@ namespace Diagrams
                     SelectedChanged(this, new EventArgs());
             }
         }
-
-
         //диаграмма, отображаемая компонентом
         public Diagram Diagram
         {
@@ -145,6 +144,7 @@ namespace Diagrams
         {
             SolidFigure figure = new RectFigure();
             int defaultSize = SolidFigure.defaultSize;
+            Block block;
             switch (num)
             {
                 case 1:
@@ -153,7 +153,7 @@ namespace Diagrams
                     figure = new EllipseFigure();
                     break;
                 case 3:
-                    figure = new RectFigureFrame();
+                    figure = new RectFigureFrame(); //действие
                     break;
                 case 4: //if else
                     figure = new RhombFigure();
@@ -175,10 +175,7 @@ namespace Diagrams
             LedgeLineFigure l = m.targetFigure as LedgeLineFigure;
             line.From = l.From;
             line.To = figure;
-            //if (l.To.location.Y - l.From.location.Y == defaultSize+30)
             figure.location = new PointF(l.ledgePositionX, l.To.location.Y);
-            //else
-            //figure.location = new PointF(l.ledgePositionX, l.To.location.Y - defaultSize-30);
 
             if (line.From.location.X != line.To.location.X)
                 line.ledgePositionX = l.ledgePositionX;
@@ -599,8 +596,9 @@ namespace Diagrams
             if (selectedFigure != null && (selectedFigure is SolidFigure))
             {
                 SolidFigure figure = (selectedFigure as SolidFigure);
-                if (figure.type != 6 || figure.type == 6 && Diagram.figures[0]==figure) {
-                    EditBlock editBlock = new EditBlock(this, blocks,figure);
+                if (figure.type != 6 || figure.type == 6 && Diagram.figures[0] == figure)
+                {
+                    EditBlock editBlock = new EditBlock(this, blocks, figure);
                     editBlock.Owner = form; //Передаём вновь созданной форме её владельца.
                     editBlock.Show();
                 }
@@ -837,11 +835,14 @@ namespace Diagrams
                             }
                         }
                     }
-                    
+
                 }
             }
             if (move)
                 MoveFiguresX(30);
         }
     }
+    
+
+
 }
