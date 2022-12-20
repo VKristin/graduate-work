@@ -150,6 +150,7 @@ namespace Diagrams
             {
                 //добавить цикл с постусловием
                 case 1:
+                    block = new ActionBlock(null, 0, ref figure);
                     break;
                 case 2:
                     figure = new EllipseFigure();
@@ -174,6 +175,7 @@ namespace Diagrams
                     block = new IfWithoutElseBlock(null, 0, ref figure, null);
                     break;
                 case 8:
+                    block = new ActionBlock(null, 0, ref figure);
                     break;
 
             }
@@ -215,11 +217,11 @@ namespace Diagrams
                     Diagram.figures.Remove(line);
                     break;
                 case 5:
-                    Cycle(line, block as WhileBlock);
+                    Cycle(line, block, 1);
                     Diagram.figures.Remove(line);
                     break;
                 case 6:
-                    Cycle(line, block as WhileBlock);
+                    Cycle(line, block, 2);
                     Diagram.figures.Remove(line);
                     break;
                 case 7:
@@ -227,7 +229,7 @@ namespace Diagrams
                     Diagram.figures.Remove(line);
                     break;
                 case 8:
-                    CyclePostC(line, block as DoWhileBlock);
+                    CyclePostC(line, block);
                     Diagram.figures.Remove(line);
                     break;
             }
@@ -280,7 +282,7 @@ namespace Diagrams
             Diagram.figures.Add(l);
         }
         //циклы с предусловием и с параметром имеют одинаковую структуру, кроме первого блока)
-        private void Cycle(LedgeLineFigure line, WhileBlock bl)
+        private void Cycle(LedgeLineFigure line, Block bl, byte type)
         {
             SolidFigure figure = new RectFigure();
             int defaultSize = SolidFigure.defaultSize;
@@ -310,10 +312,14 @@ namespace Diagrams
             Plus p = new Plus(l, 2);
             line.From.plus = p;
             Diagram.figures.Add(p);
-            bl.trueBlock = new ActionBlock(null, 0, ref figure);
+            if (type == 1)
+                (bl as WhileBlock).trueBlock = new ActionBlock(null, 0, ref figure);
+            if (type == 2)
+                (bl as ForBlock).trueBlock = new ActionBlock(null, 0, ref figure);
+
         }
         //цикл с постусловием
-        private void CyclePostC(LedgeLineFigure line, DoWhileBlock bl)
+        private void CyclePostC(LedgeLineFigure line, Block bl)
         {
             SolidFigure figure = new RhombFigure();
             int defaultSize = SolidFigure.defaultSize;
@@ -343,11 +349,14 @@ namespace Diagrams
             Minus m = new Minus(l, 1);
             l.From.minus = m;
             Diagram.figures.Add(m);
-            bl.trueBlock = new ActionBlock(null, 0, ref figure);
+            DoWhileBlock doWhile = new DoWhileBlock(bl.nextBlock, 0, ref figure, bl);
+            bl.nextBlock = doWhile;
+
+            //(bl as DoWhileBlock).trueBlock = new ActionBlock(null, 0, ref figure);
         }
 
         //ветвление без else части
-        private void BranchingWithoutElse(LedgeLineFigure line, IfWithoutElseBlock bl)
+        private void BranchingWithoutElse(LedgeLineFigure line, Block bl)
         {
             SolidFigure figure = new RectFigure();
             int defaultSize = SolidFigure.defaultSize;
@@ -376,7 +385,7 @@ namespace Diagrams
             l.To = line.To;
             l.ledgePositionX = figure.location.X;
             Diagram.figures.Add(l);
-            bl.trueBlock = new ActionBlock(null, 0, ref figure);
+            (bl as IfWithoutElseBlock).trueBlock = new ActionBlock(null, 0, ref figure);
         }
         //сдвигаем все фигуры, которые находятся ниже вставленной, вниз
         public void MoveFiguresY(SolidFigure a)
@@ -419,6 +428,28 @@ namespace Diagrams
                 if (Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
                 {
                     (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY += defaultSize + 10;
+                }
+            }
+            CalcAutoScrollPosition();
+        }
+
+        private void MoveFiguresYUp(SolidFigure a)
+        {
+            int defaultSize = SolidFigure.defaultSize;
+            for (int i = 0; i < Diagram.figures.Count(); i++)
+            {
+                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 12 && 
+                    Diagram.figures[i] as SolidFigure != a && (Diagram.figures[i] as SolidFigure).location.Y >= a.location.Y)
+                {
+                    (Diagram.figures[i] as SolidFigure).location.Y -= defaultSize + 10;
+                    if ((Diagram.figures[i] as SolidFigure).plus != null)
+                        (Diagram.figures[i] as SolidFigure).plus.location.Y -= defaultSize + 10;
+                    if ((Diagram.figures[i] as SolidFigure).minus != null)
+                        (Diagram.figures[i] as SolidFigure).minus.location.Y -= defaultSize + 10;
+                }
+                if (Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
+                {
+                    (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY -= defaultSize + 10;
                 }
             }
             CalcAutoScrollPosition();
@@ -701,8 +732,7 @@ namespace Diagrams
                 Block from = findBlockFromBlock(del, blocks);
                 Block to = del.nextBlock;
                 from.nextBlock = to;
-                DeleteFromBlock(del);
-
+                DeleteFromBlock(del, from);
 
                 //удялаем также все линии, ведущие к данной фигуре
                 for (int i = diagram.figures.Count - 1; i >= 0; i--)
@@ -726,15 +756,24 @@ namespace Diagrams
             }
         }
 
-        public void DeleteFromBlock(Block bl)
+        public void DeleteFromBlock(Block bl, Block from)
         {
             diagram.figures.Remove(bl.figure);
+            MoveFiguresYUp(from.figure);
             if (bl is WhileBlock || bl is DoWhileBlock || bl is ForBlock || bl is IfWithoutElseBlock)
             {
                 diagram.figures.Remove((bl.figure as SolidFigure).minus);
                 diagram.figures.Remove((bl.figure as SolidFigure).plus);
-                DeleteFromBlock((bl as WhileBlock).trueBlock);
+                if (bl is WhileBlock)
+                    DeleteFromBlock((bl as WhileBlock).trueBlock, from);
+                if (bl is DoWhileBlock)
+                    DeleteFromBlock((bl as DoWhileBlock).trueBlock, from);
+                if (bl is ForBlock)
+                    DeleteFromBlock((bl as ForBlock).trueBlock, from);
+                if (bl is IfWithoutElseBlock)
+                    DeleteFromBlock((bl as IfWithoutElseBlock).trueBlock, from);
             }
+
         }
 
         //преобразуем в картинку
@@ -890,8 +929,6 @@ namespace Diagrams
             }
             if (block.nextBlock != null)
                 return findBlockWithGraphic(figure, block.nextBlock);
-            return null;
-            return null;
             return null;
         }
 

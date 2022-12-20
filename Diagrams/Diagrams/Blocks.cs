@@ -27,7 +27,7 @@ namespace Diagrams
     }
     public class IfBlock : Block
     {
-        Block trueBlock;
+        public Block trueBlock;
         Block falseBlock;
 
         public IfBlock(Block nextBlock, Block trueBlock, Block falseBlock, ref SolidFigure solidFigure) : base(nextBlock, solidFigure)
