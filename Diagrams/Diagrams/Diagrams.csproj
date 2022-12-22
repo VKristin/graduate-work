@@ -43,6 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blocks.cs" />
+    <Compile Include="ChangeSize.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeSize.Designer.cs">
+      <DependentUpon>ChangeSize.cs</DependentUpon>
+    </Compile>
     <Compile Include="Diagram.cs" />
     <Compile Include="DiagramBox.cs">
       <SubType>UserControl</SubType>
@@ -65,6 +71,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ChangeSize.resx">
+      <DependentUpon>ChangeSize.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DiagramBox.resx">
       <DependentUpon>DiagramBox.cs</DependentUpon>
     </EmbeddedResource>

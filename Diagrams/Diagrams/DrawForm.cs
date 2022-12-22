@@ -50,5 +50,20 @@ namespace Diagrams
         {
             pbDraw.Invalidate();
         }
+
+        private void изменитьРазмерПоляToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+                ChangeSize window = new ChangeSize(numOfCellsX, numOfCellsY);
+                window.Owner = this; //Передаём вновь созданной форме её владельца.
+                window.Show();
+        }
+
+        public void gridSize(int x, int y)
+        {
+            numOfCellsX = x;
+            numOfCellsY = y;
+            Invalidate();
+        }
+
     }
 }

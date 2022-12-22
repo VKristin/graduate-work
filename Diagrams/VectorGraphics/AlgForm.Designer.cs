@@ -69,6 +69,7 @@
             this.btm5 = new System.Windows.Forms.Button();
             this.btm6 = new System.Windows.Forms.Button();
             this.dbDiagram = new Diagrams.DiagramBox();
+            this.нарисоватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.cmMain.SuspendLayout();
             this.cmSelectedFigure.SuspendLayout();
@@ -79,7 +80,8 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem1});
+            this.fileToolStripMenuItem1,
+            this.нарисоватьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(676, 24);
@@ -417,6 +419,13 @@
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
             this.dbDiagram.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseUp);
             // 
+            // нарисоватьToolStripMenuItem
+            // 
+            this.нарисоватьToolStripMenuItem.Name = "нарисоватьToolStripMenuItem";
+            this.нарисоватьToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.нарисоватьToolStripMenuItem.Text = "Нарисовать";
+            this.нарисоватьToolStripMenuItem.Click += new System.EventHandler(this.нарисоватьToolStripMenuItem_Click);
+            // 
             // AlgForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -481,6 +490,7 @@
         private System.Windows.Forms.ToolStripMenuItem двойнаяToolStripMenuItem;
         private System.Windows.Forms.Button btm6;
         private System.Windows.Forms.Button btm7;
+        private System.Windows.Forms.ToolStripMenuItem нарисоватьToolStripMenuItem;
     }
 }
 

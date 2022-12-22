@@ -25,7 +25,6 @@ namespace Diagrams
         public List<Marker> markers = new List<Marker>();
         Pen selectRectPen;
         byte insertFigure = 0;
-        public float zoom = 1.0f;
         public Block blocks;
 
         public DiagramBox()
@@ -76,7 +75,6 @@ namespace Diagrams
 
         private void Draw(Graphics gr)
         {
-            gr.ScaleTransform(zoom, zoom);
             gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             gr.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
 
@@ -164,7 +162,7 @@ namespace Diagrams
                     break;
                 case 5: //цикл с предусловием
                     figure = new RhombFigure();
-                    block = new WhileBlock(null, 0, ref figure, null);
+                    block = new WhileBlock(null, 0, 0, ref figure, null);
                     break;
                 case 6: //счётчик
                     figure = new SexangleFigure();
@@ -172,7 +170,7 @@ namespace Diagrams
                     break;
                 case 7: //if без ветви else
                     figure = new RhombFigure();
-                    block = new IfWithoutElseBlock(null, 0, ref figure, null);
+                    block = new IfWithoutElseBlock(null, 0, 0, ref figure, null);
                     break;
                 case 8:
                     block = new ActionBlock(null, 0, ref figure);
@@ -186,7 +184,10 @@ namespace Diagrams
             Block from = findBlockWithGraphic(l.From, blocks);
             line.From = l.From;
             line.To = figure;
-            figure.location = new PointF(l.ledgePositionX, l.To.location.Y);
+            //if (l.To.type != 4 && l.To.type != 8)
+                figure.location = new PointF(l.ledgePositionX, l.To.location.Y);
+            //else
+                //figure.location = new PointF(l.From.location.X, l.From.location.Y);
 
             if (line.From.location.X != line.To.location.X)
                 line.ledgePositionX = l.ledgePositionX;
@@ -196,8 +197,19 @@ namespace Diagrams
             line.From = figure;
             line.To = l.To;
             Block to = findBlockWithGraphic(l.To, blocks);
-            block.nextBlock = to;
-            from.nextBlock = block;
+            if (l.From.type == 4 || l.From.type == 8)
+            {
+                block.nextBlock = to;
+                if (from is WhileBlock)
+                    (from as WhileBlock).trueBlock = block;
+                if (from is ForBlock)
+                    (from as ForBlock).trueBlock = block;
+            }
+            else
+            {
+                block.nextBlock = to;
+                from.nextBlock = block;
+            }
             line.ledgePositionX = l.ledgePositionX;
             Diagram.figures.Add(line);
             if (figure.location.Y == l.To.location.Y)
@@ -349,7 +361,7 @@ namespace Diagrams
             Minus m = new Minus(l, 1);
             l.From.minus = m;
             Diagram.figures.Add(m);
-            DoWhileBlock doWhile = new DoWhileBlock(bl.nextBlock, 0, ref figure, bl);
+            DoWhileBlock doWhile = new DoWhileBlock(bl.nextBlock, 0, 0, ref figure, bl);
             bl.nextBlock = doWhile;
 
             //(bl as DoWhileBlock).trueBlock = new ActionBlock(null, 0, ref figure);
@@ -511,8 +523,9 @@ namespace Diagrams
             markers = new List<Marker>();
             for (int i = 0; i < Diagram.figures.Count; i++)
             {
+                //if (Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10)
                 if (Diagram.figures[i].type == 1)
-                {
+                    {
                     InsertMarker marker = new InsertMarker();
                     marker.targetFigure = Diagram.figures[i];
                     markers.Add(marker);
@@ -645,7 +658,8 @@ namespace Diagrams
                 SolidFigure figure = (selectedFigure as SolidFigure);
                 if (figure.type != 6 || figure.type == 6 && Diagram.figures[0] == figure)
                 {
-                    EditBlock editBlock = new EditBlock(this, blocks, figure);
+                    Block block = findBlockWithGraphic(figure, blocks);
+                    EditBlock editBlock = new EditBlock(this, block);
                     editBlock.Owner = form; //Передаём вновь созданной форме её владельца.
                     editBlock.Show();
                 }
@@ -731,19 +745,9 @@ namespace Diagrams
                 Block del = findBlockWithGraphic(selectedFigure, blocks);
                 Block from = findBlockFromBlock(del, blocks);
                 Block to = del.nextBlock;
-                from.nextBlock = to;
+                if (from != null)
+                    from.nextBlock = to;
                 DeleteFromBlock(del, from);
-
-                //удялаем также все линии, ведущие к данной фигуре
-                for (int i = diagram.figures.Count - 1; i >= 0; i--)
-                    if (diagram.figures[i] is LineFigure)
-                    {
-                        LineFigure line = (diagram.figures[i] as LineFigure);
-                        if (line.To == selectedFigure || line.From == selectedFigure)
-                        { 
-                            diagram.figures.RemoveAt(i); 
-                        }
-                    }
                 selectedFigure = null;
                 draggedFigure = null;
                 LedgeLineFigure li = new LedgeLineFigure();
@@ -755,10 +759,25 @@ namespace Diagrams
                 Invalidate();
             }
         }
+        //удялаем также все линии, ведущие к данной фигуре
+        public void DeleteLinesFromDiagam(Figure figure)
+        {
+            for (int i = diagram.figures.Count - 1; i >= 0; i--)
+                if (diagram.figures[i] is LineFigure)
+                {
+                    LineFigure line = (diagram.figures[i] as LineFigure);
+                    if (line.To == figure || line.From == figure)
+                    {
+                        diagram.figures.RemoveAt(i);
+                    }
+                }
+        }
 
+        //удаление
         public void DeleteFromBlock(Block bl, Block from)
         {
             diagram.figures.Remove(bl.figure);
+            DeleteLinesFromDiagam(bl.figure);
             MoveFiguresYUp(from.figure);
             if (bl is WhileBlock || bl is DoWhileBlock || bl is ForBlock || bl is IfWithoutElseBlock)
             {
@@ -773,7 +792,6 @@ namespace Diagrams
                 if (bl is IfWithoutElseBlock)
                     DeleteFromBlock((bl as IfWithoutElseBlock).trueBlock, from);
             }
-
         }
 
         //преобразуем в картинку
@@ -919,31 +937,55 @@ namespace Diagrams
         }
         public Block findBlockWithGraphic(Figure figure, Block block)
         {
+            if (block == null)
+                return null;
             if (block.figure == figure)
-            {
                 return block;
-            }
+            
             if (block is WhileBlock || block is DoWhileBlock || block is ForBlock || block is IfWithoutElseBlock)
             {
-                return findBlockWithGraphic(figure, (block as WhileBlock).trueBlock);
+                Block b = null;
+                if (block is WhileBlock) b = findBlockWithGraphic(figure, (block as WhileBlock).trueBlock);
+                if (block is ForBlock) b = findBlockWithGraphic(figure, (block as ForBlock).trueBlock);
+                if (b == null)
+                    return findBlockWithGraphic(figure, block.nextBlock);
+                else
+                    return b;
             }
-            if (block.nextBlock != null)
-                return findBlockWithGraphic(figure, block.nextBlock);
-            return null;
+            return findBlockWithGraphic(figure, block.nextBlock);
         }
-
         public Block findBlockFromBlock(Block bl, Block block)
         {
+            if (block.nextBlock == null)
+                return null;
             if (block.nextBlock == bl)
             {
                 return block;
             }
             if (block is WhileBlock || block is DoWhileBlock || block is ForBlock || block is IfWithoutElseBlock)
             {
-                return findBlockFromBlock(bl, (block as WhileBlock).trueBlock);
+                Block b = findBlockFromBlock(bl, (block as WhileBlock).trueBlock);
+                if (b == null)
+                    return findBlockFromBlock(bl, block.nextBlock);
+                else
+                    return b;
+            }
+            return findBlockFromBlock(bl, block.nextBlock);
+        }
+
+        public Block findTrueBlock(Block bl, Block block)
+        {
+            if (block is WhileBlock && (block as WhileBlock).trueBlock == bl ||
+                block is DoWhileBlock && (block as DoWhileBlock).trueBlock == bl ||
+                block is ForBlock && (block as ForBlock).trueBlock == bl ||
+                block is IfWithoutElseBlock && (block as IfWithoutElseBlock).trueBlock == bl)
+                return block;
+            if (block is WhileBlock || block is DoWhileBlock || block is ForBlock || block is IfWithoutElseBlock)
+            {
+                return findTrueBlock(bl, (block as WhileBlock).trueBlock);
             }
             if (block.nextBlock != null)
-                return findBlockFromBlock(bl, block.nextBlock);
+                return findTrueBlock(bl, block.nextBlock);
             return null;
         }
     }

@@ -13,22 +13,24 @@ namespace Diagrams
     {
         List<string> actions = new List<string>();
         SolidFigure figure;
+        Block block;
         DiagramBox db;
 
-        public EditBlock(DiagramBox db, Block blocks, SolidFigure figure)
+        public EditBlock(DiagramBox db, Block figure)
         {
             InitializeComponent();
-            this.figure = figure;
+            this.figure = figure.figure;
             this.db = db;
+            block = figure;
             cbActions.DropDownStyle = ComboBoxStyle.DropDownList;
-            if (db.Diagram.figures[0] == figure)
+            if (db.Diagram.figures[0] == figure.figure)
             {
                 nudConditions.Visible = false;
                 numActions.Visible = false;
                 cbActions.Visible=false;
                 lbAction.Text = "Название";
             }
-            if (figure.type == 2)
+            if (figure.figure.type == 2)
             {
                 numActions.Visible = false;
                 nudConditions.Visible = false;
@@ -37,14 +39,14 @@ namespace Diagrams
                 tbProcName.Visible = false;
                 cbActions.SelectedIndex = 0;
             }
-            if (figure.type == 8)
+            if (figure.figure.type == 8)
             {
                 nudConditions.Visible = false;
                 tbProcName.Visible = false;
                 cbActions.Visible = false;
                 lbAction.Text = "Кол-во повторов";
             }
-            if (figure.type == 4)
+            if (figure.figure.type == 4)
             {
                 tbProcName.Visible = false;
                 numActions.Visible = false;
@@ -114,6 +116,7 @@ namespace Diagrams
                     case 15: figure.text = "Переставить ↖"; break;
                     case 16: figure.text = "Переставить ↙"; break;
                 }
+                (block as ActionBlock).action = Convert.ToByte(cbActions.SelectedIndex+1);
             }
             if (figure.type == 4)
             {
@@ -128,12 +131,26 @@ namespace Diagrams
                     case 6: figure.text = "↙ " + nudConditions.Value.ToString(); break;
                     case 7: figure.text = "↖ " + nudConditions.Value.ToString(); break;
                 }
-
+                if (block is WhileBlock)
+                {
+                    (block as WhileBlock).condition = Convert.ToByte(cbActions.SelectedIndex + 1);
+                    (block as WhileBlock).num_cond = Convert.ToByte(nudConditions.Value);
+                }
+                if (block is IfWithoutElseBlock)
+                {
+                    (block as IfWithoutElseBlock).condition = Convert.ToByte(cbActions.SelectedIndex + 1);
+                    (block as IfWithoutElseBlock).num_cond = Convert.ToByte(nudConditions.Value);
+                }
             }
             if (figure.type == 8)
+            {
                 figure.text = numActions.Value.ToString();
+                (block as ForBlock).numOfRep = Convert.ToByte(numActions.Value);
+            }
             if (figure.type == 6)
+            {
                 figure.text = tbProcName.Text;
+            }
             db.Invalidate();
         }
 

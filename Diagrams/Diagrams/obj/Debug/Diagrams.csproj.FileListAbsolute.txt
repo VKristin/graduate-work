@@ -51,3 +51,4 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\D
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\obj\Debug\Diagrams.pdb
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\bin\Debug\Diagrams.dll
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\bin\Debug\Diagrams.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\obj\Debug\Diagrams.ChangeSize.resources

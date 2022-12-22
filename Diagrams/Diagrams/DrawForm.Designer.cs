@@ -30,9 +30,11 @@
         {
             this.pbDraw = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.изменитьРазмерПоляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackBarSize = new System.Windows.Forms.TrackBar();
             this.lbSize = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,11 +49,21 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.изменитьРазмерПоляToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(951, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // изменитьРазмерПоляToolStripMenuItem
+            // 
+            this.изменитьРазмерПоляToolStripMenuItem.Name = "изменитьРазмерПоляToolStripMenuItem";
+            this.изменитьРазмерПоляToolStripMenuItem.Size = new System.Drawing.Size(146, 20);
+            this.изменитьРазмерПоляToolStripMenuItem.Text = "Изменить размер поля";
+            this.изменитьРазмерПоляToolStripMenuItem.Click += new System.EventHandler(this.изменитьРазмерПоляToolStripMenuItem_Click);
             // 
             // trackBarSize
             // 
@@ -82,6 +94,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(951, 550);
             this.Controls.Add(this.lbSize);
             this.Controls.Add(this.trackBarSize);
@@ -90,8 +104,10 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DrawForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "DrawForm";
+            this.Text = "Поле";
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -99,10 +115,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pbDraw;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.TrackBar trackBarSize;
         private System.Windows.Forms.Label lbSize;
+        private System.Windows.Forms.ToolStripMenuItem изменитьРазмерПоляToolStripMenuItem;
+        public System.Windows.Forms.PictureBox pbDraw;
+        public System.Windows.Forms.TrackBar trackBarSize;
     }
 }
