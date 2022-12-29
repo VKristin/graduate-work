@@ -184,11 +184,7 @@ namespace Diagrams
             Block from = findBlockWithGraphic(l.From, blocks);
             line.From = l.From;
             line.To = figure;
-            //if (l.To.type != 4 && l.To.type != 8)
-                figure.location = new PointF(l.ledgePositionX, l.To.location.Y);
-            //else
-                //figure.location = new PointF(l.From.location.X, l.From.location.Y);
-
+            figure.location = new PointF(l.ledgePositionX, l.To.location.Y);
             if (line.From.location.X != line.To.location.X)
                 line.ledgePositionX = l.ledgePositionX;
             Diagram.figures.Add(figure);
