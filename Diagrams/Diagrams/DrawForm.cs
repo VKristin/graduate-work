@@ -78,6 +78,15 @@ namespace Diagrams
             numOfCellsY = y;
             Invalidate();
         }
+        public void DrawAgain()
+        {
+            pbDraw.Refresh();
+            pencil1.Location = new Point(pbDraw.Location.X + 1 + cellSize * position.X, pbDraw.Size.Height + pbDraw.Location.Y - 1 - pencil1.Height - cellSize * position.Y);
+            for (int i = 0; i < coordList.Count(); i++)
+            {
+                g.DrawLine(pen, coordList[i].p1, coordList[i].p2);
+            }
+        }
 
     }
     public class Coordinate

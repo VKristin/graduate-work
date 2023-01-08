@@ -62,7 +62,6 @@
     <Compile Include="DrawForm.Designer.cs">
       <DependentUpon>DrawForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DrawIt.cs" />
     <Compile Include="EditBlock.cs">
       <SubType>Form</SubType>
     </Compile>
