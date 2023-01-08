@@ -44,6 +44,8 @@ namespace Diagrams
             this.block = block;
             cellSize = form.trackBarSize.Value;
             drawPic(block);
+            Replace();
+            form.g = graph;
         }
         private Block drawPic(Block block)
         {
@@ -150,6 +152,13 @@ namespace Diagrams
             for (int i = 0; i < coord.Count(); i++)
             {
                 graph.DrawLine(pen, coord[i].p1, coord[i].p2);
+            }
+        }
+        public void Replace()
+        {
+            foreach (Coord coord in coordList)
+            {
+                form.coordList.Add(new Diagrams.Coordinate(coord.p1, coord.p2));
             }
         }
     }

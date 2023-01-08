@@ -18,6 +18,9 @@ namespace Diagrams
         int cellSize = 32;
         public Point position;
         Form Main;
+        public Graphics g;
+
+        public List<Coordinate> coordList = new List<Coordinate>();
         
         public DrawForm(Form Parent)
         {
@@ -76,5 +79,15 @@ namespace Diagrams
             Invalidate();
         }
 
+    }
+    public class Coordinate
+    {
+        public Point p1;
+        public Point p2;
+        public Coordinate(Point p1, Point p2)
+        {
+            this.p1 = p1;
+            this.p2 = p2;
+        }
     }
 }
