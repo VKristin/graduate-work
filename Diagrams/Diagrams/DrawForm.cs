@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Diagrams
 {
@@ -13,27 +14,36 @@ namespace Diagrams
     {
         public int numOfCellsX = 20;
         public int numOfCellsY = 15;
+        public Point startPosition;
         int cellSize = 32;
+        public Point position;
         Form Main;
+        
         public DrawForm(Form Parent)
         {
             Main = Parent;
             InitializeComponent();
-            this.Left =Main.Left+Main.Width;
-            this.Top= Main.Top;
+            SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.Left = Main.Left+Main.Width;
+            this.Top = Main.Top;
+            pencil1.Size = new Size(cellSize - 2, cellSize - 2);
             ControlBox = false;
-            Size = new Size(numOfCellsX * cellSize + 40, numOfCellsY * cellSize + 140);
+            Size = new Size(numOfCellsX * cellSize + 25, numOfCellsY * cellSize + 160);
+            startPosition = new Point(pbDraw.Location.X + 1, pbDraw.Size.Height + pbDraw.Location.Y - 4);
+            pencil1.BackColor = Color.Transparent;
+            pencil1.Location = startPosition;
+            position = new Point(0, 0);
         }
 
         private void pbDraw_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.White);
             Pen pen = new Pen(Color.LightGray, 1);
-
             cellSize = trackBarSize.Value;
             pbDraw.Width = numOfCellsX * cellSize + 1;
             pbDraw.Height = numOfCellsY * cellSize + 1;
-
+            startPosition = new Point(pbDraw.Location.X + 1, pbDraw.Size.Height + pbDraw.Location.Y - 1 - pencil1.Height);
 
             for (int y = 0; y <= numOfCellsY; y++)
             {
@@ -48,6 +58,7 @@ namespace Diagrams
 
         private void trackBarSize_Scroll(object sender, EventArgs e)
         {
+            pencil1.Size = new Size(cellSize - 2, cellSize - 2);
             pbDraw.Invalidate();
         }
 

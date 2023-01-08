@@ -159,6 +159,8 @@ namespace Diagrams
                     break;
                 case 4: //if else
                     figure = new RhombFigure();
+                    block = new IfBlock(null, null, null, 0, ref figure);
+
                     break;
                 case 5: //цикл с предусловием
                     figure = new RhombFigure();
@@ -193,13 +195,38 @@ namespace Diagrams
             line.From = figure;
             line.To = l.To;
             Block to = findBlockWithGraphic(l.To, blocks);
+            //здесь возможна ошибка
+            ///
+            ///
+            ///
+            ///
             if (l.From.type == 4 || l.From.type == 8)
             {
                 block.nextBlock = to;
                 if (from is WhileBlock)
+                {
+                    Block next = (from as WhileBlock).trueBlock;
                     (from as WhileBlock).trueBlock = block;
+                    block.nextBlock = next;
+                }
                 if (from is ForBlock)
+                {
+                    Block next = (from as ForBlock).trueBlock;
                     (from as ForBlock).trueBlock = block;
+                    block.nextBlock = next;
+                }
+                if (from is IfBlock && block.figure.location.X < l.From.location.X) //то есть ветвь true
+                {
+                    Block next = (from as IfBlock).trueBlock;
+                    (from as IfBlock).trueBlock = block;
+                    block.nextBlock = next;
+                }
+                if (from is IfBlock && block.figure.location.X > l.From.location.X) //то есть ветвь false
+                {
+                    Block next = (from as IfBlock).falseBlock;
+                    (from as IfBlock).falseBlock = block;
+                    block.nextBlock = next;
+                }
             }
             else
             {
@@ -221,7 +248,7 @@ namespace Diagrams
             switch (num)
             {
                 case 4:
-                    Branching(line);
+                    Branching(line, block);
                     Diagram.figures.Remove(line);
                     break;
                 case 5:
@@ -248,7 +275,7 @@ namespace Diagrams
         }
 
         //отрисовка действий для IF
-        private void Branching(LedgeLineFigure line)
+        private void Branching(LedgeLineFigure line, Block bl)
         {
             SolidFigure figure = new RectFigure();
             int defaultSize = SolidFigure.defaultSize;
@@ -288,6 +315,11 @@ namespace Diagrams
             l.To = line.To;
             l.ledgePositionX = line.To.location.X;
             Diagram.figures.Add(l);
+            ActionBlock block = new ActionBlock(null, 0, ref figure);
+            ActionBlock block1 = new ActionBlock(null, 0, ref figure1);
+
+            (bl as IfBlock).trueBlock = block;
+            (bl as IfBlock).falseBlock = block1;
         }
         //циклы с предусловием и с параметром имеют одинаковую структуру, кроме первого блока)
         private void Cycle(LedgeLineFigure line, Block bl, byte type)
@@ -447,7 +479,7 @@ namespace Diagrams
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
                 if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 12 && 
-                    Diagram.figures[i] as SolidFigure != a && (Diagram.figures[i] as SolidFigure).location.Y >= a.location.Y)
+                    Diagram.figures[i] as SolidFigure != a && (Diagram.figures[i] as SolidFigure).location.Y > (a.location.Y + defaultSize + 10))
                 {
                     (Diagram.figures[i] as SolidFigure).location.Y -= defaultSize + 10;
                     if ((Diagram.figures[i] as SolidFigure).plus != null)
@@ -751,7 +783,6 @@ namespace Diagrams
                 li.To = to.figure;
                 diagram.figures.Add(li);
                 //CreateMarkers();
-
                 Invalidate();
             }
         }
@@ -770,13 +801,17 @@ namespace Diagrams
         }
 
         //удаление
+        bool b = false;
         public void DeleteFromBlock(Block bl, Block from)
         {
             diagram.figures.Remove(bl.figure);
             DeleteLinesFromDiagam(bl.figure);
             MoveFiguresYUp(from.figure);
-            if (bl is WhileBlock || bl is DoWhileBlock || bl is ForBlock || bl is IfWithoutElseBlock)
+            if (b && bl.nextBlock != null)
+                DeleteFromBlock(bl.nextBlock, bl);
+            if (bl is WhileBlock || bl is DoWhileBlock || bl is ForBlock || bl is IfWithoutElseBlock || bl is IfBlock)
             {
+                b = true;
                 diagram.figures.Remove((bl.figure as SolidFigure).minus);
                 diagram.figures.Remove((bl.figure as SolidFigure).plus);
                 if (bl is WhileBlock)
@@ -787,9 +822,14 @@ namespace Diagrams
                     DeleteFromBlock((bl as ForBlock).trueBlock, from);
                 if (bl is IfWithoutElseBlock)
                     DeleteFromBlock((bl as IfWithoutElseBlock).trueBlock, from);
+                if (bl is IfBlock)
+                {
+                    DeleteFromBlock((bl as IfBlock).trueBlock, from);
+                    DeleteFromBlock((bl as IfBlock).falseBlock, from);
+                }
             }
+            b = false;
         }
-
         //преобразуем в картинку
         public Bitmap GetImage()
         {
@@ -958,31 +998,25 @@ namespace Diagrams
             {
                 return block;
             }
-            if (block is WhileBlock || block is DoWhileBlock || block is ForBlock || block is IfWithoutElseBlock)
+            if (block is Condition && (block as Condition).trueBlock == bl)
+                return block;
+            if (block is Condition)
             {
-                Block b = findBlockFromBlock(bl, (block as WhileBlock).trueBlock);
+                Block b = null;
+                if (block is Condition)
+                {
+                    b = findBlockFromBlock(bl, (block as Condition).trueBlock);
+                }
+                if (block is IfBlock)
+                {
+                    b = findBlockFromBlock(bl, (block as IfBlock).falseBlock);
+                }
                 if (b == null)
                     return findBlockFromBlock(bl, block.nextBlock);
                 else
                     return b;
             }
             return findBlockFromBlock(bl, block.nextBlock);
-        }
-
-        public Block findTrueBlock(Block bl, Block block)
-        {
-            if (block is WhileBlock && (block as WhileBlock).trueBlock == bl ||
-                block is DoWhileBlock && (block as DoWhileBlock).trueBlock == bl ||
-                block is ForBlock && (block as ForBlock).trueBlock == bl ||
-                block is IfWithoutElseBlock && (block as IfWithoutElseBlock).trueBlock == bl)
-                return block;
-            if (block is WhileBlock || block is DoWhileBlock || block is ForBlock || block is IfWithoutElseBlock)
-            {
-                return findTrueBlock(bl, (block as WhileBlock).trueBlock);
-            }
-            if (block.nextBlock != null)
-                return findTrueBlock(bl, block.nextBlock);
-            return null;
         }
     }
 }

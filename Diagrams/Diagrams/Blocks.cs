@@ -25,16 +25,25 @@ namespace Diagrams
             figure = solidFigure;
         }
     }
-    public class IfBlock : Block
+    public class Condition : Block 
+    {
+        public Block trueBlock;
+
+        public Condition(Block nextBlock, Block trueBlock, SolidFigure figure): base(nextBlock, figure)
+        {
+            this.trueBlock = trueBlock;
+        }
+    }
+    public class IfBlock : Condition
     {
         public byte condition; //номер условия
-        public Block trueBlock;
         public Block falseBlock;
 
-        public IfBlock(Block nextBlock, Block trueBlock, Block falseBlock, ref SolidFigure solidFigure) : base(nextBlock, solidFigure)
+        public IfBlock(Block nextBlock, Block trueBlock, Block falseBlock, byte condition, ref SolidFigure solidFigure) : base(nextBlock, trueBlock, solidFigure)
         {
             this.trueBlock = trueBlock;
             figure = solidFigure;
+            this.condition = condition;
             this.falseBlock = falseBlock;
         }
     }
@@ -63,45 +72,42 @@ namespace Diagrams
             this.action = action;
         }
     }
-    public class WhileBlock : Block //блок предусловия
+    public class WhileBlock : Condition //блок предусловия
     {
         public byte condition; //номер условия
         public byte num_cond;
-        public Block trueBlock;
-        public WhileBlock(Block nextBlock, byte condition, byte num_cond, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
+        public WhileBlock(Block nextBlock, byte condition, byte num_cond, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, trueBlock, solidFigure)
         {
             this.condition = condition;
             this.num_cond = num_cond;
             figure = solidFigure;
         }
     }
-    public class DoWhileBlock : Block //блок постусловия
+    public class DoWhileBlock : Condition //блок постусловия
     {
         public byte condition; //номер условия
         public byte num_cond;
-        public Block trueBlock;
-        public DoWhileBlock(Block nextBlock, byte condition, byte num_cond, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
+        public DoWhileBlock(Block nextBlock, byte condition, byte num_cond, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, trueBlock, solidFigure)
         {
             this.num_cond = num_cond;
+            this.trueBlock = trueBlock;
             this.condition = condition;
         }
     }
-    public class ForBlock : Block //блок цикла с параметром
+    public class ForBlock : Condition //блок цикла с параметром
     {
         public int numOfRep; //количество повторов
-        public Block trueBlock;
-        public ForBlock(Block nextBlock, int numOfRep, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
+        public ForBlock(Block nextBlock, int numOfRep, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, trueBlock, solidFigure)
         {
             this.numOfRep = numOfRep;
         }
     }
-    public class IfWithoutElseBlock: Block //блок условия без альтернативы
+    public class IfWithoutElseBlock: Condition //блок условия без альтернативы
     {
         public byte condition; //номер условия
         public byte num_cond;
-        public Block trueBlock;
 
-        public IfWithoutElseBlock(Block nextBlock, byte condition, byte num_cond, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, solidFigure)
+        public IfWithoutElseBlock(Block nextBlock, byte condition, byte num_cond, ref SolidFigure solidFigure, Block trueBlock) : base(nextBlock, trueBlock, solidFigure)
         {
             this.num_cond = num_cond;
             this.condition = condition;

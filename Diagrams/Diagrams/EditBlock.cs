@@ -73,8 +73,8 @@ namespace Diagrams
             actions.Add("Переставить влево");
             actions.Add("Переставить вверх");
             actions.Add("Переставить вниз");
-            actions.Add("Переставить вправо вниз");
             actions.Add("Переставить вправо вверх");
+            actions.Add("Переставить вправо вниз");
             actions.Add("Переставить влево вниз");
             actions.Add("Переставить влево вниз");
         }
@@ -89,7 +89,6 @@ namespace Diagrams
             actions.Add("Вправо вверх");
             actions.Add("Влево вниз");
             actions.Add("Влево вверх");
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)

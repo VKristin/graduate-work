@@ -17,6 +17,7 @@ namespace Diagrams
     {
         Block block;
         DrawForm drawForm;
+        List<Coord> coordList = new List<Coord>(); //необходимые для отрисовки балки
         public AlgForm()
         {
             this.Left = 0;
@@ -368,6 +369,11 @@ namespace Diagrams
         {
             DrawIt draw = new DrawIt();
             draw.Draw(block, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm);
+        }
+        public void Repaint(Point location)
+        {
+            DrawIt draw = new DrawIt();
+            draw.DrawAgain(coordList, location);
         }
     }
 }

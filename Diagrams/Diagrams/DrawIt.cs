@@ -143,14 +143,9 @@ namespace Diagrams
                 graph.DrawLine(pen, coordList[i].p1, coordList[i].p2);
             }
         }
-        public void DrawAgain(List<Coord> coord, Point pencilCoord)
+        public void DrawAgain()
         {
-            form.pbDraw.Refresh();
-            form.pencil1.Location = new Point(form.pbDraw.Location.X + 1 + cellSize * pencilCoord.X, form.pbDraw.Size.Height + form.pbDraw.Location.Y - 1 - form.pencil1.Height - cellSize * pencilCoord.Y);
-            for (int i = 0; i < coord.Count(); i++)
-            {
-                graph.DrawLine(pen, coord[i].p1, coord[i].p2);
-            }
+
         }
     }
 }

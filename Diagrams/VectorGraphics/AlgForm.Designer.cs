@@ -37,6 +37,7 @@
             this.miExport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.нарисоватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdDiagram = new System.Windows.Forms.SaveFileDialog();
             this.ofdDiagram = new System.Windows.Forms.OpenFileDialog();
             this.sfdImage = new System.Windows.Forms.SaveFileDialog();
@@ -69,7 +70,6 @@
             this.btm5 = new System.Windows.Forms.Button();
             this.btm6 = new System.Windows.Forms.Button();
             this.dbDiagram = new Diagrams.DiagramBox();
-            this.нарисоватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.cmMain.SuspendLayout();
             this.cmSelectedFigure.SuspendLayout();
@@ -140,6 +140,13 @@
             this.miClose.Size = new System.Drawing.Size(172, 22);
             this.miClose.Text = "Exit";
             this.miClose.Click += new System.EventHandler(this.miExit_Click);
+            // 
+            // нарисоватьToolStripMenuItem
+            // 
+            this.нарисоватьToolStripMenuItem.Name = "нарисоватьToolStripMenuItem";
+            this.нарисоватьToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
+            this.нарисоватьToolStripMenuItem.Text = "Нарисовать";
+            this.нарисоватьToolStripMenuItem.Click += new System.EventHandler(this.нарисоватьToolStripMenuItem_Click);
             // 
             // sfdDiagram
             // 
@@ -366,6 +373,7 @@
             this.btm7.TabIndex = 11;
             this.btm7.Text = "Цикл с постусловием";
             this.btm7.UseVisualStyleBackColor = false;
+            this.btm7.Visible = false;
             this.btm7.Click += new System.EventHandler(this.button1_Click);
             // 
             // btm4
@@ -399,6 +407,7 @@
             this.btm6.TabIndex = 10;
             this.btm6.Text = "Условие";
             this.btm6.UseVisualStyleBackColor = false;
+            this.btm6.Visible = false;
             this.btm6.Click += new System.EventHandler(this.btm6_Click);
             // 
             // dbDiagram
@@ -418,13 +427,6 @@
             this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
             this.dbDiagram.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseUp);
-            // 
-            // нарисоватьToolStripMenuItem
-            // 
-            this.нарисоватьToolStripMenuItem.Name = "нарисоватьToolStripMenuItem";
-            this.нарисоватьToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
-            this.нарисоватьToolStripMenuItem.Text = "Нарисовать";
-            this.нарисоватьToolStripMenuItem.Click += new System.EventHandler(this.нарисоватьToolStripMenuItem_Click);
             // 
             // AlgForm
             // 
