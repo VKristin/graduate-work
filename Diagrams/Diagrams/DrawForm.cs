@@ -19,6 +19,7 @@ namespace Diagrams
         public Point position;
         Form Main;
         public Graphics g;
+        public bool draw = false;
 
         public List<Coordinate> coordList = new List<Coordinate>();
         
@@ -41,13 +42,13 @@ namespace Diagrams
 
         private void pbDraw_Paint(object sender, PaintEventArgs e)
         {
+            pencil1.Size = new Size(cellSize - 2, cellSize - 2);
             e.Graphics.Clear(Color.White);
             Pen pen = new Pen(Color.LightGray, 1);
             cellSize = trackBarSize.Value;
             pbDraw.Width = numOfCellsX * cellSize + 1;
             pbDraw.Height = numOfCellsY * cellSize + 1;
             startPosition = new Point(pbDraw.Location.X + 1, pbDraw.Size.Height + pbDraw.Location.Y - 1 - pencil1.Height);
-
             for (int y = 0; y <= numOfCellsY; y++)
             {
                 e.Graphics.DrawLine(pen, 0, y * cellSize, numOfCellsX * cellSize, y * cellSize);
@@ -57,11 +58,19 @@ namespace Diagrams
             {
                 e.Graphics.DrawLine(pen, x * cellSize, 0, x * cellSize, numOfCellsY * cellSize);
             }
+            if (coordList.Count() != 0 && draw)
+            {
+                Pen pen1 = new Pen(Color.CornflowerBlue, 3);
+                pencil1.Location = new Point(pbDraw.Location.X + 1 + cellSize * position.X, pbDraw.Size.Height + pbDraw.Location.Y - 1 - pencil1.Height - cellSize * position.Y);
+                for (int i = 0; i < coordList.Count(); i++)
+                {
+                    g.DrawLine(pen1, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + numOfCellsY) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + numOfCellsY) * cellSize));
+                }
+            }
         }
 
         private void trackBarSize_Scroll(object sender, EventArgs e)
         {
-            pencil1.Size = new Size(cellSize - 2, cellSize - 2);
             pbDraw.Invalidate();
         }
 
@@ -80,11 +89,15 @@ namespace Diagrams
         }
         public void DrawAgain()
         {
-            pbDraw.Refresh();
-            pencil1.Location = new Point(pbDraw.Location.X + 1 + cellSize * position.X, pbDraw.Size.Height + pbDraw.Location.Y - 1 - pencil1.Height - cellSize * position.Y);
-            for (int i = 0; i < coordList.Count(); i++)
+            if (coordList.Count() != 0)
             {
-                g.DrawLine(pen, coordList[i].p1, coordList[i].p2);
+                Pen pen1 = new Pen(Color.CornflowerBlue, 3); ;
+                pbDraw.Refresh();
+                pencil1.Location = new Point(pbDraw.Location.X + 1 + cellSize * position.X, pbDraw.Size.Height + pbDraw.Location.Y - 1 - pencil1.Height - cellSize * position.Y);
+                for (int i = 0; i < coordList.Count(); i++)
+                {
+                    g.DrawLine(pen1, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.X + numOfCellsY) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.X + numOfCellsY) * cellSize));
+                }
             }
         }
 

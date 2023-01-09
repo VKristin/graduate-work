@@ -33,6 +33,7 @@ namespace Diagrams
         public void Draw(Block block, int numX, int numY, DrawForm drawForm)
         {
             form = drawForm;
+            form.draw = false;
             form.pbDraw.Refresh();
             field = new Point(numX, numY); //размер поля
             draw = true;
@@ -46,6 +47,7 @@ namespace Diagrams
             drawPic(block);
             Replace();
             form.g = graph;
+            form.draw =  true;
         }
         private Block drawPic(Block block)
         {
@@ -117,7 +119,7 @@ namespace Diagrams
                 {
                     Point point1 = new Point((location.X * cellSize), ((-location.Y + field.Y) * cellSize));
                     Point point2 = new Point((n_loc.X * cellSize), ((-n_loc.Y + field.Y) * cellSize));
-                    coordList.Add(new Coord(point1, point2));
+                    coordList.Add(new Coord(location, n_loc));
                     graph.DrawLine(pen, point1, point2);
                 }
                 form.pencil1.Location = new Point(form.pencil1.Location.X + d.X * cellSize, form.pencil1.Location.Y - d.Y * cellSize);
@@ -142,7 +144,7 @@ namespace Diagrams
             form.pbDraw.Refresh();
             for (int i = 0; i < coordList.Count(); i++)
             {
-                graph.DrawLine(pen, coordList[i].p1, coordList[i].p2);
+                graph.DrawLine(pen, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + field.Y) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + field.Y) * cellSize));
             }
         }
         public void DrawAgain(List<Coord> coord, Point pencilCoord)
@@ -151,7 +153,7 @@ namespace Diagrams
             form.pencil1.Location = new Point(form.pbDraw.Location.X + 1 + cellSize * pencilCoord.X, form.pbDraw.Size.Height + form.pbDraw.Location.Y - 1 - form.pencil1.Height - cellSize * pencilCoord.Y);
             for (int i = 0; i < coord.Count(); i++)
             {
-                graph.DrawLine(pen, coord[i].p1, coord[i].p2);
+                graph.DrawLine(pen, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + field.Y) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + field.Y) * cellSize));
             }
         }
         public void Replace()
