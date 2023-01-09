@@ -58,6 +58,8 @@ namespace Diagrams
             {
                 e.Graphics.DrawLine(pen, x * cellSize, 0, x * cellSize, numOfCellsY * cellSize);
             }
+            if (position.X == 0 && position.Y == 0)
+                pencil1.Location = startPosition;
             if (coordList.Count() != 0 && draw)
             {
                 Pen pen1 = new Pen(Color.CornflowerBlue, 3);
