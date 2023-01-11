@@ -51,6 +51,7 @@ namespace Diagrams
         }
         private Block drawPic(Block block)
         {
+            form.coordList.Clear();
             if (block == null)
                 return null;
             if (block is ActionBlock) //если действие
@@ -93,7 +94,7 @@ namespace Diagrams
             Point n_loc = new Point(-1, -1);
             switch ((block as ActionBlock).action)
             {
-                case 1: location = new Point(0, 0); break;
+                case 1: n_loc = new Point(0, 0); break;
                 case 2: n_loc = new Point(location.X + 1, location.Y); break;
                 case 3: n_loc = new Point(location.X - 1, location.Y); break;
                 case 4: n_loc = new Point(location.X, location.Y + 1); break;
@@ -120,6 +121,7 @@ namespace Diagrams
                     Point point1 = new Point((location.X * cellSize), ((-location.Y + field.Y) * cellSize));
                     Point point2 = new Point((n_loc.X * cellSize), ((-n_loc.Y + field.Y) * cellSize));
                     coordList.Add(new Coord(location, n_loc));
+                    form.position = n_loc;
                     graph.DrawLine(pen, point1, point2);
                 }
                 form.pencil1.Location = new Point(form.pencil1.Location.X + d.X * cellSize, form.pencil1.Location.Y - d.Y * cellSize);

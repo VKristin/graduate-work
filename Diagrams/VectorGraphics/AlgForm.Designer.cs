@@ -407,7 +407,6 @@
             this.btm6.TabIndex = 10;
             this.btm6.Text = "Условие";
             this.btm6.UseVisualStyleBackColor = false;
-            this.btm6.Visible = false;
             this.btm6.Click += new System.EventHandler(this.btm6_Click);
             // 
             // dbDiagram

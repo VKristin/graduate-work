@@ -764,6 +764,7 @@ namespace Diagrams
                 Invalidate();
             }
         }
+        SolidFigure f_to = null;
 
         public void SelectedDelete()
         {
@@ -772,6 +773,8 @@ namespace Diagrams
                 //удалем фигуру
                 Block del = findBlockWithGraphic(selectedFigure, blocks);
                 Block from = findBlockFromBlock(del, blocks);
+                //если удалить все блоки из цикла, то у самого цикла не остаётся nextBlock, из-за чего всё ломается
+                //нужно посмотреть, в чём ошибка
                 Block to = del.nextBlock;
                 if (from != null)
                     from.nextBlock = to;
@@ -779,9 +782,20 @@ namespace Diagrams
                 selectedFigure = null;
                 draggedFigure = null;
                 LedgeLineFigure li = new LedgeLineFigure();
-                li.From = from.figure;
-                li.To = to.figure;
-                diagram.figures.Add(li);
+                if (from != null && to != null)
+                {
+                    li.From = from.figure;
+                    li.To = to.figure;
+                    diagram.figures.Add(li);
+                }
+                if (to == null && !(from is EllipseBlock))
+                {
+                    LedgeLineFigure l = new DoubleLedgeLineFigure();
+                    l.From = from.figure;
+                    l.To = f_to;
+                    l.ledgePositionX = from.figure.location.X - SolidFigure.defaultSize - 30;
+                    Diagram.figures.Add(l);
+                }
                 //CreateMarkers();
                 Invalidate();
             }
@@ -795,6 +809,8 @@ namespace Diagrams
                     LineFigure line = (diagram.figures[i] as LineFigure);
                     if (line.To == figure || line.From == figure)
                     {
+                        if (line.From == figure)
+                            f_to = line.To;
                         diagram.figures.RemoveAt(i);
                     }
                 }

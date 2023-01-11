@@ -66,7 +66,7 @@ namespace Diagrams
                 pencil1.Location = new Point(pbDraw.Location.X + 1 + cellSize * position.X, pbDraw.Size.Height + pbDraw.Location.Y - 1 - pencil1.Height - cellSize * position.Y);
                 for (int i = 0; i < coordList.Count(); i++)
                 {
-                    g.DrawLine(pen1, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + numOfCellsY) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + numOfCellsY) * cellSize));
+                    e.Graphics.DrawLine(pen1, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + numOfCellsY) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + numOfCellsY) * cellSize));
                 }
             }
         }
