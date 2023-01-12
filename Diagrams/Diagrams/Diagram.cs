@@ -859,8 +859,13 @@ namespace Diagrams
         public override void UpdateLocation()
         {
             LedgeLineFigure line = (targetFigure as LedgeLineFigure);
+            if (line.To is SexangleFigure || line.To is RhombFigure)
+                location = new PointF(line.To.location.X, line.From.location.Y + SolidFigure.defaultSize / 2 - 5);
+            else
+                location = new PointF(line.ledgePositionX, (line.From.location.Y + line.To.location.Y) / 2);
             //if (line.ledgePositionX == (line.From.location.X + line.To.location.X) / 2) //добавить, когда условия в целом смогут быть другими
-            location = new PointF(line.ledgePositionX, (line.From.location.Y + line.To.location.Y) / 2);
+            if (line.type == 11 && (line.From is SexangleFigure || line.From is RhombFigure))
+                location = new PointF(line.To.location.X, line.To.location.Y - SolidFigure.defaultSize / 2 + 5);
         }
         public override void Draw(Graphics gr)
         {

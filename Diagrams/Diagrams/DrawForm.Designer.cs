@@ -85,8 +85,8 @@
             // 
             // pencil1
             // 
-            this.pencil1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pencil1.Image = global::Diagrams.Properties.Resources.Карандаш_11;
+            this.pencil1.BackColor = System.Drawing.Color.Transparent;
+            this.pencil1.Image = global::Diagrams.Properties.Resources.Карандаш_12;
             this.pencil1.Location = new System.Drawing.Point(12, 519);
             this.pencil1.Name = "pencil1";
             this.pencil1.Size = new System.Drawing.Size(50, 50);
@@ -109,7 +109,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(933, 589);
+            this.ClientSize = new System.Drawing.Size(933, 623);
             this.Controls.Add(this.pencil1);
             this.Controls.Add(this.lbSize);
             this.Controls.Add(this.trackBarSize);

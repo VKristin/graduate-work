@@ -131,6 +131,8 @@ namespace Diagrams
                 location = n_loc;
                 form.position = location;
                 form.Invalidate();
+                RefreshField();
+
             }
             else
             {

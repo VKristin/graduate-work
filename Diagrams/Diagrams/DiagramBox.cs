@@ -137,6 +137,8 @@ namespace Diagrams
                 Invalidate();
                 if (SelectedChanged != null)
                     SelectedChanged(this, new EventArgs());
+                else
+                    markers.Clear();
             }
         }
         private void InsertFigure(byte num, InsertMarker m)
@@ -551,8 +553,8 @@ namespace Diagrams
             markers = new List<Marker>();
             for (int i = 0; i < Diagram.figures.Count; i++)
             {
-                //if (Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10)
-                if (Diagram.figures[i].type == 1)
+                if (Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
+                //if (Diagram.figures[i].type == 1)
                     {
                     InsertMarker marker = new InsertMarker();
                     marker.targetFigure = Diagram.figures[i];
@@ -776,8 +778,10 @@ namespace Diagrams
                 //если удалить все блоки из цикла, то у самого цикла не остаётся nextBlock, из-за чего всё ломается
                 //нужно посмотреть, в чём ошибка
                 Block to = del.nextBlock;
-                if (from != null)
+                if (!(from is Condition))
                     from.nextBlock = to;
+                else
+                    (from as Condition).trueBlock = to;
                 DeleteFromBlock(del, from);
                 selectedFigure = null;
                 draggedFigure = null;
@@ -830,19 +834,10 @@ namespace Diagrams
                 b = true;
                 diagram.figures.Remove((bl.figure as SolidFigure).minus);
                 diagram.figures.Remove((bl.figure as SolidFigure).plus);
-                if (bl is WhileBlock)
-                    DeleteFromBlock((bl as WhileBlock).trueBlock, from);
-                if (bl is DoWhileBlock)
-                    DeleteFromBlock((bl as DoWhileBlock).trueBlock, from);
-                if (bl is ForBlock)
-                    DeleteFromBlock((bl as ForBlock).trueBlock, from);
-                if (bl is IfWithoutElseBlock)
-                    DeleteFromBlock((bl as IfWithoutElseBlock).trueBlock, from);
+                if (bl is Condition && (bl as Condition).trueBlock != null)
+                    DeleteFromBlock((bl as Condition).trueBlock, from);
                 if (bl is IfBlock)
-                {
-                    DeleteFromBlock((bl as IfBlock).trueBlock, from);
                     DeleteFromBlock((bl as IfBlock).falseBlock, from);
-                }
             }
             b = false;
         }

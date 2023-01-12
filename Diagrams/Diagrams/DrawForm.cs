@@ -28,6 +28,7 @@ namespace Diagrams
             Main = Parent;
             InitializeComponent();
             SetStyle(ControlStyles.DoubleBuffer, true);
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.Left = Main.Left+Main.Width;
             this.Top = Main.Top;

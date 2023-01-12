@@ -204,6 +204,7 @@ namespace Diagrams
         {
             dbDiagram.CreateMarkers(4, block);
             dbDiagram.Invalidate();
+            
         }
 
         private void прямоугольникСРамкойToolStripMenuItem_Click(object sender, EventArgs e)
