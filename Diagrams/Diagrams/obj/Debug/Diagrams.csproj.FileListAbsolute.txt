@@ -53,3 +53,5 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\D
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\bin\Debug\Diagrams.pdb
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\obj\Debug\Diagrams.ChangeSize.resources
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\obj\Debug\Diagrams.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\nir\Diagrams\Diagrams\obj\Debug\Diagrams.ChangeSize.resources
+C:\Users\User\Documents\GitHub\nir\Diagrams\Diagrams\obj\Debug\Diagrams.Properties.Resources.resources
