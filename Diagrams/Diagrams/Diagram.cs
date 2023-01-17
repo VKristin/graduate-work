@@ -660,33 +660,33 @@ namespace Diagrams
                 p = new PointF(To.location.X + SolidFigure.defaultSize, To.location.Y);
             if (ledgePositionX < To.location.X)
                 p = new PointF(To.location.X - SolidFigure.defaultSize, To.location.Y);
-            PointF pt = new PointF(p.X + 10, To.location.Y + 7);
+            PointF pt = new PointF(p.X + 8, To.location.Y + 7);
             if (ledgePositionX > To.location.X)
             {
                 Path.AddLine(p, pt);
-                pt = new PointF(p.X + 10, p.Y - 7);
+                pt = new PointF(p.X + 4, p.Y - 9);
                 Path.AddLine(p, pt);
             }
             if (ledgePositionX < To.location.X)
             {
-                pt = new PointF(p.X - 10, p.Y + 7);
+                pt = new PointF(p.X - 9, p.Y + 4);
                 Path.AddLine(p, pt);
-                pt = new PointF(p.X - 10, p.Y - 7);
+                pt = new PointF(p.X - 9, p.Y - 4);
                 Path.AddLine(p, pt);
             }
             if (ledgePositionX == To.location.X && From.location.Y < To.location.Y)
             {
-                pt = new PointF(p.X - 7, p.Y - 10);
+                pt = new PointF(p.X - 4, p.Y - 9);
                 Path.AddLine(p, pt);
-                pt = new PointF(p.X + 7, p.Y - 10);
+                pt = new PointF(p.X + 4, p.Y - 9);
                 Path.AddLine(p, pt);
             }
             if (ledgePositionX == To.location.X && From.location.Y > To.location.Y)
             {
                 p = new PointF(To.location.X, To.location.Y + SolidFigure.defaultSize / 2);
-                pt = new PointF(p.X - 7, p.Y + 10);
+                pt = new PointF(p.X - 4, p.Y + 9);
                 Path.AddLine(p, pt);
-                pt = new PointF(p.X + 7, p.Y + 10);
+                pt = new PointF(p.X + 4, p.Y + 9);
                 Path.AddLine(p, pt);
             }
         }
@@ -719,9 +719,9 @@ namespace Diagrams
             PointF[] points = null;
 
             if (ledgePositionX < 0)
-                ledgePositionX = (From.location.X + To.location.X) / 2;
+                ledgePositionX = (From.location.X + To.location.X) / 2.2f;
             if (ledgePositionY < 0)
-                ledgePositionY = From.location.Y + SolidFigure.defaultSize / 2;
+                ledgePositionY = From.location.Y + SolidFigure.defaultSize / 2.2f;
 
             if (Path.PointCount > 0)
                 points = Path.PathPoints;
@@ -752,7 +752,7 @@ namespace Diagrams
             if (Path.PointCount > 0)
                 points = Path.PathPoints;
             if (ledgePositionY < 0)
-                ledgePositionY = To.location.Y - SolidFigure.defaultSize + SolidFigure.defaultSize / 2.2f;
+                ledgePositionY = To.location.Y - SolidFigure.defaultSize + SolidFigure.defaultSize / 2;
             if (Path.PointCount != 4 || points[0] != From.location || points[3] != To.location ||
                 points[1].X != ledgePositionX)
             {
@@ -770,9 +770,52 @@ namespace Diagrams
         public void CreateArrow()
         {
             PointF p = new PointF(To.location.X, To.location.Y - SolidFigure.defaultSize/ 2 / 1.5f);
-            PointF pt = new PointF(p.X - 7, p.Y - 10);
+            PointF pt = new PointF(p.X - 4, p.Y - 9);
             Path.AddLine(p, pt);
-            pt = new PointF(p.X + 7, p.Y - 10);
+            pt = new PointF(p.X + 4, p.Y - 9);
+            Path.AddLine(p, pt);
+        }
+    }
+    public class TripleLedgeLineFigure: DoubleLedgeLineFigure
+    {
+        public float secondLedgePosX = -1;
+        public override void RecalcPath()
+        {
+            type = 13;
+            PointF[] points = null;
+
+            if (ledgePositionX < 0)
+                ledgePositionX = (From.location.X + To.location.X) / 2.2f;
+            if (ledgePositionY < 0)
+                ledgePositionY = From.location.Y + SolidFigure.defaultSize / 2f;
+            if (secondLedgePosX < 0)
+                secondLedgePosX = (From.location.X + To.location.X) / 2;
+
+            if (Path.PointCount > 0)
+                points = Path.PathPoints;
+            if (ledgePositionY < 0)
+                ledgePositionY = To.location.Y - SolidFigure.defaultSize + SolidFigure.defaultSize / 2;
+            if (Path.PointCount != 4 || points[0] != From.location || points[3] != To.location ||
+                points[1].X != ledgePositionX)
+            {
+                Path.Reset();
+                Path.AddLines(new PointF[]{
+                    From.location,
+                    new PointF(ledgePositionX, From.location.Y),
+                    new PointF(ledgePositionX, ledgePositionY),
+                    new PointF(secondLedgePosX, ledgePositionY),
+                    new PointF(secondLedgePosX, To.location.Y),
+                    To.location
+                    });
+                CreateArrow();
+            }
+        }
+        public void CreateArrow()
+        {
+            PointF p = new PointF(To.location.X - SolidFigure.defaultSize, To.location.Y);
+            PointF pt = new PointF(p.X - 9, p.Y + 4);
+            Path.AddLine(p, pt);
+            pt = new PointF(p.X - 9, p.Y - 4);
             Path.AddLine(p, pt);
         }
     }

@@ -181,40 +181,65 @@ namespace Diagrams
                     break;
 
             }
-            //вставка происходит между верхним и неижним блоками
+            //вставка происходит между верхним и нижним блоками
             //в данном случае работам с верхним блоком
             LedgeLineFigure line = new LedgeLineFigure();
-            LedgeLineFigure l = m.targetFigure as LedgeLineFigure;
+            LedgeLineFigure l = null;
+            if (m.targetFigure.type == 1)
+            {
+                l = new LedgeLineFigure(); l = m.targetFigure as LedgeLineFigure;
+                figure.location = new PointF(l.ledgePositionX, l.To.location.Y);
+                line.From = l.From;
+                line.To = figure;
+                Diagram.figures.Add(figure);
+                Diagram.figures.Add(line);
+            }
+            if (m.targetFigure.type == 10)
+            {
+                l = new LedgeLineFigure(); l = m.targetFigure as LedgeLineFigure;
+                figure.location = new PointF(l.From.location.X, l.From.location.Y);
+                line.From = l.From;
+                line.To = figure;
+                Diagram.figures.Add(figure);
+                Diagram.figures.Add(line);
+            }
+            if (m.targetFigure.type == 11)
+            {
+                DoubleLedgeLineFigureS l_ = new DoubleLedgeLineFigureS();
+                DoubleLedgeLineFigureS line_ = new DoubleLedgeLineFigureS();
+                l_ = m.targetFigure as DoubleLedgeLineFigureS;
+                l = l_;
+                figure.location = new PointF(l_.From.location.X, l_.To.location.Y);
+                line_.ledgePositionX = l_.ledgePositionX;
+                line_.From = l_.From;
+                line_.To = figure;
+                Diagram.figures.Add(figure);
+                Diagram.figures.Add(line_);
+            }
             Block from = findBlockWithGraphic(l.From, blocks);
-            line.From = l.From;
+            /*line.From = l.From;
             line.To = figure;
-            figure.location = new PointF(l.ledgePositionX, l.To.location.Y);
-            if (line.From.location.X != line.To.location.X)
-                line.ledgePositionX = l.ledgePositionX;
+
             Diagram.figures.Add(figure);
-            Diagram.figures.Add(line);
+            Diagram.figures.Add(line);*/
             line = new LedgeLineFigure();
             line.From = figure;
             line.To = l.To;
+            ///
+            ///исправить
+            ///неправильное nextBlock
+            ///
             Block to = findBlockWithGraphic(l.To, blocks);
-            //здесь возможна ошибка
-            ///
-            ///
-            ///
-            ///
-            if (l.From.type == 4 || l.From.type == 8)
+            if (to is Condition && m.targetFigure.type == 10)
+                to = null;
+            if (from is Condition && !(m.targetFigure.type == 11))
             {
                 block.nextBlock = to;
-                if (from is WhileBlock)
+
+                if (from is Condition && !(from is IfBlock))
                 {
-                    Block next = (from as WhileBlock).trueBlock;
-                    (from as WhileBlock).trueBlock = block;
-                    block.nextBlock = next;
-                }
-                if (from is ForBlock)
-                {
-                    Block next = (from as ForBlock).trueBlock;
-                    (from as ForBlock).trueBlock = block;
+                    Block next = (from as Condition).trueBlock;
+                    (from as Condition).trueBlock = block;
                     block.nextBlock = next;
                 }
                 if (from is IfBlock && block.figure.location.X < l.From.location.X) //то есть ветвь true
@@ -232,12 +257,51 @@ namespace Diagrams
             }
             else
             {
-                block.nextBlock = to;
-                from.nextBlock = block;
+                if (from is Condition && m.targetFigure.type == 11)
+                {
+                    Block next = (from as Condition).nextBlock;
+                    (from as Condition).nextBlock = block;
+                    block.nextBlock = next;
+                }
+                else
+                {
+                    block.nextBlock = to;
+                    from.nextBlock = block;
+                }
             }
-            line.ledgePositionX = l.ledgePositionX;
-            Diagram.figures.Add(line);
-            if (figure.location.Y == l.To.location.Y)
+            if (m.targetFigure.type == 10)
+            {
+                DoubleLedgeLineFigure l_ = new DoubleLedgeLineFigure();
+                l_ = m.targetFigure as DoubleLedgeLineFigure;
+                DoubleLedgeLineFigure line_ = new DoubleLedgeLineFigure();
+                l = l_;
+                line_.ledgePositionX = l_.ledgePositionX;
+                line_.From = figure;
+                line_.To = l_.To;
+                line = line_;
+                Diagram.figures.Add(line_);
+            }
+            else
+            {
+                l = new LedgeLineFigure(); l = m.targetFigure as LedgeLineFigure;
+                line.From = figure;
+                line.To = l.To;
+                Diagram.figures.Add(line);
+            }
+
+            /*line.ledgePositionX = l.ledgePositionX;
+            Diagram.figures.Add(line);*/
+            if (figure.location.Y == l.From.location.Y && l.From.location.X == figure.location.X)
+            {
+                figure.location.Y += defaultSize + 10;
+                if (figure.plus != null)
+                    figure.plus.location.Y += defaultSize + 10;
+                if (figure.minus != null)
+                    figure.minus.location.Y += defaultSize + 10;
+                MoveFiguresY(figure);
+            }
+            else
+            if (figure.location.Y == l.To.location.Y && l.To.location.X == figure.location.X)
             {
                 l.To.location.Y += defaultSize + 10;
                 if (l.To.plus != null)
@@ -246,8 +310,9 @@ namespace Diagrams
                     l.To.minus.location.Y += defaultSize + 10;
                 MoveFiguresY(l.To);
             }
-            //для конструкций выполняем ещё раз проверку, для дорисовки недостающих фигур
-            switch (num)
+
+                //для конструкций выполняем ещё раз проверку, для дорисовки недостающих фигур
+                switch (num)
             {
                 case 4:
                     Branching(line, block);
@@ -328,23 +393,40 @@ namespace Diagrams
         {
             SolidFigure figure = new RectFigure();
             int defaultSize = SolidFigure.defaultSize;
-            figure.location = new PointF(line.To.location.X, line.To.location.Y);
+            figure.location = new PointF(line.From.location.X, line.From.location.Y);
             Diagram.figures.Add(figure);
             LedgeLineFigure l = new DoubleLedgeLineFigure();
             l.From = figure;
             l.To = line.From;
-            MoveFiguresY(figure);
+            MoveFiguresY(line.From);
             l.ledgePositionX = figure.location.X - defaultSize - 30;
             Diagram.figures.Add(l);
 
-            l = new DoubleLedgeLineFigureS();
-            l.From = line.From;
-            l.To = line.To;
-            l.ledgePositionX = figure.location.X + defaultSize + 30;
-            Diagram.figures.Add(l);
-            Minus m = new Minus(l, 1);
-            l.From.minus = m;
-            Diagram.figures.Add(m);
+            if (!(((line.To is RhombFigure)  || (line.To is SexangleFigure)) && line.To.location.Y < figure.location.Y))
+            {
+                l = new DoubleLedgeLineFigureS();
+                l.From = line.From;
+                l.To = line.To;
+                l.ledgePositionX = figure.location.X + defaultSize + 30;
+                Diagram.figures.Add(l);
+                Minus m = new Minus(l, 1);
+                l.From.minus = m;
+                Diagram.figures.Add(m);
+            }
+            else
+            {
+                TripleLedgeLineFigure l_ = new TripleLedgeLineFigure();
+                l_.From = line.From;
+                l_.To = line.To;
+                l_.ledgePositionX = figure.location.X + defaultSize + 30;
+                l_.secondLedgePosX = figure.location.X - defaultSize - 60;
+                Block t = findBlockWithGraphic(line.To, blocks);
+                l_.ledgePositionY = (t.nextBlock.figure.location.Y + figure.location.Y) / 2 - 1;
+                Diagram.figures.Add(l_);
+                Minus m = new Minus(l_, 1);
+                l_.From.minus = m;
+                Diagram.figures.Add(m);
+            }
 
             l = new LedgeLineFigure();
             l.From = line.From;
@@ -435,7 +517,7 @@ namespace Diagrams
             int defaultSize = SolidFigure.defaultSize;
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
-                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 12 &&
+                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13 && Diagram.figures[i].type != 12 &&
                     Diagram.figures[i] as SolidFigure != a && (Diagram.figures[i] as SolidFigure).location.Y >= a.location.Y)
                 {
                     (Diagram.figures[i] as SolidFigure).location.Y += defaultSize + 10;
@@ -444,7 +526,8 @@ namespace Diagrams
                     if ((Diagram.figures[i] as SolidFigure).minus != null)
                         (Diagram.figures[i] as SolidFigure).minus.location.Y += defaultSize + 10;
                 }
-                if (Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
+                if ((Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13) && 
+                    ((Diagram.figures[i] as DoubleLedgeLineFigure).From.location.Y >= a.location.Y || (Diagram.figures[i] as DoubleLedgeLineFigure).To.location.Y >= a.location.Y))
                 {
                     (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY += defaultSize + 10;
                 }
@@ -467,7 +550,7 @@ namespace Diagrams
                     if ((Diagram.figures[i] as SolidFigure).minus != null)
                         (Diagram.figures[i] as SolidFigure).minus.location.Y += defaultSize + 10;
                 }
-                if (Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
+                if (Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13)
                 {
                     (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY += defaultSize + 10;
                 }
@@ -480,8 +563,8 @@ namespace Diagrams
             int defaultSize = SolidFigure.defaultSize;
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
-                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 12 && 
-                    Diagram.figures[i] as SolidFigure != a && (Diagram.figures[i] as SolidFigure).location.Y > (a.location.Y + defaultSize + 10))
+                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13 && Diagram.figures[i].type != 12 && 
+                    Diagram.figures[i] as SolidFigure != a && (Diagram.figures[i] as SolidFigure).location.Y >= (a.location.Y + defaultSize + 10))
                 {
                     (Diagram.figures[i] as SolidFigure).location.Y -= defaultSize + 10;
                     if ((Diagram.figures[i] as SolidFigure).plus != null)
@@ -489,7 +572,8 @@ namespace Diagrams
                     if ((Diagram.figures[i] as SolidFigure).minus != null)
                         (Diagram.figures[i] as SolidFigure).minus.location.Y -= defaultSize + 10;
                 }
-                if (Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
+                if ((Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13) &&
+                    ((Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY >= a.location.Y))
                 {
                     (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY -= defaultSize + 10;
                 }
@@ -504,11 +588,11 @@ namespace Diagrams
             float b = -1;
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
-                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 12
+                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13 && Diagram.figures[i].type != 12
                     && (Diagram.figures[i] as SolidFigure).location.X - defaultSize - 20 <= 0)
                     if ((Diagram.figures[i] as SolidFigure).location.X - defaultSize - 20 < b)
                         b = (Diagram.figures[i] as SolidFigure).location.X - defaultSize - 20;
-                if ((Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
+                if ((Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13)
                     && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX < 0 && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX != -1)
                     b = (Diagram.figures[i] as LedgeLineFigure).ledgePositionX - defaultSize - 20;
             }
@@ -523,14 +607,17 @@ namespace Diagrams
             }
             CalcAutoScrollPosition();
         }
-
+        //сдвигаем линии
         private void MoveFiguresX(int dist)
         {
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
                 if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11)
                     (Diagram.figures[i] as SolidFigure).location.X += dist;
-                else (Diagram.figures[i] as LedgeLineFigure).ledgePositionX += dist;
+                else
+                {
+                    (Diagram.figures[i] as LedgeLineFigure).ledgePositionX += dist;
+                }
             }
             CalcAutoScrollPosition();
         }
@@ -781,16 +868,34 @@ namespace Diagrams
                 if (!(from is Condition))
                     from.nextBlock = to;
                 else
-                    (from as Condition).trueBlock = to;
+                {
+                    if ((from is Condition) && (from as Condition).nextBlock == del)
+                    {
+                        from.nextBlock = to;
+                    }
+                    else
+                        (from as Condition).trueBlock = to;
+                }
                 DeleteFromBlock(del, from);
                 selectedFigure = null;
                 draggedFigure = null;
                 LedgeLineFigure li = new LedgeLineFigure();
                 if (from != null && to != null)
                 {
-                    li.From = from.figure;
-                    li.To = to.figure;
-                    diagram.figures.Add(li);
+                    if (from is Condition && (from as Condition).trueBlock != to) 
+                    {
+                        LedgeLineFigure l = new DoubleLedgeLineFigureS();
+                        l.From = from.figure;
+                        l.To = f_to;
+                        l.ledgePositionX = from.figure.location.X + SolidFigure.defaultSize + 30;
+                        Diagram.figures.Add(l);
+                    }
+                    else
+                    {
+                        li.From = from.figure;
+                        li.To = to.figure;
+                        diagram.figures.Add(li);
+                    }
                 }
                 if (to == null && !(from is EllipseBlock))
                 {
@@ -824,9 +929,9 @@ namespace Diagrams
         bool b = false;
         public void DeleteFromBlock(Block bl, Block from)
         {
+            MoveFiguresYUp(bl.figure);
             diagram.figures.Remove(bl.figure);
             DeleteLinesFromDiagam(bl.figure);
-            MoveFiguresYUp(from.figure);
             if (b && bl.nextBlock != null)
                 DeleteFromBlock(bl.nextBlock, bl);
             if (bl is WhileBlock || bl is DoWhileBlock || bl is ForBlock || bl is IfWithoutElseBlock || bl is IfBlock)
@@ -934,11 +1039,10 @@ namespace Diagrams
             {
                 switch (Diagram.figures[i].type)
                 {
-                    case 1:
-                    case 10:
-                    case 11:
-                        list.Add(Diagram.figures[i] as LedgeLineFigure);
-                        break;
+                    case 1: list.Add(Diagram.figures[i] as LedgeLineFigure); break;
+                    case 10: list.Add(Diagram.figures[i] as DoubleLedgeLineFigure); break;
+                    case 11: list.Add(Diagram.figures[i] as DoubleLedgeLineFigureS); break;
+                    case 13: list.Add(Diagram.figures[i] as TripleLedgeLineFigure); break;
                 }
             }
             list.Sort((a, b) => a.From.location.Y.CompareTo(b.From.location.Y));
@@ -953,7 +1057,7 @@ namespace Diagrams
             {
                 foreach (LedgeLineFigure item in list)
                 {
-                    if (item.ledgePositionX == line.ledgePositionX
+                    if ((item.ledgePositionX == line.ledgePositionX || item.type == 13 &&(item as TripleLedgeLineFigure).secondLedgePosX == line.ledgePositionX)
                         && (item.From.location.Y > line.From.location.Y && (item as LedgeLineFigure).To.location.Y < line.To.location.Y) ||
                         ((item as LedgeLineFigure).To.location.Y > line.To.location.Y && (item as LedgeLineFigure).From.location.Y < line.From.location.Y))
                     {
@@ -975,6 +1079,14 @@ namespace Diagrams
                                 }
                             }
                         }
+                        if (item.type == 13 && (item as TripleLedgeLineFigure).secondLedgePosX < item.From.location.X)
+                        {
+                            while ((item as TripleLedgeLineFigure).secondLedgePosX == line.ledgePositionX)
+                            {
+                                item.ledgePositionX -= 30;
+                                move = true;
+                            }
+                        }
                     }
 
                 }
@@ -982,18 +1094,17 @@ namespace Diagrams
             if (move)
                 MoveFiguresX(30);
         }
-        public Block findBlockWithGraphic(Figure figure, Block block)
+        public Block findBlockWithGraphic(Figure figure, Block block)        
         {
             if (block == null)
                 return null;
             if (block.figure == figure)
                 return block;
             
-            if (block is WhileBlock || block is DoWhileBlock || block is ForBlock || block is IfWithoutElseBlock)
+            if (block is Condition)
             {
                 Block b = null;
-                if (block is WhileBlock) b = findBlockWithGraphic(figure, (block as WhileBlock).trueBlock);
-                if (block is ForBlock) b = findBlockWithGraphic(figure, (block as ForBlock).trueBlock);
+                b = findBlockWithGraphic(figure, (block as Condition).trueBlock);
                 if (b == null)
                     return findBlockWithGraphic(figure, block.nextBlock);
                 else
@@ -1003,8 +1114,6 @@ namespace Diagrams
         }
         public Block findBlockFromBlock(Block bl, Block block)
         {
-            if (block.nextBlock == null)
-                return null;
             if (block.nextBlock == bl)
             {
                 return block;
@@ -1027,6 +1136,8 @@ namespace Diagrams
                 else
                     return b;
             }
+            if (block.nextBlock == null)
+                return null;
             return findBlockFromBlock(bl, block.nextBlock);
         }
     }

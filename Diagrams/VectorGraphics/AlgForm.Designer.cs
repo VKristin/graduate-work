@@ -32,8 +32,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.miNew = new System.Windows.Forms.ToolStripMenuItem();
-            this.miLoad = new System.Windows.Forms.ToolStripMenuItem();
-            this.miSave = new System.Windows.Forms.ToolStripMenuItem();
             this.miExport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,8 +90,6 @@
             // 
             this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miNew,
-            this.miLoad,
-            this.miSave,
             this.miExport,
             this.toolStripMenuItem2,
             this.miClose});
@@ -104,41 +100,27 @@
             // miNew
             // 
             this.miNew.Name = "miNew";
-            this.miNew.Size = new System.Drawing.Size(172, 22);
+            this.miNew.Size = new System.Drawing.Size(231, 22);
             this.miNew.Text = "Новая диаграмма";
             this.miNew.Click += new System.EventHandler(this.miNewDiagram_Click);
-            // 
-            // miLoad
-            // 
-            this.miLoad.Name = "miLoad";
-            this.miLoad.Size = new System.Drawing.Size(172, 22);
-            this.miLoad.Text = "Open";
-            this.miLoad.Click += new System.EventHandler(this.miLoad_Click);
-            // 
-            // miSave
-            // 
-            this.miSave.Name = "miSave";
-            this.miSave.Size = new System.Drawing.Size(172, 22);
-            this.miSave.Text = "Save";
-            this.miSave.Click += new System.EventHandler(this.miSave_Click);
             // 
             // miExport
             // 
             this.miExport.Name = "miExport";
-            this.miExport.Size = new System.Drawing.Size(172, 22);
-            this.miExport.Text = "Export as Image";
+            this.miExport.Size = new System.Drawing.Size(231, 22);
+            this.miExport.Text = "Сохранить как изображение";
             this.miExport.Click += new System.EventHandler(this.miExport_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(169, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(228, 6);
             // 
             // miClose
             // 
             this.miClose.Name = "miClose";
-            this.miClose.Size = new System.Drawing.Size(172, 22);
-            this.miClose.Text = "Exit";
+            this.miClose.Size = new System.Drawing.Size(231, 22);
+            this.miClose.Text = "Выход";
             this.miClose.Click += new System.EventHandler(this.miExit_Click);
             // 
             // нарисоватьToolStripMenuItem
@@ -458,8 +440,6 @@
         private DiagramBox dbDiagram;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem miNew;
-        private System.Windows.Forms.ToolStripMenuItem miSave;
-        private System.Windows.Forms.ToolStripMenuItem miLoad;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem miClose;
         private System.Windows.Forms.ToolStripMenuItem miExport;
