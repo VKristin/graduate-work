@@ -27,6 +27,8 @@ namespace Diagrams
         byte insertFigure = 0;
         public Block blocks;
 
+        public Figure drawFigure = null;
+
         public DiagramBox()
         {
             InitializeComponent();
@@ -98,6 +100,12 @@ namespace Diagrams
             if (selectedFigure is SolidFigure)
             {
                 SolidFigure figure = selectedFigure as SolidFigure;
+                RectangleF bounds = figure.Bounds;
+                gr.DrawRectangle(selectRectPen, bounds.Left - 2, bounds.Top - 2, bounds.Width + 4, bounds.Height + 4);
+            }
+            if (drawFigure is SolidFigure)
+            {
+                SolidFigure figure = drawFigure as SolidFigure;
                 RectangleF bounds = figure.Bounds;
                 gr.DrawRectangle(selectRectPen, bounds.Left - 2, bounds.Top - 2, bounds.Width + 4, bounds.Height + 4);
             }

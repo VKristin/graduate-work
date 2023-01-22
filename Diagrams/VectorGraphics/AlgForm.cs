@@ -369,7 +369,7 @@ namespace Diagrams
         private void нарисоватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DrawIt draw = new DrawIt();
-            draw.Draw(block, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm);
+            draw.Draw(block, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this);
         }
         public void Repaint(Point location)
         {

@@ -32,6 +32,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.miNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьЗаданиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miExport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +69,6 @@
             this.btm5 = new System.Windows.Forms.Button();
             this.btm6 = new System.Windows.Forms.Button();
             this.dbDiagram = new Diagrams.DiagramBox();
-            this.открытьЗаданиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.cmMain.SuspendLayout();
             this.cmSelectedFigure.SuspendLayout();
@@ -105,6 +105,13 @@
             this.miNew.Size = new System.Drawing.Size(231, 22);
             this.miNew.Text = "Новая диаграмма";
             this.miNew.Click += new System.EventHandler(this.miNewDiagram_Click);
+            // 
+            // открытьЗаданиеToolStripMenuItem
+            // 
+            this.открытьЗаданиеToolStripMenuItem.Name = "открытьЗаданиеToolStripMenuItem";
+            this.открытьЗаданиеToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.открытьЗаданиеToolStripMenuItem.Text = "Открыть задание";
+            this.открытьЗаданиеToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаданиеToolStripMenuItem_Click);
             // 
             // miExport
             // 
@@ -411,13 +418,6 @@
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
             this.dbDiagram.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseUp);
             // 
-            // открытьЗаданиеToolStripMenuItem
-            // 
-            this.открытьЗаданиеToolStripMenuItem.Name = "открытьЗаданиеToolStripMenuItem";
-            this.открытьЗаданиеToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.открытьЗаданиеToolStripMenuItem.Text = "Открыть задание";
-            this.открытьЗаданиеToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаданиеToolStripMenuItem_Click);
-            // 
             // AlgForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,7 +445,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.SaveFileDialog sfdDiagram;
         private System.Windows.Forms.OpenFileDialog ofdDiagram;
-        private DiagramBox dbDiagram;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem miNew;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
@@ -482,6 +481,7 @@
         private System.Windows.Forms.Button btm7;
         private System.Windows.Forms.ToolStripMenuItem нарисоватьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьЗаданиеToolStripMenuItem;
+        public DiagramBox dbDiagram;
     }
 }
 

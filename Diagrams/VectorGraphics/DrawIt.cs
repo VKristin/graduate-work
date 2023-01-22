@@ -24,13 +24,15 @@ namespace Diagrams
         List<Coord> coordList = new List<Coord>(); //линии, которые отображены на рисунке
         Point field;
         DrawForm form;
+        AlgForm parentForm;
         Graphics graph;
         bool draw;
         int speed = 300;
         Block block;
         Pen pen;
         int cellSize;
-        public void Draw(Block block, int numX, int numY, DrawForm drawForm)
+        Block selectedBlock = null;
+        public void Draw(Block block, int numX, int numY, DrawForm drawForm, AlgForm parentForm)
         {
             form = drawForm;
             speed = drawForm.tbSpeed.Value;
@@ -38,21 +40,31 @@ namespace Diagrams
             form.pbDraw.Refresh();
             field = new Point(numX, numY); //размер поля
             draw = true;
-            pen = new Pen(Color.CornflowerBlue, 3);
+            pen = new Pen(Color.CornflowerBlue, 2);
             graph = form.pbDraw.CreateGraphics();
             form.pencil1.Location = form.startPosition;
             RefreshField();
             Thread.Sleep(speed);
             this.block = block;
+            this.parentForm = parentForm;
             cellSize = form.trackBarSize.Value;
             drawPic(block);
             Replace();
             form.g = graph;
             form.draw =  true;
+            parentForm.dbDiagram.drawFigure = null;
+            parentForm.dbDiagram.Refresh();
         }
         private Block drawPic(Block block)
         {
+            Thread.Sleep(speed);
             form.coordList.Clear();
+            if (block != null)
+            {
+                parentForm.dbDiagram.drawFigure = block.figure;
+                parentForm.dbDiagram.Refresh();
+            }
+
             if (block == null)
                 return null;
             if (block is ActionBlock) //если действие
@@ -128,7 +140,6 @@ namespace Diagrams
                 form.pencil1.Location = new Point(form.pencil1.Location.X + d.X * cellSize, form.pencil1.Location.Y - d.Y * cellSize);
                 form.pencil1.Update();
                 RefreshField();
-                Thread.Sleep(speed);
                 location = n_loc;
                 form.position = location;
                 form.Invalidate();
