@@ -193,6 +193,18 @@ namespace Diagrams
                 line.To = figure;
                 Diagram.figures.Add(figure);
                 Diagram.figures.Add(line);
+                if ((m.targetFigure as LineFigure).From is RhombFigure)
+                {
+                    LedgeLineFigure li =  FindLine(11, (m.targetFigure as LineFigure).To);
+                    li.To = figure;
+                    //////////
+                    /////////
+                    ///
+                    ////
+                    //////
+                    ///////
+                    /////
+                }
             }
             if (m.targetFigure.type == 10)
             {
@@ -216,6 +228,24 @@ namespace Diagrams
                 Diagram.figures.Add(figure);
                 Diagram.figures.Add(line_);
             }
+            //при добавлении блока после двойного цикла
+            if (m.targetFigure.type == 13)
+            {
+                LedgeLineFigure l_ = new LedgeLineFigure();
+                DoubleLedgeLineFigure line_ = new DoubleLedgeLineFigure();
+                figure.location = findFigureHigher(m.location).location;
+                l_.From = (m.targetFigure as TripleLedgeLineFigure).From;
+                l_.To = figure;
+                l_.ledgePositionX = (m.targetFigure as TripleLedgeLineFigure).ledgePositionX;
+                //l_.ledgePositionY = (m.targetFigure as TripleLedgeLineFigure).ledgePositionY;
+                l = l_;
+                line_.ledgePositionX = (m.targetFigure as TripleLedgeLineFigure).secondLedgePosX;
+                line_.From = figure;
+                line_.To = (m.targetFigure as TripleLedgeLineFigure).To;
+                Diagram.figures.Add(figure);
+                Diagram.figures.Add(line_);
+                MoveFiguresY(findFigureHigher(m.location));
+            }
             Block from = findBlockWithGraphic(l.From, blocks);
             /*line.From = l.From;
             line.To = figure;
@@ -232,7 +262,7 @@ namespace Diagrams
             Block to = findBlockWithGraphic(l.To, blocks);
             if (to is Condition && m.targetFigure.type == 10)
                 to = null;
-            if (from is Condition && !(m.targetFigure.type == 11))
+            if (from is Condition && !(m.targetFigure.type == 11) && !(m.targetFigure.type == 13))
             {
                 block.nextBlock = to;
 
@@ -283,10 +313,22 @@ namespace Diagrams
             }
             else
             {
-                l = new LedgeLineFigure(); l = m.targetFigure as LedgeLineFigure;
-                line.From = figure;
-                line.To = l.To;
-                Diagram.figures.Add(line);
+                if (m.targetFigure.type == 13)
+                {
+                    l = m.targetFigure as LedgeLineFigure;
+                    DoubleLedgeLineFigureS line_ = new DoubleLedgeLineFigureS();
+                    line_.From = (m.targetFigure as TripleLedgeLineFigure).From;
+                    line_.To = figure;
+                    line_.ledgePositionX = (m.targetFigure as TripleLedgeLineFigure).ledgePositionX;
+                    Diagram.figures.Add(line_);
+                }
+                else
+                {
+                    l = m.targetFigure as LedgeLineFigure;
+                    line.From = figure;
+                    line.To = l.To;
+                    Diagram.figures.Add(line);
+                }
             }
 
             /*line.ledgePositionX = l.ledgePositionX;
@@ -526,8 +568,8 @@ namespace Diagrams
                     if ((Diagram.figures[i] as SolidFigure).minus != null)
                         (Diagram.figures[i] as SolidFigure).minus.location.Y += defaultSize + 10;
                 }
-                if ((Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13) && 
-                    ((Diagram.figures[i] as DoubleLedgeLineFigure).From.location.Y >= a.location.Y || (Diagram.figures[i] as DoubleLedgeLineFigure).To.location.Y >= a.location.Y))
+                if ((Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13) &&
+                    ((Diagram.figures[i] as DoubleLedgeLineFigure).From != a && (Diagram.figures[i] as DoubleLedgeLineFigure).From.location.Y >= a.location.Y ||  (Diagram.figures[i] as DoubleLedgeLineFigure).To.location.Y >= a.location.Y && (Diagram.figures[i] as DoubleLedgeLineFigure).To != a ))
                 {
                     (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY += defaultSize + 10;
                 }
@@ -640,7 +682,7 @@ namespace Diagrams
             markers = new List<Marker>();
             for (int i = 0; i < Diagram.figures.Count; i++)
             {
-                if (Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
+                if (Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13)
                 //if (Diagram.figures[i].type == 1)
                     {
                     InsertMarker marker = new InsertMarker();
@@ -1094,6 +1136,24 @@ namespace Diagrams
             if (move)
                 MoveFiguresX(30);
         }
+
+        public SolidFigure findFigureHigher(PointF p)
+        {
+            SolidFigure f = new RectFigure();
+            f.location = new PointF(0, 0);
+            for (int i = 0; i < Diagram.figures.Count; i++)
+            {
+                if (Diagram.figures[i] is SolidFigure)
+                {
+                    SolidFigure fig = Diagram.figures[i] as SolidFigure;
+                    if (fig.location.Y < p.Y && Math.Abs(fig.location.Y - p.Y) < Math.Abs(f.location.Y - p.Y))
+                    {
+                        f = fig;
+                    }
+                }
+            }
+            return f;
+        }
         public Block findBlockWithGraphic(Figure figure, Block block)        
         {
             if (block == null)
@@ -1105,6 +1165,8 @@ namespace Diagrams
             {
                 Block b = null;
                 b = findBlockWithGraphic(figure, (block as Condition).trueBlock);
+                if (block is IfBlock)
+                    b = findBlockWithGraphic(figure, (block as IfBlock).falseBlock);
                 if (b == null)
                     return findBlockWithGraphic(figure, block.nextBlock);
                 else
@@ -1139,6 +1201,17 @@ namespace Diagrams
             if (block.nextBlock == null)
                 return null;
             return findBlockFromBlock(bl, block.nextBlock);
+        }
+        public LedgeLineFigure FindLine(byte type, SolidFigure figure)
+        {
+            for (int i = 0; i < Diagram.figures.Count(); i++)
+            {
+                if (Diagram.figures[i].type == type && (Diagram.figures[i] as DoubleLedgeLineFigure).To == figure)
+                {
+                    return (Diagram.figures[i] as LedgeLineFigure);
+                }
+            }
+            return null;
         }
     }
 }

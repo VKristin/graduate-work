@@ -33,6 +33,7 @@ namespace Diagrams
         public void Draw(Block block, int numX, int numY, DrawForm drawForm)
         {
             form = drawForm;
+            speed = drawForm.tbSpeed.Value;
             form.draw = false;
             form.pbDraw.Refresh();
             field = new Point(numX, numY); //размер поля

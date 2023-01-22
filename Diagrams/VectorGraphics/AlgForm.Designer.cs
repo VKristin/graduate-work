@@ -68,6 +68,7 @@
             this.btm5 = new System.Windows.Forms.Button();
             this.btm6 = new System.Windows.Forms.Button();
             this.dbDiagram = new Diagrams.DiagramBox();
+            this.открытьЗаданиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.cmMain.SuspendLayout();
             this.cmSelectedFigure.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miNew,
+            this.открытьЗаданиеToolStripMenuItem,
             this.miExport,
             this.toolStripMenuItem2,
             this.miClose});
@@ -389,7 +391,6 @@
             this.btm6.TabIndex = 10;
             this.btm6.Text = "Условие";
             this.btm6.UseVisualStyleBackColor = false;
-            this.btm6.Visible = false;
             this.btm6.Click += new System.EventHandler(this.btm6_Click);
             // 
             // dbDiagram
@@ -409,6 +410,13 @@
             this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
             this.dbDiagram.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseUp);
+            // 
+            // открытьЗаданиеToolStripMenuItem
+            // 
+            this.открытьЗаданиеToolStripMenuItem.Name = "открытьЗаданиеToolStripMenuItem";
+            this.открытьЗаданиеToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.открытьЗаданиеToolStripMenuItem.Text = "Открыть задание";
+            this.открытьЗаданиеToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаданиеToolStripMenuItem_Click);
             // 
             // AlgForm
             // 
@@ -473,6 +481,7 @@
         private System.Windows.Forms.Button btm6;
         private System.Windows.Forms.Button btm7;
         private System.Windows.Forms.ToolStripMenuItem нарисоватьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem открытьЗаданиеToolStripMenuItem;
     }
 }
 

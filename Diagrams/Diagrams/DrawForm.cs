@@ -20,6 +20,8 @@ namespace Diagrams
         Form Main;
         public Graphics g;
         public bool draw = false;
+        public bool task = false;
+        public List<Coordinate> taskCoord = null;
 
         public List<Coordinate> coordList = new List<Coordinate>();
         
@@ -46,6 +48,8 @@ namespace Diagrams
             pencil1.Size = new Size(cellSize - 2, cellSize - 2);
             e.Graphics.Clear(Color.White);
             Pen pen = new Pen(Color.LightGray, 1);
+            Pen penTask = new Pen(Color.YellowGreen, 3);
+            float[] dashValues = { 2, 2 };
             cellSize = trackBarSize.Value;
             pbDraw.Width = numOfCellsX * cellSize + 1;
             pbDraw.Height = numOfCellsY * cellSize + 1;
@@ -63,11 +67,21 @@ namespace Diagrams
                 pencil1.Location = startPosition;
             if (coordList.Count() != 0 && draw)
             {
-                Pen pen1 = new Pen(Color.CornflowerBlue, 3);
+                Pen pen1 = new Pen(Color.CornflowerBlue, 2);
                 pencil1.Location = new Point(pbDraw.Location.X + 1 + cellSize * position.X, pbDraw.Size.Height + pbDraw.Location.Y - 1 - pencil1.Height - cellSize * position.Y);
                 for (int i = 0; i < coordList.Count(); i++)
                 {
                     e.Graphics.DrawLine(pen1, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + numOfCellsY) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + numOfCellsY) * cellSize));
+                }
+            }
+            if (task && taskCoord.Count > 0)
+            {
+                penTask.DashPattern = dashValues;
+                for (int i = 0; i < taskCoord.Count(); i++)
+                {
+                    Point point1 = new Point((int)(taskCoord[i].p1.X * cellSize), (int)((-taskCoord[i].p1.Y + numOfCellsY) * cellSize));
+                    Point point2 = new Point((int)(taskCoord[i].p2.X * cellSize), (int)((-taskCoord[i].p2.Y + numOfCellsY) * cellSize));
+                    e.Graphics.DrawLine(penTask, point1, point2);
                 }
             }
         }
@@ -103,6 +117,35 @@ namespace Diagrams
                 }
             }
         }
+        public void OpenTask()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.InitialDirectory = directory;
+            openFileDialog.Filter = "drawer task files (*.drawertask)|*.drawertask|All files (*.*)|*.*";
+            openFileDialog.ShowDialog();
+            string filename = openFileDialog.FileName;
+            if (filename == "")
+                return;
+            //directory = filename;
+            //saveNewSettings(filename);
+            if (taskCoord != null && taskCoord.Count != 0)
+                taskCoord.Clear();
+            task = false;
+            pbDraw.Invalidate();
+            System.Xml.Serialization.XmlSerializer reader =
+            new System.Xml.Serialization.XmlSerializer(typeof(List<Coordinate>));
+
+            System.IO.StreamReader file = new System.IO.StreamReader(filename);
+            taskCoord = (List<Coordinate>)reader.Deserialize(file);
+            //numOfCellsX = Convert.ToInt32(Math.Ceiling(taskCoord.Max(x => x2))) + 1;
+            //numOfCellsY = Convert.ToInt32(Math.Ceiling(taskCoord.Max(x => x.y1))) + 1;
+            numOfCellsX = 20;
+            numOfCellsY = 10;
+            file.Close();
+            task = true;
+            //clear = false;
+            pbDraw.Invalidate();
+        }
 
     }
     public class Coordinate
@@ -114,5 +157,7 @@ namespace Diagrams
             this.p1 = p1;
             this.p2 = p2;
         }
+        public Coordinate() { }
     }
+    
 }

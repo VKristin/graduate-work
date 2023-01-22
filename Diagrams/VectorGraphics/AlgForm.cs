@@ -376,5 +376,10 @@ namespace Diagrams
             DrawIt draw = new DrawIt();
             draw.DrawAgain(coordList, location);
         }
+
+        private void открытьЗаданиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            drawForm.OpenTask();
+        }
     }
 }

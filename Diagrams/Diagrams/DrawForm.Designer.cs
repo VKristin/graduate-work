@@ -34,10 +34,13 @@
             this.lbSize = new System.Windows.Forms.Label();
             this.pencil1 = new System.Windows.Forms.PictureBox();
             this.pbDraw = new System.Windows.Forms.PictureBox();
+            this.lbSpeed = new System.Windows.Forms.Label();
+            this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pencil1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -103,6 +106,31 @@
             this.pbDraw.TabStop = false;
             this.pbDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.pbDraw_Paint);
             // 
+            // lbSpeed
+            // 
+            this.lbSpeed.AutoSize = true;
+            this.lbSpeed.Location = new System.Drawing.Point(438, 39);
+            this.lbSpeed.Name = "lbSpeed";
+            this.lbSpeed.Size = new System.Drawing.Size(111, 13);
+            this.lbSpeed.TabIndex = 8;
+            this.lbSpeed.Text = "Скорость анимации:";
+            // 
+            // tbSpeed
+            // 
+            this.tbSpeed.AutoSize = false;
+            this.tbSpeed.LargeChange = 8;
+            this.tbSpeed.Location = new System.Drawing.Point(358, 55);
+            this.tbSpeed.Maximum = 600;
+            this.tbSpeed.Minimum = 100;
+            this.tbSpeed.Name = "tbSpeed";
+            this.tbSpeed.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.tbSpeed.Size = new System.Drawing.Size(277, 21);
+            this.tbSpeed.SmallChange = 8;
+            this.tbSpeed.TabIndex = 7;
+            this.tbSpeed.TabStop = false;
+            this.tbSpeed.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tbSpeed.Value = 300;
+            // 
             // DrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,6 +138,8 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(933, 623);
+            this.Controls.Add(this.lbSpeed);
+            this.Controls.Add(this.tbSpeed);
             this.Controls.Add(this.pencil1);
             this.Controls.Add(this.lbSize);
             this.Controls.Add(this.trackBarSize);
@@ -124,6 +154,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pencil1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,5 +167,7 @@
         public System.Windows.Forms.PictureBox pbDraw;
         public System.Windows.Forms.TrackBar trackBarSize;
         public System.Windows.Forms.PictureBox pencil1;
+        private System.Windows.Forms.Label lbSpeed;
+        public System.Windows.Forms.TrackBar tbSpeed;
     }
 }
