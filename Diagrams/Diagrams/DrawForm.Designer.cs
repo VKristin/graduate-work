@@ -34,8 +34,8 @@
             this.lbSize = new System.Windows.Forms.Label();
             this.pencil1 = new System.Windows.Forms.PictureBox();
             this.pbDraw = new System.Windows.Forms.PictureBox();
-            this.lbSpeed = new System.Windows.Forms.Label();
             this.tbSpeed = new System.Windows.Forms.TrackBar();
+            this.lbSpeed = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pencil1)).BeginInit();
@@ -51,14 +51,15 @@
             this.изменитьРазмерПоляToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1252, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(939, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // изменитьРазмерПоляToolStripMenuItem
             // 
             this.изменитьРазмерПоляToolStripMenuItem.Name = "изменитьРазмерПоляToolStripMenuItem";
-            this.изменитьРазмерПоляToolStripMenuItem.Size = new System.Drawing.Size(186, 24);
+            this.изменитьРазмерПоляToolStripMenuItem.Size = new System.Drawing.Size(146, 20);
             this.изменитьРазмерПоляToolStripMenuItem.Text = "Изменить размер поля";
             this.изменитьРазмерПоляToolStripMenuItem.Click += new System.EventHandler(this.изменитьРазмерПоляToolStripMenuItem_Click);
             // 
@@ -66,12 +67,11 @@
             // 
             this.trackBarSize.AutoSize = false;
             this.trackBarSize.LargeChange = 8;
-            this.trackBarSize.Location = new System.Drawing.Point(16, 68);
-            this.trackBarSize.Margin = new System.Windows.Forms.Padding(4);
+            this.trackBarSize.Location = new System.Drawing.Point(12, 55);
             this.trackBarSize.Maximum = 128;
             this.trackBarSize.Minimum = 16;
             this.trackBarSize.Name = "trackBarSize";
-            this.trackBarSize.Size = new System.Drawing.Size(369, 26);
+            this.trackBarSize.Size = new System.Drawing.Size(277, 21);
             this.trackBarSize.SmallChange = 8;
             this.trackBarSize.TabIndex = 4;
             this.trackBarSize.TabStop = false;
@@ -82,10 +82,9 @@
             // lbSize
             // 
             this.lbSize.AutoSize = true;
-            this.lbSize.Location = new System.Drawing.Point(157, 48);
-            this.lbSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbSize.Location = new System.Drawing.Point(118, 39);
             this.lbSize.Name = "lbSize";
-            this.lbSize.Size = new System.Drawing.Size(94, 16);
+            this.lbSize.Size = new System.Drawing.Size(76, 13);
             this.lbSize.TabIndex = 5;
             this.lbSize.Text = "Размер поля:";
             // 
@@ -93,58 +92,54 @@
             // 
             this.pencil1.BackColor = System.Drawing.Color.Transparent;
             this.pencil1.Image = global::Diagrams.Properties.Resources.Карандаш_12;
-            this.pencil1.Location = new System.Drawing.Point(16, 639);
-            this.pencil1.Margin = new System.Windows.Forms.Padding(4);
+            this.pencil1.Location = new System.Drawing.Point(12, 519);
             this.pencil1.Name = "pencil1";
-            this.pencil1.Size = new System.Drawing.Size(67, 62);
+            this.pencil1.Size = new System.Drawing.Size(50, 50);
             this.pencil1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pencil1.TabIndex = 6;
             this.pencil1.TabStop = false;
             // 
             // pbDraw
             // 
-            this.pbDraw.Location = new System.Drawing.Point(15, 143);
-            this.pbDraw.Margin = new System.Windows.Forms.Padding(4);
+            this.pbDraw.Location = new System.Drawing.Point(11, 116);
             this.pbDraw.Name = "pbDraw";
-            this.pbDraw.Size = new System.Drawing.Size(1237, 559);
+            this.pbDraw.Size = new System.Drawing.Size(928, 454);
             this.pbDraw.TabIndex = 0;
             this.pbDraw.TabStop = false;
             this.pbDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.pbDraw_Paint);
-            // 
-            // lbSpeed
-            // 
-            this.lbSpeed.AutoSize = true;
-            this.lbSpeed.Location = new System.Drawing.Point(584, 48);
-            this.lbSpeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbSpeed.Name = "lbSpeed";
-            this.lbSpeed.Size = new System.Drawing.Size(139, 16);
-            this.lbSpeed.TabIndex = 8;
-            this.lbSpeed.Text = "Скорость анимации:";
             // 
             // tbSpeed
             // 
             this.tbSpeed.AutoSize = false;
             this.tbSpeed.LargeChange = 8;
-            this.tbSpeed.Location = new System.Drawing.Point(477, 68);
-            this.tbSpeed.Margin = new System.Windows.Forms.Padding(4);
+            this.tbSpeed.Location = new System.Drawing.Point(358, 55);
             this.tbSpeed.Maximum = 600;
             this.tbSpeed.Minimum = 100;
             this.tbSpeed.Name = "tbSpeed";
             this.tbSpeed.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.tbSpeed.Size = new System.Drawing.Size(369, 26);
+            this.tbSpeed.Size = new System.Drawing.Size(277, 21);
             this.tbSpeed.SmallChange = 8;
             this.tbSpeed.TabIndex = 7;
             this.tbSpeed.TabStop = false;
             this.tbSpeed.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tbSpeed.Value = 300;
             // 
+            // lbSpeed
+            // 
+            this.lbSpeed.AutoSize = true;
+            this.lbSpeed.Location = new System.Drawing.Point(413, 39);
+            this.lbSpeed.Name = "lbSpeed";
+            this.lbSpeed.Size = new System.Drawing.Size(180, 13);
+            this.lbSpeed.TabIndex = 8;
+            this.lbSpeed.Text = "Скорость выполнения алгоритма:";
+            // 
             // DrawForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1244, 767);
+            this.ClientSize = new System.Drawing.Size(933, 623);
             this.Controls.Add(this.lbSpeed);
             this.Controls.Add(this.tbSpeed);
             this.Controls.Add(this.pencil1);
@@ -153,7 +148,6 @@
             this.Controls.Add(this.pbDraw);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DrawForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Поле";
@@ -175,7 +169,7 @@
         public System.Windows.Forms.PictureBox pbDraw;
         public System.Windows.Forms.TrackBar trackBarSize;
         public System.Windows.Forms.PictureBox pencil1;
-        private System.Windows.Forms.Label lbSpeed;
         public System.Windows.Forms.TrackBar tbSpeed;
+        private System.Windows.Forms.Label lbSpeed;
     }
 }

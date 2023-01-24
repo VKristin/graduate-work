@@ -40,7 +40,7 @@ namespace Diagrams
             ResizeRedraw = true;
 
             selectRectPen = new Pen(Color.Blue, 1);
-            drawPen = new Pen(Color.Green, 1);
+            drawPen = new Pen(Color.Green, 2);
             
             selectRectPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }
@@ -223,6 +223,7 @@ namespace Diagrams
                 figure.location = new PointF(l.From.location.X, l.From.location.Y);
                 line.From = l.From;
                 line.To = figure;
+                //line.ledgePositionX = (m.targetFigure as LedgeLineFigure).ledgePositionX;
                 Diagram.figures.Add(figure);
                 Diagram.figures.Add(line);
             }
@@ -363,9 +364,13 @@ namespace Diagrams
                     l.To.minus.location.Y += defaultSize + 10;
                 MoveFiguresY(l.To);
             }
+            else if (figure.location.Y == l.To.location.Y && figure.location.X >= l.To.location.X + SolidFigure.defaultSize)
+            {
+                MoveFiguresY(figure);
+            }
 
-                //для конструкций выполняем ещё раз проверку, для дорисовки недостающих фигур
-                switch (num)
+            //для конструкций выполняем ещё раз проверку, для дорисовки недостающих фигур
+            switch (num)
             {
                 case 4:
                     Branching(line, block);
@@ -580,7 +585,8 @@ namespace Diagrams
                         (Diagram.figures[i] as SolidFigure).minus.location.Y += defaultSize + 10;
                 }
                 if ((Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13) &&
-                    ((Diagram.figures[i] as DoubleLedgeLineFigure).From != a && (Diagram.figures[i] as DoubleLedgeLineFigure).From.location.Y >= a.location.Y ||  (Diagram.figures[i] as DoubleLedgeLineFigure).To.location.Y >= a.location.Y && (Diagram.figures[i] as DoubleLedgeLineFigure).To != a ))
+                    ((Diagram.figures[i] as DoubleLedgeLineFigure).From != a && (Diagram.figures[i] as DoubleLedgeLineFigure).From.location.Y >= a.location.Y ||  (Diagram.figures[i] as DoubleLedgeLineFigure).To.location.Y >= a.location.Y && (Diagram.figures[i] as DoubleLedgeLineFigure).To != a 
+                    || (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY >= a.location.Y))
                 {
                     (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY += defaultSize + 10;
                 }

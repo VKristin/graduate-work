@@ -48,6 +48,7 @@ namespace Diagrams
             this.block = block;
             this.parentForm = parentForm;
             cellSize = form.trackBarSize.Value;
+            form.coordList.Clear();
             drawPic(block);
             moveBlock();
             Replace();
@@ -58,17 +59,6 @@ namespace Diagrams
         }
         private Block drawPic(Block block)
         {
-            /*if (block != null)
-                firstDrawer.Add(block);*,
-            //Thread.Sleep(speed);
-
-            form.coordList.Clear();
-            /*if (block != null)
-            {
-                parentForm.dbDiagram.drawFigure = block.figure;
-                parentForm.dbDiagram.Refresh();
-            }*/
-            form.coordList.Clear();
 
             if (block is EllipseBlock)
                 firstDrawer.Add(block);
