@@ -24,6 +24,7 @@ namespace Diagrams
 
         public List<Marker> markers = new List<Marker>();
         Pen selectRectPen;
+        Pen drawPen;
         byte insertFigure = 0;
         public Block blocks;
 
@@ -39,6 +40,8 @@ namespace Diagrams
             ResizeRedraw = true;
 
             selectRectPen = new Pen(Color.Blue, 1);
+            drawPen = new Pen(Color.Green, 1);
+            
             selectRectPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }
 
@@ -107,7 +110,7 @@ namespace Diagrams
             {
                 SolidFigure figure = drawFigure as SolidFigure;
                 RectangleF bounds = figure.Bounds;
-                gr.DrawRectangle(selectRectPen, bounds.Left - 2, bounds.Top - 2, bounds.Width + 4, bounds.Height + 4);
+                gr.DrawRectangle(drawPen, bounds.Left - 2, bounds.Top - 2, bounds.Width + 4, bounds.Height + 4);
             }
             //рисуем маркеры
             foreach (Marker m in markers)

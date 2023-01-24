@@ -80,3 +80,15 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\D
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Debug\Diagrams.dll
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Debug\Diagrams.pdb
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CopyComplete
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.exe
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.pdb
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\bin\Debug\Diagrams.dll
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\bin\Debug\Diagrams.pdb
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.AlgForm.resources
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\Diagrams.Properties.Resources.resources
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CopyComplete
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.exe
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\VectorGraphics.pdb

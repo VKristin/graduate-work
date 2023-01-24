@@ -27,11 +27,11 @@ namespace Diagrams
         AlgForm parentForm;
         Graphics graph;
         bool draw;
+        List<Block> firstDrawer = new List<Block>();
         int speed = 300;
         Block block;
         Pen pen;
         int cellSize;
-        Block selectedBlock = null;
         public void Draw(Block block, int numX, int numY, DrawForm drawForm, AlgForm parentForm)
         {
             form = drawForm;
@@ -49,6 +49,7 @@ namespace Diagrams
             this.parentForm = parentForm;
             cellSize = form.trackBarSize.Value;
             drawPic(block);
+            moveBlock();
             Replace();
             form.g = graph;
             form.draw =  true;
@@ -57,39 +58,51 @@ namespace Diagrams
         }
         private Block drawPic(Block block)
         {
-            Thread.Sleep(speed);
+            /*if (block != null)
+                firstDrawer.Add(block);*,
+            //Thread.Sleep(speed);
+
             form.coordList.Clear();
-            if (block != null)
+            /*if (block != null)
             {
                 parentForm.dbDiagram.drawFigure = block.figure;
                 parentForm.dbDiagram.Refresh();
-            }
+            }*/
+            form.coordList.Clear();
+
+            if (block is EllipseBlock)
+                firstDrawer.Add(block);
 
             if (block == null)
                 return null;
             if (block is ActionBlock) //если действие
             {
-                drawAction(block);
+                firstDrawer.Add(block);
+                //drawAction(block);
                 return drawPic(block.nextBlock);
             }
             if (block is WhileBlock)
             {
                 switch ((block as WhileBlock).condition)
                 {
-                    case 1: while (field.X - location.X >= (block as WhileBlock).num_cond) { drawPic((block as WhileBlock).trueBlock); }  break;
-                    case 2: while (location.X >= (block as WhileBlock).num_cond) { drawPic((block as WhileBlock).trueBlock); } break;
-                    case 3: while (field.Y - location.Y >= (block as WhileBlock).num_cond) { drawPic((block as WhileBlock).trueBlock); } break;
-                    case 4: while (location.Y >= (block as WhileBlock).num_cond) { drawPic((block as WhileBlock).trueBlock); } break;
-                    case 5: while (field.X - location.X >= (block as WhileBlock).num_cond && location.Y >= (block as WhileBlock).num_cond) { drawPic((block as WhileBlock).trueBlock); } break;
-                    case 6: while (field.X - location.X >= (block as WhileBlock).num_cond && field.Y - location.Y >= (block as WhileBlock).num_cond) { drawPic((block as WhileBlock).trueBlock); } break;
-                    case 7: while (location.X >= (block as WhileBlock).num_cond && location.Y >= (block as WhileBlock).num_cond) { drawPic((block as WhileBlock).trueBlock); } break;
-                    case 8: while (location.X >= (block as WhileBlock).num_cond && (field.Y - location.Y >= (block as WhileBlock).num_cond)) { drawPic((block as WhileBlock).trueBlock); } break;
+                    case 1: while (field.X - location.X >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); drawPic((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 2: while (location.X >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); drawPic((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 3: while (field.Y - location.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); drawPic((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 4: while (location.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); drawPic((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 5: while (field.X - location.X >= (block as WhileBlock).num_cond && location.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); drawPic((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 6: while (field.X - location.X >= (block as WhileBlock).num_cond && field.Y - location.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); drawPic((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 7: while (location.X >= (block as WhileBlock).num_cond && location.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); drawPic((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 8: while (location.X >= (block as WhileBlock).num_cond && (field.Y - location.Y >= (block as WhileBlock).num_cond)) { firstDrawer.Add(block); drawPic((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
                 }
             }
             if (block is ForBlock)
             {
                 for (int i = 0; i < (block as ForBlock).numOfRep; i++)
+                {
+                    firstDrawer.Add(block);
                     drawPic((block as ForBlock).trueBlock);
+                }
+                firstDrawer.Add(block);
             }
             return drawPic(block.nextBlock);
         }
@@ -102,6 +115,22 @@ namespace Diagrams
                     case 5: figure.text = "↗ " + nudConditions.Value.ToString(); break;
                     case 6: figure.text = "↙ " + nudConditions.Value.ToString(); break;
                     case 7: figure.text = "↖ " + nudConditions.Value.ToString(); break;*/
+        
+        private void moveBlock()
+        {
+            //здесь посмотреть, у кого из исполнителей блоков больше
+            for (int i = 0; i < firstDrawer.Count(); i++)
+            {
+                parentForm.dbDiagram.drawFigure = firstDrawer[i].figure;
+                parentForm.dbDiagram.Refresh();
+                if (firstDrawer[i] is ActionBlock)
+                {
+                    drawAction(firstDrawer[i]);
+                }
+                Thread.Sleep(speed);
+            }
+        }
+
         private void drawAction(Block block)
         {
             Point n_loc = new Point(-1, -1);

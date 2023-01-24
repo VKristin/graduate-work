@@ -55,3 +55,15 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\D
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\obj\Debug\Diagrams.Properties.Resources.resources
 C:\Users\User\Documents\GitHub\nir\Diagrams\Diagrams\obj\Debug\Diagrams.ChangeSize.resources
 C:\Users\User\Documents\GitHub\nir\Diagrams\Diagrams\obj\Debug\Diagrams.Properties.Resources.resources
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\bin\Debug\Diagrams.dll
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\bin\Debug\Diagrams.pdb
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.ChangeSize.resources
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.DiagramBox.resources
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.DrawForm.resources
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.EditBlock.resources
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.Properties.Resources.resources
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.dll
+C:\Users\User\Desktop\Учёба\Диплом\nir\Diagrams\Diagrams\obj\Debug\Diagrams.pdb
