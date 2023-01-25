@@ -206,7 +206,7 @@ namespace Diagrams
                 Diagram.figures.Add(line);
                 if ((m.targetFigure as LineFigure).From is RhombFigure)
                 {
-                    LedgeLineFigure li =  FindLine(11, (m.targetFigure as LineFigure).To);
+                    LedgeLineFigure li =  FindLine(1, (m.targetFigure as LineFigure).To);
                     li.To = figure;
                     //////////
                     /////////
@@ -357,12 +357,13 @@ namespace Diagrams
             else
             if (figure.location.Y == l.To.location.Y && l.To.location.X == figure.location.X)
             {
-                l.To.location.Y += defaultSize + 10;
+                /*l.To.location.Y += defaultSize + 10;
                 if (l.To.plus != null)
                     l.To.plus.location.Y += defaultSize + 10;
                 if (l.To.minus != null)
                     l.To.minus.location.Y += defaultSize + 10;
-                MoveFiguresY(l.To);
+                MoveFiguresY(l.To);*/
+                MoveFiguresY(figure);
             }
             else if (figure.location.Y == l.To.location.Y && figure.location.X >= l.To.location.X + SolidFigure.defaultSize)
             {
@@ -569,24 +570,26 @@ namespace Diagrams
             Diagram.figures.Add(l);
             (bl as IfWithoutElseBlock).trueBlock = new ActionBlock(null, 0, ref figure);
         }
+
+        List<LedgeLineFigure> stopListForMoving;
+
         //сдвигаем все фигуры, которые находятся ниже вставленной, вниз
         public void MoveFiguresY(SolidFigure a)
         {
+            stopListForMoving = new List<LedgeLineFigure>();
             int defaultSize = SolidFigure.defaultSize;
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
                 if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13 && Diagram.figures[i].type != 12 &&
                     Diagram.figures[i] as SolidFigure != a && (Diagram.figures[i] as SolidFigure).location.Y >= a.location.Y)
                 {
+                    findLinesToMove(Diagram.figures[i] as SolidFigure, defaultSize + 10);
                     (Diagram.figures[i] as SolidFigure).location.Y += defaultSize + 10;
                     if ((Diagram.figures[i] as SolidFigure).plus != null)
                         (Diagram.figures[i] as SolidFigure).plus.location.Y += defaultSize + 10;
                     if ((Diagram.figures[i] as SolidFigure).minus != null)
                         (Diagram.figures[i] as SolidFigure).minus.location.Y += defaultSize + 10;
 
-                    findLinesToMove(Diagram.figures[i] as SolidFigure, defaultSize + 10);
-
-                    
                 }
                 /*if ((Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13) &&
                     ((Diagram.figures[i] as DoubleLedgeLineFigure).From != a && (Diagram.figures[i] as DoubleLedgeLineFigure).From.location.Y >= a.location.Y ||  (Diagram.figures[i] as DoubleLedgeLineFigure).To.location.Y >= a.location.Y && (Diagram.figures[i] as DoubleLedgeLineFigure).To != a 
@@ -678,10 +681,15 @@ namespace Diagrams
             List<LedgeLineFigure> lines = new List<LedgeLineFigure>();
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
-                if (Diagram.figures[i] is LineFigure && Diagram.figures[i].type != 1)
+                if (Diagram.figures[i] is LineFigure && Diagram.figures[i].type != 1 )
                 {
-                    if ((Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY >= figure.location.Y)
+                    /*if ((Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY >= figure.location.Y || (Diagram.figures[i] as DoubleLedgeLineFigure).To.location.Y >= figure.location.Y)
+                        lines.Add(Diagram.figures[i] as LedgeLineFigure);*/
+                    if (((Diagram.figures[i] as DoubleLedgeLineFigure).To == figure || (Diagram.figures[i] as DoubleLedgeLineFigure).From == figure) && stopListForMoving.FindAll(x => x == Diagram.figures[i] as DoubleLedgeLineFigure).Count() == 0)
+                    { 
                         lines.Add(Diagram.figures[i] as LedgeLineFigure);
+                        stopListForMoving.Add(Diagram.figures[i] as LedgeLineFigure);
+                    }
                 }
             }
             moveLines(lines, b);
@@ -1250,7 +1258,7 @@ namespace Diagrams
         {
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
-                if (Diagram.figures[i].type == type && (Diagram.figures[i] as DoubleLedgeLineFigure).To == figure)
+                if (Diagram.figures[i] is LedgeLineFigure && (Diagram.figures[i] as LedgeLineFigure).To != null && (Diagram.figures[i] as LedgeLineFigure).To == figure)
                 {
                     return (Diagram.figures[i] as LedgeLineFigure);
                 }
