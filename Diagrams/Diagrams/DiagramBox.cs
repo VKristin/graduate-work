@@ -583,13 +583,18 @@ namespace Diagrams
                         (Diagram.figures[i] as SolidFigure).plus.location.Y += defaultSize + 10;
                     if ((Diagram.figures[i] as SolidFigure).minus != null)
                         (Diagram.figures[i] as SolidFigure).minus.location.Y += defaultSize + 10;
+
+                    findLinesToMove(Diagram.figures[i] as SolidFigure, defaultSize + 10);
+
+                    
                 }
-                if ((Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13) &&
+                /*if ((Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13) &&
                     ((Diagram.figures[i] as DoubleLedgeLineFigure).From != a && (Diagram.figures[i] as DoubleLedgeLineFigure).From.location.Y >= a.location.Y ||  (Diagram.figures[i] as DoubleLedgeLineFigure).To.location.Y >= a.location.Y && (Diagram.figures[i] as DoubleLedgeLineFigure).To != a 
                     || (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY >= a.location.Y))
                 {
                     (Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY += defaultSize + 10;
-                }
+                }*/
+
             }
             CalcAutoScrollPosition();
         }
@@ -667,6 +672,28 @@ namespace Diagrams
             CalcAutoScrollPosition();
         }
         //сдвигаем линии
+
+        private void findLinesToMove(SolidFigure figure, int b)
+        {
+            List<LedgeLineFigure> lines = new List<LedgeLineFigure>();
+            for (int i = 0; i < Diagram.figures.Count(); i++)
+            {
+                if (Diagram.figures[i] is LineFigure && Diagram.figures[i].type != 1)
+                {
+                    if ((Diagram.figures[i] as DoubleLedgeLineFigure).ledgePositionY >= figure.location.Y)
+                        lines.Add(Diagram.figures[i] as LedgeLineFigure);
+                }
+            }
+            moveLines(lines, b);
+        }
+
+        private void moveLines(List<LedgeLineFigure> lines, int b)
+        {
+            for (int i = 0; i < lines.Count(); i++)
+            {
+                (lines[i] as DoubleLedgeLineFigure).ledgePositionY += b;
+            }
+        }
         private void MoveFiguresX(int dist)
         {
             for (int i = 0; i < Diagram.figures.Count(); i++)
