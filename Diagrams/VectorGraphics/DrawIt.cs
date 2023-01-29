@@ -56,6 +56,43 @@ namespace Diagrams
             form.draw =  true;
             parentForm.dbDiagram.drawFigure = null;
             parentForm.dbDiagram.Refresh();
+            checkTask();
+        }
+
+        private void checkTask()
+        {
+            List <Coord> missingCoords = new List<Coord>(); //список для недостающих координат
+            List <Coord> extraCoords = new List<Coord>(); //список для лишних координат
+
+            if (form.task)
+            {
+                for (int i = 0; i < coordList.Count(); i++)
+                {
+                    if (form.taskCoord.Find(x => x.p1 == coordList[i].p1 && x.p2 == coordList[i].p2 || x.p2 == coordList[i].p1 && x.p1 == coordList[i].p2) == null)
+                    {
+                        extraCoords.Add(coordList[i]);
+                    }
+                }
+                for (int i = 0; i < form.taskCoord.Count(); i++)
+                {
+                    if (coordList.Find(x => x.p1 == form.taskCoord[i].p1 && x.p2 == form.taskCoord[i].p2 || x.p2 == form.taskCoord[i].p1 && x.p1 == form.taskCoord[i].p2) == null)
+                    {
+                        Coord b = new Coord(new Point(form.taskCoord[i].p1.X, form.taskCoord[i].p1.Y), new Point(form.taskCoord[i].p2.X, form.taskCoord[i].p2.Y));
+                        missingCoords.Add(b);
+                    }
+                }
+                if (missingCoords.Count() != 0 || extraCoords.Count() != 0)
+                    MessageBox.Show("Задание было выполнено некорретно!", "Алгоритм выполнен", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button1,
+                                    MessageBoxOptions.ServiceNotification);
+                else
+                    MessageBox.Show("Задание было выполнено успешно!", "Алгоритм выполнен", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button1,
+                                    MessageBoxOptions.ServiceNotification);
+            }
+            
         }
         private Block drawPic(Block block)
         {
@@ -123,9 +160,10 @@ namespace Diagrams
 
         private void drawAction(Block block)
         {
-            Point n_loc = new Point(-1, -1);
+            Point n_loc = new Point(0, 0);
             switch ((block as ActionBlock).action)
             {
+                case 0: break; //если пустой блок
                 case 1: n_loc = new Point(0, 0); break;
                 case 2: n_loc = new Point(location.X + 1, location.Y); break;
                 case 3: n_loc = new Point(location.X - 1, location.Y); break;

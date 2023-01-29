@@ -9,7 +9,11 @@ using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.IO;
-
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Diagrams
 {
@@ -17,6 +21,7 @@ namespace Diagrams
     {
         Block block;
         DrawForm drawForm;
+        string directory;
         List<Coord> coordList = new List<Coord>(); //необходимые для отрисовки балки
         public AlgForm()
         {
@@ -381,5 +386,55 @@ namespace Diagrams
         {
             drawForm.OpenTask();
         }
+
+        private void сохранитьАлгоритмToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = directory;
+            saveFileDialog.Filter = "drawer algorithm files (*.draweralgorithm)|*.draweralgorithm|All files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = saveFileDialog.FileName;
+                ForSave forsave = new ForSave(block, dbDiagram.Diagram.figures);
+                using (FileStream fs = new FileStream(filename, FileMode.Create))
+                    new BinaryFormatter().Serialize(fs, forsave);
+            }
+        }
+
+        private void открытьАлгоритмToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = directory;
+            openFileDialog.Filter = "drawer algorithm files (*.draweralgorithm)|*.draweralgorithm|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = openFileDialog.FileName;
+                dbDiagram.Diagram.figures.Clear();
+                ForSave forsave = LoadFile(filename);
+                block = forsave.block; 
+                dbDiagram.Diagram.figures = forsave.figures;
+            }
+        }
+
+        private ForSave LoadFile(string filename)
+        {
+            using (FileStream fs = new FileStream(filename, FileMode.Open))
+                return (ForSave)new BinaryFormatter().Deserialize(fs);
+        }
+
     }
+
+    [Serializable]
+    public class ForSave 
+    {
+        public Block block;
+        public List<Figure> figures;
+
+        public ForSave(Block block, List<Figure> figures)
+        {
+            this.block = block;
+            this.figures = figures;
+        }
+    }
+
 }

@@ -16,7 +16,7 @@ namespace Diagrams
     public class Diagram
     {
         //список фигур диаграммы
-        public readonly List<Figure> figures = new List<Figure>();
+        public List<Figure> figures = new List<Figure>();
 
         //сохранение диаграммы в файл
         public void Save(string fileName)
@@ -459,6 +459,10 @@ namespace Diagrams
         //Плюс слева сверху - 1
         //Плюс снизу справа - 2
         public byte plusType;
+        public Plus()
+        {
+
+        }
         public Plus(LineFigure line, byte plusType)
         {
             type = 12;
@@ -532,6 +536,11 @@ namespace Diagrams
     {
         public LineFigure line;
         static Pen clickPen = new Pen(Color.Transparent, 2);
+
+        public Minus()
+        {
+
+        }
         public Minus(LineFigure line, byte minusType)
         {
             type = 12;
@@ -710,6 +719,7 @@ namespace Diagrams
     }
 
     //линия с двойным "переломом"
+    [Serializable]
     public class DoubleLedgeLineFigure : LedgeLineFigure
     {
         public float ledgePositionY = -1;
@@ -742,6 +752,8 @@ namespace Diagrams
     }
 
     //линия с двойным "переломом" для выхода из цикла
+    [Serializable]
+
     public class DoubleLedgeLineFigureS : DoubleLedgeLineFigure
     {
         public override void RecalcPath()
@@ -776,6 +788,8 @@ namespace Diagrams
             Path.AddLine(p, pt);
         }
     }
+    [Serializable]
+
     public class TripleLedgeLineFigure: DoubleLedgeLineFigure
     {
         public float secondLedgePosX = -1;

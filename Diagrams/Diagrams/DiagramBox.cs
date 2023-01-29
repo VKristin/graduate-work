@@ -200,6 +200,7 @@ namespace Diagrams
             {
                 l = new LedgeLineFigure(); l = m.targetFigure as LedgeLineFigure;
                 figure.location = new PointF(l.ledgePositionX, l.To.location.Y);
+                line.ledgePositionX = l.ledgePositionX;
                 line.From = l.From;
                 line.To = figure;
                 Diagram.figures.Add(figure);
@@ -208,6 +209,7 @@ namespace Diagrams
                 {
                     LedgeLineFigure li =  FindLine(1, (m.targetFigure as LineFigure).To);
                     li.To = figure;
+                    li.ledgePositionX = l.To.location.X;
                     //////////
                     /////////
                     ///
@@ -229,16 +231,32 @@ namespace Diagrams
             }
             if (m.targetFigure.type == 11)
             {
-                DoubleLedgeLineFigureS l_ = new DoubleLedgeLineFigureS();
-                DoubleLedgeLineFigureS line_ = new DoubleLedgeLineFigureS();
-                l_ = m.targetFigure as DoubleLedgeLineFigureS;
-                l = l_;
-                figure.location = new PointF(l_.From.location.X, l_.To.location.Y);
-                line_.ledgePositionX = l_.ledgePositionX;
-                line_.From = l_.From;
-                line_.To = figure;
-                Diagram.figures.Add(figure);
-                Diagram.figures.Add(line_);
+                if ((m.targetFigure as DoubleLedgeLineFigureS).ledgePositionX != (m.targetFigure as DoubleLedgeLineFigureS).From.location.X)
+                {
+                    DoubleLedgeLineFigureS l_ = new DoubleLedgeLineFigureS();
+                    DoubleLedgeLineFigureS line_ = new DoubleLedgeLineFigureS();
+                    l_ = m.targetFigure as DoubleLedgeLineFigureS;
+                    l = l_;
+                    figure.location = new PointF(l_.From.location.X, l_.To.location.Y);
+                    line_.ledgePositionX = l_.ledgePositionX;
+                    line_.From = l_.From;
+                    line_.To = figure;
+                    Diagram.figures.Add(figure);
+                    Diagram.figures.Add(line_);
+                }
+                else
+                {
+                    DoubleLedgeLineFigureS l_ = new DoubleLedgeLineFigureS();
+                    LedgeLineFigure line_ = new LedgeLineFigure();
+                    l_ = m.targetFigure as DoubleLedgeLineFigureS;
+                    l = l_;
+                    figure.location = new PointF(l_.From.location.X, l_.To.location.Y);
+                    line_.ledgePositionX = l_.ledgePositionX;
+                    line_.From = l_.From;
+                    line_.To = figure;
+                    Diagram.figures.Add(figure);
+                    Diagram.figures.Add(line_);
+                }
             }
             //при добавлении блока после двойного цикла
             if (m.targetFigure.type == 13)
@@ -336,10 +354,24 @@ namespace Diagrams
                 }
                 else
                 {
-                    l = m.targetFigure as LedgeLineFigure;
-                    line.From = figure;
-                    line.To = l.To;
-                    Diagram.figures.Add(line);
+                    
+                    if (m.targetFigure.type != 11)
+                    {
+                        l = m.targetFigure as LedgeLineFigure;
+                        line.From = figure;
+                        line.To = l.To;
+                        Diagram.figures.Add(line);
+                    }
+                    else
+                    {
+                        DoubleLedgeLineFigureS l_ = new DoubleLedgeLineFigureS();
+                        DoubleLedgeLineFigureS line_ = new DoubleLedgeLineFigureS();
+                        l_ = m.targetFigure as DoubleLedgeLineFigureS;
+                        line_.From = figure;
+                        line_.To = l_.To;
+                        line_.ledgePositionX = figure.location.X;
+                        Diagram.figures.Add(line_);
+                    }
                 }
             }
 
