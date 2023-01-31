@@ -49,14 +49,24 @@ namespace Diagrams
             this.parentForm = parentForm;
             cellSize = form.trackBarSize.Value;
             form.coordList.Clear();
-            drawPic(block);
-            moveBlock();
-            Replace();
-            form.g = graph;
-            form.draw =  true;
-            parentForm.dbDiagram.drawFigure = null;
-            parentForm.dbDiagram.Refresh();
-            checkTask();
+            try
+            {
+                drawPic(block);
+                moveBlock();
+                Replace();
+                form.g = graph;
+                form.draw = true;
+                parentForm.dbDiagram.drawFigure = null;
+                parentForm.dbDiagram.Refresh();
+                checkTask();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Невозможно выполнение алгоритма!" + e.Message, "Ошибка!", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button1,
+                                    MessageBoxOptions.ServiceNotification);
+            }
         }
 
         private void checkTask()
@@ -96,12 +106,14 @@ namespace Diagrams
         }
         private Block drawPic(Block block)
         {
+            if (block == null)
+                return null;
+            if (block.figure.text == null)
+                throw new Exception("Был обнаруден пустой блок!");
 
             if (block is EllipseBlock)
                 firstDrawer.Add(block);
 
-            if (block == null)
-                return null;
             if (block is ActionBlock) //если действие
             {
                 firstDrawer.Add(block);
