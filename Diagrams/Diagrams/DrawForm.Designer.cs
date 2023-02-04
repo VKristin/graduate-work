@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DrawForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.изменитьРазмерПоляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trackBarSize = new System.Windows.Forms.TrackBar();
             this.lbSize = new System.Windows.Forms.Label();
-            this.pencil1 = new System.Windows.Forms.PictureBox();
             this.pbDraw = new System.Windows.Forms.PictureBox();
             this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.lbSpeed = new System.Windows.Forms.Label();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pencil1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             this.SuspendLayout();
@@ -52,7 +53,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(939, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(940, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -76,7 +77,7 @@
             this.trackBarSize.TabIndex = 4;
             this.trackBarSize.TabStop = false;
             this.trackBarSize.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarSize.Value = 32;
+            this.trackBarSize.Value = 30;
             this.trackBarSize.Scroll += new System.EventHandler(this.trackBarSize_Scroll);
             // 
             // lbSize
@@ -88,20 +89,9 @@
             this.lbSize.TabIndex = 5;
             this.lbSize.Text = "Размер поля:";
             // 
-            // pencil1
-            // 
-            this.pencil1.BackColor = System.Drawing.Color.Transparent;
-            this.pencil1.Image = global::Diagrams.Properties.Resources.Карандаш_12;
-            this.pencil1.Location = new System.Drawing.Point(12, 519);
-            this.pencil1.Name = "pencil1";
-            this.pencil1.Size = new System.Drawing.Size(50, 50);
-            this.pencil1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pencil1.TabIndex = 6;
-            this.pencil1.TabStop = false;
-            // 
             // pbDraw
             // 
-            this.pbDraw.Location = new System.Drawing.Point(11, 116);
+            this.pbDraw.Location = new System.Drawing.Point(12, 92);
             this.pbDraw.Name = "pbDraw";
             this.pbDraw.Size = new System.Drawing.Size(928, 454);
             this.pbDraw.TabIndex = 0;
@@ -133,16 +123,23 @@
             this.lbSpeed.TabIndex = 8;
             this.lbSpeed.Text = "Скорость выполнения алгоритма:";
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Карандаш 1.png");
+            this.imageList1.Images.SetKeyName(1, "Карандаш 2.png");
+            this.imageList1.Images.SetKeyName(2, "Карандаш 3.png");
+            // 
             // DrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(933, 623);
+            this.ClientSize = new System.Drawing.Size(933, 640);
             this.Controls.Add(this.lbSpeed);
             this.Controls.Add(this.tbSpeed);
-            this.Controls.Add(this.pencil1);
             this.Controls.Add(this.lbSize);
             this.Controls.Add(this.trackBarSize);
             this.Controls.Add(this.pbDraw);
@@ -154,7 +151,6 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pencil1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             this.ResumeLayout(false);
@@ -168,8 +164,8 @@
         private System.Windows.Forms.ToolStripMenuItem изменитьРазмерПоляToolStripMenuItem;
         public System.Windows.Forms.PictureBox pbDraw;
         public System.Windows.Forms.TrackBar trackBarSize;
-        public System.Windows.Forms.PictureBox pencil1;
         public System.Windows.Forms.TrackBar tbSpeed;
         private System.Windows.Forms.Label lbSpeed;
+        public System.Windows.Forms.ImageList imageList1;
     }
 }

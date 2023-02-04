@@ -42,7 +42,9 @@ namespace Diagrams
             draw = true;
             pen = new Pen(Color.CornflowerBlue, 2);
             graph = form.pbDraw.CreateGraphics();
-            form.pencil1.Location = form.startPosition;
+            //form.pencil1.Location = form.startPosition;
+            //form.pencil1.Location = form.startPosition;
+            form.position = new Point(0, 0);
             RefreshField();
             Thread.Sleep(speed);
             this.block = block;
@@ -52,6 +54,7 @@ namespace Diagrams
             try
             {
                 drawPic(block);
+                location = new Point(0, 0);
                 moveBlock();
                 Replace();
                 form.g = graph;
@@ -117,6 +120,7 @@ namespace Diagrams
             if (block is ActionBlock) //если действие
             {
                 firstDrawer.Add(block);
+                DoAction(block);
                 //drawAction(block);
                 return drawPic(block.nextBlock);
             }
@@ -154,7 +158,7 @@ namespace Diagrams
                     case 5: figure.text = "↗ " + nudConditions.Value.ToString(); break;
                     case 6: figure.text = "↙ " + nudConditions.Value.ToString(); break;
                     case 7: figure.text = "↖ " + nudConditions.Value.ToString(); break;*/
-        
+
         private void moveBlock()
         {
             //здесь посмотреть, у кого из исполнителей блоков больше
@@ -169,7 +173,32 @@ namespace Diagrams
                 Thread.Sleep(speed);
             }
         }
+        private void DoAction(Block b)
+        {
+            Point n_loc = new Point(0, 0);
+            switch ((b as ActionBlock).action)
+            {
+                case 0: break; //если пустой блок
+                case 1: location = new Point(0, 0); break;
+                case 2: location = new Point(location.X + 1, location.Y); break;
+                case 3: location = new Point(location.X - 1, location.Y); break;
+                case 4: location = new Point(location.X, location.Y + 1); break;
+                case 5: location = new Point(location.X, location.Y - 1); break;
+                case 6: location = new Point(location.X + 1, location.Y + 1); break;
+                case 7: location = new Point(location.X + 1, location.Y - 1); break;
+                case 8: location = new Point(location.X - 1, location.Y + 1); break;
+                case 9: location = new Point(location.X - 1, location.Y - 1); break;
+                case 10: location = new Point(location.X + 1, location.Y); break;
+                case 11: location = new Point(location.X - 1, location.Y); break;
+                case 12: location = new Point(location.X, location.Y + 1); break;
+                case 13: location = new Point(location.X, location.Y - 1); break;
+                case 14: location = new Point(location.X + 1, location.Y + 1); break;
+                case 15: location = new Point(location.X + 1, location.Y - 1); break;
+                case 16: location = new Point(location.X - 1, location.Y + 1); break;
+                case 17: location = new Point(location.X - 1, location.Y - 1); break;
 
+            }
+        }
         private void drawAction(Block block)
         {
             Point n_loc = new Point(0, 0);
@@ -200,14 +229,15 @@ namespace Diagrams
                 Point d = new Point(n_loc.X - location.X, n_loc.Y - location.Y);
                 if (0 < (block as ActionBlock).action && (block as ActionBlock).action < 10)
                 {
-                    Point point1 = new Point((location.X * cellSize), ((-location.Y + field.Y) * cellSize));
+                    Point point1 = new Point((location.X * cellSize), ((-location.Y + field.Y + 1) * cellSize));
                     Point point2 = new Point((n_loc.X * cellSize), ((-n_loc.Y + field.Y) * cellSize));
                     coordList.Add(new Coord(location, n_loc));
                     form.position = n_loc;
                     graph.DrawLine(pen, point1, point2);
                 }
-                form.pencil1.Location = new Point(form.pencil1.Location.X + d.X * cellSize, form.pencil1.Location.Y - d.Y * cellSize);
-                form.pencil1.Update();
+                //form.pencil1.Location = new Point(form.pencil1.Location.X + d.X * cellSize, form.pencil1.Location.Y - d.Y * cellSize);
+                //form.pencil1.Update();
+                graph.DrawImage(form.imageList1.Images[0], form.startPosition.X + cellSize * form.position.X, form.startPosition.Y - 1 - cellSize * form.position.Y, cellSize - 2, cellSize - 2);
                 RefreshField();
                 location = n_loc;
                 form.position = location;
@@ -229,17 +259,23 @@ namespace Diagrams
             form.pbDraw.Refresh();
             for (int i = 0; i < coordList.Count(); i++)
             {
-                graph.DrawLine(pen, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + field.Y) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + field.Y) * cellSize));
+                graph.DrawLine(pen, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + field.Y + 1) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + field.Y + 1) * cellSize));
+
             }
+            graph.DrawImage(form.imageList1.Images[0], form.startPosition.X + cellSize * form.position.X, form.startPosition.Y - 1 - cellSize * form.position.Y, cellSize - 2, cellSize - 2);
         }
         public void DrawAgain(List<Coord> coord, Point pencilCoord)
         {
             form.pbDraw.Refresh();
-            form.pencil1.Location = new Point(form.pbDraw.Location.X + 1 + cellSize * pencilCoord.X, form.pbDraw.Size.Height + form.pbDraw.Location.Y - 1 - form.pencil1.Height - cellSize * pencilCoord.Y);
+            graph.DrawImage(form.imageList1.Images[0], form.startPosition.X + cellSize * form.position.X, form.startPosition.Y - 1 - cellSize * form.position.Y, cellSize - 2, cellSize - 2);
+
+            //graph.DrawImage(form.imageList1.Images[0], new Point(1 + cellSize * form.position.X, pbDraw.Location.Y - 1 - cellSize - 2 - cellSize * position.Y));
+            //form.pencil1.Location = new Point(form.pbDraw.Location.X + 1 + cellSize * pencilCoord.X, form.pbDraw.Size.Height + form.pbDraw.Location.Y - 1 - form.pencil1.Height - cellSize * pencilCoord.Y);
             for (int i = 0; i < coord.Count(); i++)
             {
-                graph.DrawLine(pen, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + field.Y) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + field.Y) * cellSize));
+                graph.DrawLine(pen, new Point(coordList[i].p1.X * cellSize, (-coordList[i].p1.Y + field.Y + 1) * cellSize), new Point(coordList[i].p2.X * cellSize, (-coordList[i].p2.Y + field.Y + 1) * cellSize));
             }
+            graph.DrawImage(form.imageList1.Images[0], form.startPosition.X + cellSize * form.position.X, form.startPosition.Y - 1 - cellSize * form.position.Y, cellSize - 2, cellSize - 2);
         }
         public void Replace()
         {
