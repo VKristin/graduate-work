@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace Diagrams
 {
@@ -46,7 +47,12 @@ namespace Diagrams
             //form.pencil1.Location = form.startPosition;
             form.position = new Point(0, 0);
             RefreshField();
-            Thread.Sleep(speed);
+            //Thread.Sleep(speed);
+            var t = Task.Run(async delegate
+            {
+                await Task.Delay(speed);
+            });
+            t.Wait();
             this.block = block;
             this.parentForm = parentForm;
             cellSize = form.trackBarSize.Value;
@@ -170,7 +176,12 @@ namespace Diagrams
                 {
                     drawAction(firstDrawer[i]);
                 }
-                Thread.Sleep(speed);
+                //Thread.Sleep(speed);
+                var t = Task.Run(async delegate
+                {
+                    await Task.Delay(speed);
+                });
+                t.Wait();
             }
         }
         private void DoAction(Block b)
