@@ -205,19 +205,6 @@ namespace Diagrams
                 line.To = figure;
                 Diagram.figures.Add(figure);
                 Diagram.figures.Add(line);
-                if ((m.targetFigure as LineFigure).From is RhombFigure)
-                {
-                    LedgeLineFigure li =  FindLine(1, (m.targetFigure as LineFigure).To);
-                    li.To = figure;
-                    li.ledgePositionX = l.To.location.X;
-                    //////////
-                    /////////
-                    ///
-                    ////
-                    //////
-                    ///////
-                    /////
-                }
             }
             if (m.targetFigure.type == 10)
             {

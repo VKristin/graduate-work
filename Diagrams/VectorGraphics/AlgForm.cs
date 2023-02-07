@@ -201,8 +201,8 @@ namespace Diagrams
 
         private void btm1_Click(object sender, EventArgs e)
         {
-            /*dbDiagram.CreateMarkers(3);
-            dbDiagram.Invalidate();*/
+            dbDiagram.CreateMarkers(3, block);
+            dbDiagram.Invalidate();
         }
 
         private void btm2_Click(object sender, EventArgs e)

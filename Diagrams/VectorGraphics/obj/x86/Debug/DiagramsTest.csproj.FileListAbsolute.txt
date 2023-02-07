@@ -118,3 +118,5 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Карандаши\Diagrams\V
 D:\User\Desktop\Учёба\4 курс\Диплом\Карандаши\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.CopyComplete
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.exe.config
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Debug\VectorGraphics.exe.config
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Debug\DiagramsTest.csproj.SuggestedBindingRedirects.cache
