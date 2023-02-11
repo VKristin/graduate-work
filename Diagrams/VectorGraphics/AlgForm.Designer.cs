@@ -33,6 +33,8 @@
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.miNew = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьЗаданиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miExport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,8 +71,6 @@
             this.btm5 = new System.Windows.Forms.Button();
             this.btm6 = new System.Windows.Forms.Button();
             this.dbDiagram = new Diagrams.DiagramBox();
-            this.сохранитьАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.открытьАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.cmMain.SuspendLayout();
             this.cmSelectedFigure.SuspendLayout();
@@ -118,6 +118,20 @@
             this.открытьЗаданиеToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.открытьЗаданиеToolStripMenuItem.Text = "Открыть задание";
             this.открытьЗаданиеToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаданиеToolStripMenuItem_Click);
+            // 
+            // открытьАлгоритмToolStripMenuItem
+            // 
+            this.открытьАлгоритмToolStripMenuItem.Name = "открытьАлгоритмToolStripMenuItem";
+            this.открытьАлгоритмToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.открытьАлгоритмToolStripMenuItem.Text = "Открыть алгоритм";
+            this.открытьАлгоритмToolStripMenuItem.Click += new System.EventHandler(this.открытьАлгоритмToolStripMenuItem_Click);
+            // 
+            // сохранитьАлгоритмToolStripMenuItem
+            // 
+            this.сохранитьАлгоритмToolStripMenuItem.Name = "сохранитьАлгоритмToolStripMenuItem";
+            this.сохранитьАлгоритмToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.сохранитьАлгоритмToolStripMenuItem.Text = "Сохранить алгоритм";
+            this.сохранитьАлгоритмToolStripMenuItem.Click += new System.EventHandler(this.сохранитьАлгоритмToolStripMenuItem_Click);
             // 
             // miExport
             // 
@@ -350,6 +364,7 @@
             this.btm2.TabIndex = 6;
             this.btm2.Text = "Развилка";
             this.btm2.UseVisualStyleBackColor = false;
+            this.btm2.Visible = false;
             this.btm2.Click += new System.EventHandler(this.btm2_Click);
             // 
             // btm3
@@ -418,7 +433,7 @@
             this.dbDiagram.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dbDiagram.ForeColor = System.Drawing.Color.Black;
             this.dbDiagram.Location = new System.Drawing.Point(137, 24);
-            this.dbDiagram.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dbDiagram.Margin = new System.Windows.Forms.Padding(4);
             this.dbDiagram.Name = "dbDiagram";
             this.dbDiagram.SelectedFigure = null;
             this.dbDiagram.Size = new System.Drawing.Size(539, 622);
@@ -426,20 +441,6 @@
             this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
             this.dbDiagram.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseUp);
-            // 
-            // сохранитьАлгоритмToolStripMenuItem
-            // 
-            this.сохранитьАлгоритмToolStripMenuItem.Name = "сохранитьАлгоритмToolStripMenuItem";
-            this.сохранитьАлгоритмToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.сохранитьАлгоритмToolStripMenuItem.Text = "Сохранить алгоритм";
-            this.сохранитьАлгоритмToolStripMenuItem.Click += new System.EventHandler(this.сохранитьАлгоритмToolStripMenuItem_Click);
-            // 
-            // открытьАлгоритмToolStripMenuItem
-            // 
-            this.открытьАлгоритмToolStripMenuItem.Name = "открытьАлгоритмToolStripMenuItem";
-            this.открытьАлгоритмToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.открытьАлгоритмToolStripMenuItem.Text = "Открыть алгоритм";
-            this.открытьАлгоритмToolStripMenuItem.Click += new System.EventHandler(this.открытьАлгоритмToolStripMenuItem_Click);
             // 
             // AlgForm
             // 
