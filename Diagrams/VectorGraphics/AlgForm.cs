@@ -477,7 +477,7 @@ namespace Diagrams
         private void нарисоватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DrawIt draw = new DrawIt();
-            draw.Draw(blockFirst, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this);
+            draw.Draw(blockFirst, blockSecond, blockThird, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this);
         }
         public void Repaint(Point location)
         {
@@ -525,6 +525,15 @@ namespace Diagrams
                 return (ForSave)new BinaryFormatter().Deserialize(fs);
         }
 
+        private void dbDiagramS_DoubleClick(object sender, EventArgs e)
+        {
+            dbDiagramS.SelectedBeginEditText(this, blockSecond);
+        }
+
+        private void dbDiagramT_DoubleClick(object sender, EventArgs e)
+        {
+            dbDiagramT.SelectedBeginEditText(this, blockThird);
+        }
     }
 
     [Serializable]

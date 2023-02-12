@@ -29,11 +29,15 @@ namespace Diagrams
         Graphics graph;
         bool draw;
         List<Block> firstDrawer = new List<Block>();
+        List<Block> secondDrawer = new List<Block>();
+        List<Block> thirdDrawer = new List<Block>();
         int speed = 300;
-        Block block;
+        Block blockFirst;
+        Block blockSecond;
+        Block blockThird;
         Pen pen;
         int cellSize;
-        public void Draw(Block block, int numX, int numY, DrawForm drawForm, AlgForm parentForm)
+        public void Draw(Block blockFirst, Block blockSecond, Block blockThird, int numX, int numY, DrawForm drawForm, AlgForm parentForm)
         {
             form = drawForm;
             speed = drawForm.tbSpeed.Value;
@@ -53,13 +57,15 @@ namespace Diagrams
                 await Task.Delay(speed);
             });
             t.Wait();
-            this.block = block;
+            this.blockFirst = blockFirst;
+            this.blockSecond = blockSecond;
+            this.blockThird = blockThird;
             this.parentForm = parentForm;
             cellSize = form.trackBarSize.Value;
             form.coordList.Clear();
             try
             {
-                drawPic(block);
+                drawPic(blockFirst);
                 location = new Point(0, 0);
                 moveBlock();
                 Replace();
@@ -127,7 +133,6 @@ namespace Diagrams
             {
                 firstDrawer.Add(block);
                 DoAction(block);
-                //drawAction(block);
                 return drawPic(block.nextBlock);
             }
             if (block is IfWithoutElseBlock)

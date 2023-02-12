@@ -855,10 +855,12 @@ namespace Diagrams
             RectangleF r = new RectangleF(0, 0, 0, 0);
             //перебираем все фигуры, ищем максимальные координаты
             foreach (Figure f in diagram.figures)
+            {
                 if (f != null && f is SolidFigure)
                     r = RectangleF.Union(r, (f as SolidFigure).Bounds);
+            }
 
-            Size size = new Size((int)r.Width, (int)r.Height + 10);
+            Size size = new Size((int)r.Width + 20, (int)r.Height + 10);
             if (size != AutoScrollMinSize)
                 AutoScrollMinSize = size;
         }

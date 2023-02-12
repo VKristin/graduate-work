@@ -70,12 +70,12 @@
             this.btm4 = new System.Windows.Forms.Button();
             this.btm5 = new System.Windows.Forms.Button();
             this.btm6 = new System.Windows.Forms.Button();
-            this.dbDiagram = new Diagrams.DiagramBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.dbDiagramS = new Diagrams.DiagramBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
-            this.dbDiagramT = new Diagrams.DiagramBox();
             this.splitter3 = new System.Windows.Forms.Splitter();
+            this.dbDiagramT = new Diagrams.DiagramBox();
+            this.dbDiagramS = new Diagrams.DiagramBox();
+            this.dbDiagram = new Diagrams.DiagramBox();
             this.menuStrip1.SuspendLayout();
             this.cmMain.SuspendLayout();
             this.cmSelectedFigure.SuspendLayout();
@@ -92,7 +92,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(941, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(798, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -346,7 +346,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(137, 622);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(137, 406);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // btm1
@@ -424,9 +424,67 @@
             this.btm6.Name = "btm6";
             this.btm6.Size = new System.Drawing.Size(134, 45);
             this.btm6.TabIndex = 10;
-            this.btm6.Text = "Условие";
+            this.btm6.Text = "Ветвление без else";
             this.btm6.UseVisualStyleBackColor = false;
             this.btm6.Click += new System.EventHandler(this.btm6_Click);
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(335, 24);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 406);
+            this.splitter1.TabIndex = 8;
+            this.splitter1.TabStop = false;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(536, 24);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 406);
+            this.splitter2.TabIndex = 10;
+            this.splitter2.TabStop = false;
+            // 
+            // splitter3
+            // 
+            this.splitter3.Location = new System.Drawing.Point(737, 24);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(3, 406);
+            this.splitter3.TabIndex = 12;
+            this.splitter3.TabStop = false;
+            // 
+            // dbDiagramT
+            // 
+            this.dbDiagramT.AutoScroll = true;
+            this.dbDiagramT.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dbDiagramT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dbDiagramT.ContextMenuStrip = this.cmMain;
+            this.dbDiagramT.Diagram = null;
+            this.dbDiagramT.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dbDiagramT.ForeColor = System.Drawing.Color.Black;
+            this.dbDiagramT.Location = new System.Drawing.Point(539, 24);
+            this.dbDiagramT.Margin = new System.Windows.Forms.Padding(4);
+            this.dbDiagramT.Name = "dbDiagramT";
+            this.dbDiagramT.SelectedFigure = null;
+            this.dbDiagramT.Size = new System.Drawing.Size(198, 406);
+            this.dbDiagramT.TabIndex = 11;
+            this.dbDiagramT.DoubleClick += new System.EventHandler(this.dbDiagramT_DoubleClick);
+            // 
+            // dbDiagramS
+            // 
+            this.dbDiagramS.AutoScroll = true;
+            this.dbDiagramS.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dbDiagramS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dbDiagramS.ContextMenuStrip = this.cmMain;
+            this.dbDiagramS.Diagram = null;
+            this.dbDiagramS.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dbDiagramS.ForeColor = System.Drawing.Color.Black;
+            this.dbDiagramS.Location = new System.Drawing.Point(338, 24);
+            this.dbDiagramS.Margin = new System.Windows.Forms.Padding(4);
+            this.dbDiagramS.Name = "dbDiagramS";
+            this.dbDiagramS.SelectedFigure = null;
+            this.dbDiagramS.Size = new System.Drawing.Size(198, 406);
+            this.dbDiagramS.TabIndex = 9;
+            this.dbDiagramS.DoubleClick += new System.EventHandler(this.dbDiagramS_DoubleClick);
             // 
             // dbDiagram
             // 
@@ -441,74 +499,18 @@
             this.dbDiagram.Margin = new System.Windows.Forms.Padding(4);
             this.dbDiagram.Name = "dbDiagram";
             this.dbDiagram.SelectedFigure = null;
-            this.dbDiagram.Size = new System.Drawing.Size(253, 622);
+            this.dbDiagram.Size = new System.Drawing.Size(198, 406);
             this.dbDiagram.TabIndex = 3;
             this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
             this.dbDiagram.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseUp);
-            // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(390, 24);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 622);
-            this.splitter1.TabIndex = 8;
-            this.splitter1.TabStop = false;
-            // 
-            // dbDiagramS
-            // 
-            this.dbDiagramS.AutoScroll = true;
-            this.dbDiagramS.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dbDiagramS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagramS.ContextMenuStrip = this.cmMain;
-            this.dbDiagramS.Diagram = null;
-            this.dbDiagramS.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dbDiagramS.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagramS.Location = new System.Drawing.Point(393, 24);
-            this.dbDiagramS.Margin = new System.Windows.Forms.Padding(4);
-            this.dbDiagramS.Name = "dbDiagramS";
-            this.dbDiagramS.SelectedFigure = null;
-            this.dbDiagramS.Size = new System.Drawing.Size(253, 622);
-            this.dbDiagramS.TabIndex = 9;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Location = new System.Drawing.Point(646, 24);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 622);
-            this.splitter2.TabIndex = 10;
-            this.splitter2.TabStop = false;
-            // 
-            // dbDiagramT
-            // 
-            this.dbDiagramT.AutoScroll = true;
-            this.dbDiagramT.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dbDiagramT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagramT.ContextMenuStrip = this.cmMain;
-            this.dbDiagramT.Diagram = null;
-            this.dbDiagramT.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dbDiagramT.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagramT.Location = new System.Drawing.Point(649, 24);
-            this.dbDiagramT.Margin = new System.Windows.Forms.Padding(4);
-            this.dbDiagramT.Name = "dbDiagramT";
-            this.dbDiagramT.SelectedFigure = null;
-            this.dbDiagramT.Size = new System.Drawing.Size(253, 622);
-            this.dbDiagramT.TabIndex = 11;
-            // 
-            // splitter3
-            // 
-            this.splitter3.Location = new System.Drawing.Point(902, 24);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(3, 622);
-            this.splitter3.TabIndex = 12;
-            this.splitter3.TabStop = false;
             // 
             // AlgForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(941, 646);
+            this.ClientSize = new System.Drawing.Size(798, 430);
             this.Controls.Add(this.splitter3);
             this.Controls.Add(this.dbDiagramT);
             this.Controls.Add(this.splitter2);
