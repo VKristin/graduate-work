@@ -19,7 +19,9 @@ namespace Diagrams
 {
     public partial class AlgForm : Form
     {
-        Block block;
+        Block blockFirst;
+        Block blockSecond;
+        Block blockThird;
         DrawForm drawForm;
         string directory;
         List<Coord> coordList = new List<Coord>(); //необходимые для отрисовки балки
@@ -45,11 +47,18 @@ namespace Diagrams
         private void miNewDiagram_Click(object sender, EventArgs e)
         {
             dbDiagram.Diagram = new Diagram();
+            dbDiagramS.Diagram = new Diagram();
+            dbDiagramT.Diagram = new Diagram();
+            dbDiagramS.Diagram = dbDiagramS.Diagram;
+            dbDiagramT.Diagram = dbDiagramT.Diagram;
             dbDiagram.Diagram = dbDiagram.Diagram;
-            NewDiagram();
+            NewDiagramFirst();
+            NewDiagramSecond();
+            NewDiagramThird();
+
         }
 
-        private void NewDiagram()
+        private void NewDiagramFirst()
         {
             
             SolidFigure.defaultSize = 70;
@@ -75,11 +84,77 @@ namespace Diagrams
                 dbDiagram.Diagram.figures.Add(figure);
             }
             figureSt.nextBlock = figureEnd;
-            block = figureSt;
+            blockFirst = figureSt;
             LedgeLineFigure line = new LedgeLineFigure();
             line.From = dbDiagram.Diagram.figures[0] as SolidFigure;
             line.To = dbDiagram.Diagram.figures[1] as SolidFigure;
             dbDiagram.Diagram.figures.Add(line);
+        }
+
+        private void NewDiagramSecond()
+        {
+
+            SolidFigure.defaultSize = 70;
+            SolidFigure figure = null;
+            Block figureSt = null;
+            Block figureEnd = null;
+            List<Block> blocks = new List<Block>();
+            for (int i = 0; i < 2; i++)
+            {
+                figure = new EllipseFigure();
+                int defaultSize = SolidFigure.defaultSize;
+                figure.location = new Point(defaultSize + 20, 50 + (defaultSize + 10) * i);
+                if (i == 0)
+                {
+                    figure.text = "НАЧАЛО";
+                    figureSt = new EllipseBlock(null, figure);
+                }
+                else
+                {
+                    figure.text = "КОНЕЦ";
+                    figureEnd = new EllipseBlock(null, figure);
+                }
+                dbDiagramS.Diagram.figures.Add(figure);
+            }
+            figureSt.nextBlock = figureEnd;
+            blockSecond = figureSt;
+            LedgeLineFigure line = new LedgeLineFigure();
+            line.From = dbDiagramS.Diagram.figures[0] as SolidFigure;
+            line.To = dbDiagramS.Diagram.figures[1] as SolidFigure;
+            dbDiagramS.Diagram.figures.Add(line);
+        }
+
+        private void NewDiagramThird()
+        {
+
+            SolidFigure.defaultSize = 70;
+            SolidFigure figure = null;
+            Block figureSt = null;
+            Block figureEnd = null;
+            List<Block> blocks = new List<Block>();
+            for (int i = 0; i < 2; i++)
+            {
+                figure = new EllipseFigure();
+                int defaultSize = SolidFigure.defaultSize;
+                figure.location = new Point(defaultSize + 20, 50 + (defaultSize + 10) * i);
+                if (i == 0)
+                {
+                    figure.text = "НАЧАЛО";
+                    figureSt = new EllipseBlock(null, figure);
+                }
+                else
+                {
+                    figure.text = "КОНЕЦ";
+                    figureEnd = new EllipseBlock(null, figure);
+                }
+                dbDiagramT.Diagram.figures.Add(figure);
+            }
+            figureSt.nextBlock = figureEnd;
+            blockThird = figureSt;
+            LedgeLineFigure line = new LedgeLineFigure();
+            line.From = dbDiagramT.Diagram.figures[0] as SolidFigure;
+            line.To = dbDiagramT.Diagram.figures[1] as SolidFigure;
+            dbDiagramT.Diagram.figures.Add(line);
         }
 
         private void miSave_Click(object sender, EventArgs e)
@@ -107,7 +182,7 @@ namespace Diagrams
 
         private void dbDiagram_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            dbDiagram.SelectedBeginEditText(this, block);
+            dbDiagram.SelectedBeginEditText(this, blockFirst);
             /*EditBlock editBlock = new EditBlock(blocks);
             editBlock.Owner = this; //Передаём вновь созданной форме её владельца.
             editBlock.Show();*/
@@ -173,7 +248,7 @@ namespace Diagrams
 
         private void editTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dbDiagram.SelectedBeginEditText(this, block);
+            dbDiagram.SelectedBeginEditText(this, blockFirst);
         }
 
         private void sendToBackToolStripMenuItem_Click(object sender, EventArgs e)
@@ -201,15 +276,23 @@ namespace Diagrams
 
         private void btm1_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(3, block);
+            dbDiagram.CreateMarkers(3, blockFirst);
             dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(3, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(3, blockThird);
+            dbDiagramT.Invalidate();
         }
 
         private void btm2_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(4, block);
+            dbDiagram.CreateMarkers(4, blockFirst);
             dbDiagram.Invalidate();
-            
+            dbDiagramS.CreateMarkers(4, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(4, blockThird);
+            dbDiagramT.Invalidate();
+
         }
 
         private void прямоугольникСРамкойToolStripMenuItem_Click(object sender, EventArgs e)
@@ -224,8 +307,12 @@ namespace Diagrams
 
         private void btm5_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(1, block);
+            dbDiagram.CreateMarkers(1, blockFirst);
             dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(1, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(1, blockThird);
+            dbDiagramT.Invalidate();
         }
 
         private void двойнаяToolStripMenuItem_Click(object sender, EventArgs e)
@@ -235,26 +322,42 @@ namespace Diagrams
 
         private void btm3_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(5, block);
+            dbDiagram.CreateMarkers(5, blockFirst);
             dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(5, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(5, blockThird);
+            dbDiagramT.Invalidate();
         }
 
         private void btm4_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(6, block);
+            dbDiagram.CreateMarkers(6, blockFirst);
             dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(6, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(6, blockThird);
+            dbDiagramT.Invalidate();
         }
 
         private void btm6_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(7, block);
+            dbDiagram.CreateMarkers(7, blockFirst);
             dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(7, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(7, blockThird);
+            dbDiagramT.Invalidate();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            dbDiagram.CreateMarkers(8, block);
+            dbDiagram.CreateMarkers(8, blockFirst);
             dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(8, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(8, blockThird);
+            dbDiagramT.Invalidate();
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -374,7 +477,7 @@ namespace Diagrams
         private void нарисоватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DrawIt draw = new DrawIt();
-            draw.Draw(block, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this);
+            draw.Draw(blockFirst, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this);
         }
         public void Repaint(Point location)
         {
@@ -395,7 +498,7 @@ namespace Diagrams
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filename = saveFileDialog.FileName;
-                ForSave forsave = new ForSave(block, dbDiagram.Diagram.figures);
+                ForSave forsave = new ForSave(blockFirst, dbDiagram.Diagram.figures);
                 using (FileStream fs = new FileStream(filename, FileMode.Create))
                     new BinaryFormatter().Serialize(fs, forsave);
             }
@@ -411,7 +514,7 @@ namespace Diagrams
                 string filename = openFileDialog.FileName;
                 dbDiagram.Diagram.figures.Clear();
                 ForSave forsave = LoadFile(filename);
-                block = forsave.block; 
+                blockFirst = forsave.block; 
                 dbDiagram.Diagram.figures = forsave.figures;
             }
         }

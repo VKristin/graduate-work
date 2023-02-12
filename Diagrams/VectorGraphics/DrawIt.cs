@@ -118,7 +118,7 @@ namespace Diagrams
             if (block == null)
                 return null;
             if (block.figure.text == null)
-                throw new Exception("Был обнаруден пустой блок!");
+                throw new Exception("Был обнаружен пустой блок!");
 
             if (block is EllipseBlock)
                 firstDrawer.Add(block);
@@ -129,6 +129,21 @@ namespace Diagrams
                 DoAction(block);
                 //drawAction(block);
                 return drawPic(block.nextBlock);
+            }
+            if (block is IfWithoutElseBlock)
+            {
+                firstDrawer.Add(block);
+                switch ((block as IfWithoutElseBlock).condition)
+                {
+                    case 1: if (field.X - location.X >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); drawPic((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 2: if (location.X >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); drawPic((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 3: if (field.Y - location.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); drawPic((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 4: if (location.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); drawPic((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 5: if (field.X - location.X >= (block as IfWithoutElseBlock).num_cond && location.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); drawPic((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 6: if (field.X - location.X >= (block as IfWithoutElseBlock).num_cond && field.Y - location.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); drawPic((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 7: if (location.X >= (block as IfWithoutElseBlock).num_cond && location.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); drawPic((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 8: if (location.X >= (block as IfWithoutElseBlock).num_cond && (field.Y - location.Y >= (block as IfWithoutElseBlock).num_cond)) { firstDrawer.Add(block); drawPic((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                }
             }
             if (block is WhileBlock)
             {

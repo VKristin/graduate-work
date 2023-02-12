@@ -398,11 +398,13 @@ namespace Diagrams
                     break;
                 case 5:
                     Cycle(line, block, 1);
-                    Diagram.figures.Remove(line);
+                    DeleteLine(line.From, line.To);
+                    //Diagram.figures.Remove(line);
                     break;
                 case 6:
                     Cycle(line, block, 2);
-                    Diagram.figures.Remove(line);
+                    //Diagram.figures.Remove(line);
+                    DeleteLine(line.From, line.To);
                     break;
                 case 7:
                     BranchingWithoutElse(line, block as IfWithoutElseBlock);
@@ -417,6 +419,18 @@ namespace Diagrams
             Diagram.figures.Remove(l);
             MoveFiguresX();
             markers.Clear();
+        }
+
+        private void DeleteLine(SolidFigure from, SolidFigure to)
+        {
+            for (int i = 0; i < Diagram.figures.Count(); i++)
+            {
+                if (Diagram.figures[i] is LineFigure && (Diagram.figures[i] as LineFigure).From == from && (Diagram.figures[i] as LineFigure).To == to)
+                {
+                    Diagram.figures.Remove(Diagram.figures[i]);
+                    return;
+                }
+            }
         }
 
         //отрисовка действий для IF
@@ -675,12 +689,12 @@ namespace Diagrams
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
                 if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13 && Diagram.figures[i].type != 12
-                    && (Diagram.figures[i] as SolidFigure).location.X - defaultSize - 20 <= 0)
-                    if ((Diagram.figures[i] as SolidFigure).location.X - defaultSize - 20 < b)
-                        b = (Diagram.figures[i] as SolidFigure).location.X - defaultSize - 20;
+                    && (Diagram.figures[i] as SolidFigure).location.X - defaultSize <= 0)
+                    if ((Diagram.figures[i] as SolidFigure).location.X - defaultSize < b)
+                        b = (Diagram.figures[i] as SolidFigure).location.X - defaultSize;
                 if ((Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13)
                     && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX < 0 && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX != -1)
-                    b = (Diagram.figures[i] as LedgeLineFigure).ledgePositionX - defaultSize - 20;
+                    b = (Diagram.figures[i] as LedgeLineFigure).ledgePositionX - 20;
             }
             if (b != -1)
             {
@@ -693,6 +707,29 @@ namespace Diagrams
             }
             CalcAutoScrollPosition();
         }
+
+        private void MoveFiguresXBack()
+        {
+            float coordX = float.MaxValue;
+            byte type = 0;
+            for (int i = 0; i < diagram.figures.Count(); i++)
+            {
+                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13 && Diagram.figures[i].type != 12
+                    && (Diagram.figures[i] as SolidFigure).location.X < coordX)
+                {
+                    coordX = (Diagram.figures[i] as SolidFigure).location.X;
+                    type = Diagram.figures[i].type;
+                }
+                else
+                    if ((Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13)
+                    && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX < coordX)
+                {
+                    coordX = (Diagram.figures[i] as LedgeLineFigure).ledgePositionX;
+                    type = Diagram.figures[i].type;
+                }
+            }
+        }
+
         //сдвигаем линии
 
         private void findLinesToMove(SolidFigure figure, int b)
@@ -975,8 +1012,6 @@ namespace Diagrams
                 //удалем фигуру
                 Block del = findBlockWithGraphic(selectedFigure, blocks);
                 Block from = findBlockFromBlock(del, blocks);
-                //если удалить все блоки из цикла, то у самого цикла не остаётся nextBlock, из-за чего всё ломается
-                //нужно посмотреть, в чём ошибка
                 Block to = del.nextBlock;
                 if (!(from is Condition))
                     from.nextBlock = to;
