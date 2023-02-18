@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.miNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,26 +41,6 @@
             this.sfdDiagram = new System.Windows.Forms.SaveFileDialog();
             this.ofdDiagram = new System.Windows.Forms.OpenFileDialog();
             this.sfdImage = new System.Windows.Forms.SaveFileDialog();
-            this.cmMain = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miAddRect = new System.Windows.Forms.ToolStripMenuItem();
-            this.addRoundRectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addRhombToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addParalelogrammToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addEllipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addStackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addFrameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.прямоугольникСРамкойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.шестиугольникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmSelectedFigure = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.miEditText = new System.Windows.Forms.ToolStripMenuItem();
-            this.miAddLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.miAddLedgeLine = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.miDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bringToFrontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sendToBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.двойнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btm1 = new System.Windows.Forms.Button();
             this.btm2 = new System.Windows.Forms.Button();
@@ -77,8 +56,6 @@
             this.dbDiagramS = new Diagrams.DiagramBox();
             this.dbDiagram = new Diagrams.DiagramBox();
             this.menuStrip1.SuspendLayout();
-            this.cmMain.SuspendLayout();
-            this.cmSelectedFigure.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +69,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(798, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1060, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -177,161 +154,6 @@
             // sfdImage
             // 
             this.sfdImage.Filter = "PNG Image(*.png)|*.png|Metafile(*.emf)|*.emf";
-            // 
-            // cmMain
-            // 
-            this.cmMain.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miAddRect,
-            this.addRoundRectToolStripMenuItem,
-            this.addRhombToolStripMenuItem,
-            this.addParalelogrammToolStripMenuItem,
-            this.addEllipseToolStripMenuItem,
-            this.addStackToolStripMenuItem,
-            this.addFrameToolStripMenuItem,
-            this.прямоугольникСРамкойToolStripMenuItem,
-            this.шестиугольникToolStripMenuItem});
-            this.cmMain.Name = "cmMain";
-            this.cmMain.Size = new System.Drawing.Size(218, 202);
-            // 
-            // miAddRect
-            // 
-            this.miAddRect.Name = "miAddRect";
-            this.miAddRect.Size = new System.Drawing.Size(217, 22);
-            this.miAddRect.Text = "Add Rectangle";
-            this.miAddRect.Click += new System.EventHandler(this.miAddRect_Click);
-            // 
-            // addRoundRectToolStripMenuItem
-            // 
-            this.addRoundRectToolStripMenuItem.Name = "addRoundRectToolStripMenuItem";
-            this.addRoundRectToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.addRoundRectToolStripMenuItem.Text = "Add RoundRect";
-            this.addRoundRectToolStripMenuItem.Click += new System.EventHandler(this.addRoundRectToolStripMenuItem_Click);
-            // 
-            // addRhombToolStripMenuItem
-            // 
-            this.addRhombToolStripMenuItem.Name = "addRhombToolStripMenuItem";
-            this.addRhombToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.addRhombToolStripMenuItem.Text = "Add Rhomb";
-            this.addRhombToolStripMenuItem.Click += new System.EventHandler(this.addRhombToolStripMenuItem_Click);
-            // 
-            // addParalelogrammToolStripMenuItem
-            // 
-            this.addParalelogrammToolStripMenuItem.Name = "addParalelogrammToolStripMenuItem";
-            this.addParalelogrammToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.addParalelogrammToolStripMenuItem.Text = "Add Paralelogramm";
-            this.addParalelogrammToolStripMenuItem.Click += new System.EventHandler(this.addParalelogrammToolStripMenuItem_Click);
-            // 
-            // addEllipseToolStripMenuItem
-            // 
-            this.addEllipseToolStripMenuItem.Name = "addEllipseToolStripMenuItem";
-            this.addEllipseToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.addEllipseToolStripMenuItem.Text = "Add Ellipse";
-            this.addEllipseToolStripMenuItem.Click += new System.EventHandler(this.addEllipseToolStripMenuItem_Click);
-            // 
-            // addStackToolStripMenuItem
-            // 
-            this.addStackToolStripMenuItem.Name = "addStackToolStripMenuItem";
-            this.addStackToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.addStackToolStripMenuItem.Text = "Add Stack";
-            this.addStackToolStripMenuItem.Click += new System.EventHandler(this.addStackToolStripMenuItem_Click);
-            // 
-            // addFrameToolStripMenuItem
-            // 
-            this.addFrameToolStripMenuItem.Name = "addFrameToolStripMenuItem";
-            this.addFrameToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.addFrameToolStripMenuItem.Text = "Add Frame";
-            this.addFrameToolStripMenuItem.Click += new System.EventHandler(this.addFrameToolStripMenuItem_Click);
-            // 
-            // прямоугольникСРамкойToolStripMenuItem
-            // 
-            this.прямоугольникСРамкойToolStripMenuItem.Name = "прямоугольникСРамкойToolStripMenuItem";
-            this.прямоугольникСРамкойToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.прямоугольникСРамкойToolStripMenuItem.Text = "Прямоугольник с рамкой";
-            this.прямоугольникСРамкойToolStripMenuItem.Click += new System.EventHandler(this.прямоугольникСРамкойToolStripMenuItem_Click);
-            // 
-            // шестиугольникToolStripMenuItem
-            // 
-            this.шестиугольникToolStripMenuItem.Name = "шестиугольникToolStripMenuItem";
-            this.шестиугольникToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.шестиугольникToolStripMenuItem.Text = "Шестиугольник";
-            this.шестиугольникToolStripMenuItem.Click += new System.EventHandler(this.шестиугольникToolStripMenuItem_Click);
-            // 
-            // cmSelectedFigure
-            // 
-            this.cmSelectedFigure.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.cmSelectedFigure.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miEditText,
-            this.miAddLine,
-            this.miAddLedgeLine,
-            this.toolStripSeparator1,
-            this.miDelete,
-            this.toolStripMenuItem1,
-            this.bringToFrontToolStripMenuItem,
-            this.sendToBackToolStripMenuItem,
-            this.двойнаяToolStripMenuItem});
-            this.cmSelectedFigure.Name = "cmSelectedFigure";
-            this.cmSelectedFigure.Size = new System.Drawing.Size(157, 170);
-            // 
-            // miEditText
-            // 
-            this.miEditText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.miEditText.Name = "miEditText";
-            this.miEditText.Size = new System.Drawing.Size(156, 22);
-            this.miEditText.Text = "Edit text ...";
-            this.miEditText.Click += new System.EventHandler(this.editTextToolStripMenuItem_Click);
-            // 
-            // miAddLine
-            // 
-            this.miAddLine.Name = "miAddLine";
-            this.miAddLine.Size = new System.Drawing.Size(156, 22);
-            this.miAddLine.Text = "Add Line";
-            this.miAddLine.Click += new System.EventHandler(this.miAddLine_Click);
-            // 
-            // miAddLedgeLine
-            // 
-            this.miAddLedgeLine.Name = "miAddLedgeLine";
-            this.miAddLedgeLine.Size = new System.Drawing.Size(156, 22);
-            this.miAddLedgeLine.Text = "Add Ledge Line";
-            this.miAddLedgeLine.Click += new System.EventHandler(this.miAddLedgeLine_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
-            // 
-            // miDelete
-            // 
-            this.miDelete.Name = "miDelete";
-            this.miDelete.Size = new System.Drawing.Size(156, 22);
-            this.miDelete.Text = "Delete Figure";
-            this.miDelete.Click += new System.EventHandler(this.miDelete_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 6);
-            // 
-            // bringToFrontToolStripMenuItem
-            // 
-            this.bringToFrontToolStripMenuItem.Name = "bringToFrontToolStripMenuItem";
-            this.bringToFrontToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.bringToFrontToolStripMenuItem.Text = "Bring to Front";
-            this.bringToFrontToolStripMenuItem.Click += new System.EventHandler(this.bringToFrontToolStripMenuItem_Click);
-            // 
-            // sendToBackToolStripMenuItem
-            // 
-            this.sendToBackToolStripMenuItem.Name = "sendToBackToolStripMenuItem";
-            this.sendToBackToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.sendToBackToolStripMenuItem.Text = "Send to Back";
-            this.sendToBackToolStripMenuItem.Click += new System.EventHandler(this.sendToBackToolStripMenuItem_Click);
-            // 
-            // двойнаяToolStripMenuItem
-            // 
-            this.двойнаяToolStripMenuItem.Name = "двойнаяToolStripMenuItem";
-            this.двойнаяToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.двойнаяToolStripMenuItem.Text = "Двойная";
-            this.двойнаяToolStripMenuItem.Click += new System.EventHandler(this.двойнаяToolStripMenuItem_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -430,7 +252,7 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(335, 24);
+            this.splitter1.Location = new System.Drawing.Point(429, 24);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 406);
             this.splitter1.TabIndex = 8;
@@ -438,7 +260,7 @@
             // 
             // splitter2
             // 
-            this.splitter2.Location = new System.Drawing.Point(536, 24);
+            this.splitter2.Location = new System.Drawing.Point(724, 24);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(3, 406);
             this.splitter2.TabIndex = 10;
@@ -446,7 +268,7 @@
             // 
             // splitter3
             // 
-            this.splitter3.Location = new System.Drawing.Point(737, 24);
+            this.splitter3.Location = new System.Drawing.Point(1019, 24);
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(3, 406);
             this.splitter3.TabIndex = 12;
@@ -457,41 +279,42 @@
             this.dbDiagramT.AutoScroll = true;
             this.dbDiagramT.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.dbDiagramT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagramT.ContextMenuStrip = this.cmMain;
             this.dbDiagramT.Diagram = null;
             this.dbDiagramT.Dock = System.Windows.Forms.DockStyle.Left;
             this.dbDiagramT.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagramT.Location = new System.Drawing.Point(539, 24);
+            this.dbDiagramT.Location = new System.Drawing.Point(727, 24);
             this.dbDiagramT.Margin = new System.Windows.Forms.Padding(4);
             this.dbDiagramT.Name = "dbDiagramT";
             this.dbDiagramT.SelectedFigure = null;
-            this.dbDiagramT.Size = new System.Drawing.Size(198, 406);
+            this.dbDiagramT.Size = new System.Drawing.Size(292, 406);
             this.dbDiagramT.TabIndex = 11;
             this.dbDiagramT.DoubleClick += new System.EventHandler(this.dbDiagramT_DoubleClick);
+            this.dbDiagramT.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramT_KeyDown);
+            this.dbDiagramT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramT_MouseClick);
             // 
             // dbDiagramS
             // 
             this.dbDiagramS.AutoScroll = true;
             this.dbDiagramS.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.dbDiagramS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagramS.ContextMenuStrip = this.cmMain;
             this.dbDiagramS.Diagram = null;
             this.dbDiagramS.Dock = System.Windows.Forms.DockStyle.Left;
             this.dbDiagramS.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagramS.Location = new System.Drawing.Point(338, 24);
+            this.dbDiagramS.Location = new System.Drawing.Point(432, 24);
             this.dbDiagramS.Margin = new System.Windows.Forms.Padding(4);
             this.dbDiagramS.Name = "dbDiagramS";
             this.dbDiagramS.SelectedFigure = null;
-            this.dbDiagramS.Size = new System.Drawing.Size(198, 406);
+            this.dbDiagramS.Size = new System.Drawing.Size(292, 406);
             this.dbDiagramS.TabIndex = 9;
             this.dbDiagramS.DoubleClick += new System.EventHandler(this.dbDiagramS_DoubleClick);
+            this.dbDiagramS.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramS_KeyDown_1);
+            this.dbDiagramS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseClick);
             // 
             // dbDiagram
             // 
             this.dbDiagram.AutoScroll = true;
             this.dbDiagram.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.dbDiagram.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagram.ContextMenuStrip = this.cmMain;
             this.dbDiagram.Diagram = null;
             this.dbDiagram.Dock = System.Windows.Forms.DockStyle.Left;
             this.dbDiagram.ForeColor = System.Drawing.Color.Black;
@@ -499,18 +322,19 @@
             this.dbDiagram.Margin = new System.Windows.Forms.Padding(4);
             this.dbDiagram.Name = "dbDiagram";
             this.dbDiagram.SelectedFigure = null;
-            this.dbDiagram.Size = new System.Drawing.Size(198, 406);
+            this.dbDiagram.Size = new System.Drawing.Size(292, 406);
             this.dbDiagram.TabIndex = 3;
             this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
+            this.dbDiagram.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseClick);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
-            this.dbDiagram.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseUp);
             // 
             // AlgForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(798, 430);
+            this.ClientSize = new System.Drawing.Size(1060, 430);
             this.Controls.Add(this.splitter3);
             this.Controls.Add(this.dbDiagramT);
             this.Controls.Add(this.splitter2);
@@ -526,8 +350,6 @@
             this.Load += new System.EventHandler(this.AlgForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.cmMain.ResumeLayout(false);
-            this.cmSelectedFigure.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -544,32 +366,12 @@
         private System.Windows.Forms.ToolStripMenuItem miClose;
         private System.Windows.Forms.ToolStripMenuItem miExport;
         private System.Windows.Forms.SaveFileDialog sfdImage;
-        private System.Windows.Forms.ContextMenuStrip cmMain;
-        private System.Windows.Forms.ToolStripMenuItem miAddRect;
-        private System.Windows.Forms.ToolStripMenuItem addRoundRectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addRhombToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addParalelogrammToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addEllipseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addStackToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addFrameToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip cmSelectedFigure;
-        private System.Windows.Forms.ToolStripMenuItem miEditText;
-        private System.Windows.Forms.ToolStripMenuItem miAddLine;
-        private System.Windows.Forms.ToolStripMenuItem miAddLedgeLine;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem miDelete;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem bringToFrontToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sendToBackToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btm1;
-        private System.Windows.Forms.ToolStripMenuItem прямоугольникСРамкойToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem шестиугольникToolStripMenuItem;
         private System.Windows.Forms.Button btm2;
         private System.Windows.Forms.Button btm3;
         private System.Windows.Forms.Button btm4;
         private System.Windows.Forms.Button btm5;
-        private System.Windows.Forms.ToolStripMenuItem двойнаяToolStripMenuItem;
         private System.Windows.Forms.Button btm6;
         private System.Windows.Forms.Button btm7;
         private System.Windows.Forms.ToolStripMenuItem нарисоватьToolStripMenuItem;

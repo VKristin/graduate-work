@@ -865,6 +865,7 @@ namespace Diagrams
                 AutoScrollMinSize = size;
         }
 
+
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);

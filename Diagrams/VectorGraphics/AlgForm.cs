@@ -187,6 +187,21 @@ namespace Diagrams
             editBlock.Owner = this; //Передаём вновь созданной форме её владельца.
             editBlock.Show();*/
         }
+        private void dbDiagramS_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            dbDiagramS.SelectedBeginEditText(this, blockFirst);
+            /*EditBlock editBlock = new EditBlock(blocks);
+            editBlock.Owner = this; //Передаём вновь созданной форме её владельца.
+            editBlock.Show();*/
+        }
+
+        private void dbDiagramT_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            dbDiagramT.SelectedBeginEditText(this, blockFirst);
+            /*EditBlock editBlock = new EditBlock(blocks);
+            editBlock.Owner = this; //Передаём вновь созданной форме её владельца.
+            editBlock.Show();*/
+        }
 
 
         Point startDragPoint;
@@ -256,7 +271,7 @@ namespace Diagrams
             dbDiagram.SelectedSendToBack();
         }
 
-        private void dbDiagram_MouseUp(object sender, MouseEventArgs e)
+        /*private void dbDiagram_MouseUp(object sender, MouseEventArgs e)
         {
             startDragPoint = e.Location;
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
@@ -266,12 +281,21 @@ namespace Diagrams
                 else
                     cmSelectedFigure.Show(dbDiagram.PointToScreen(e.Location));
             }
-        }
+        }*/
 
         private void dbDiagram_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
+            {
                 dbDiagram.SelectedDelete();
+            }
+        }
+        private void dbDiagramS_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                dbDiagramS.SelectedDelete();
+            }
         }
 
         private void btm1_Click(object sender, EventArgs e)
@@ -498,7 +522,7 @@ namespace Diagrams
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filename = saveFileDialog.FileName;
-                ForSave forsave = new ForSave(blockFirst, dbDiagram.Diagram.figures);
+                ForSave forsave = new ForSave(blockFirst, blockSecond, blockThird, dbDiagram.Diagram.figures, dbDiagramS.Diagram.figures, dbDiagramT.Diagram.figures);
                 using (FileStream fs = new FileStream(filename, FileMode.Create))
                     new BinaryFormatter().Serialize(fs, forsave);
             }
@@ -513,9 +537,17 @@ namespace Diagrams
             {
                 string filename = openFileDialog.FileName;
                 dbDiagram.Diagram.figures.Clear();
+                dbDiagramS.Diagram.figures.Clear();
+                dbDiagramT.Diagram.figures.Clear();
                 ForSave forsave = LoadFile(filename);
-                blockFirst = forsave.block; 
-                dbDiagram.Diagram.figures = forsave.figures;
+                blockFirst = forsave.blockFirst; 
+                blockSecond = forsave.blockSecond;
+                blockThird = forsave.blockThird;
+                dbDiagram.Diagram.figures = forsave.figuresFirst;
+                dbDiagramS.Diagram.figures = forsave.figuresSecond;
+                dbDiagramT.Diagram.figures = forsave.figuresThird;
+                dbDiagramS.Invalidate();
+                dbDiagramT.Invalidate();
             }
         }
 
@@ -534,18 +566,64 @@ namespace Diagrams
         {
             dbDiagramT.SelectedBeginEditText(this, blockThird);
         }
+
+        private void dbDiagramS_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                dbDiagramS.SelectedDelete();
+            }
+        }
+
+        private void dbDiagramT_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                dbDiagramT.SelectedDelete();
+            }
+        }
+
+        private void dbDiagram_MouseClick(object sender, MouseEventArgs e)
+        {
+            dbDiagramS.SelectedFigure = null;
+            dbDiagramS.markers.Clear();
+            dbDiagramT.SelectedFigure = null;
+            dbDiagramT.markers.Clear();
+        }
+        private void dbDiagramS_MouseClick(object sender, MouseEventArgs e)
+        {
+            dbDiagram.SelectedFigure = null;
+            dbDiagram.markers.Clear();
+            dbDiagramT.SelectedFigure = null;
+            dbDiagramT.markers.Clear();
+        }
+        private void dbDiagramT_MouseClick(object sender, MouseEventArgs e)
+        {
+            dbDiagramS.SelectedFigure = null;
+            dbDiagramS.markers.Clear();
+            dbDiagram.SelectedFigure = null;
+            dbDiagram.markers.Clear();
+        }
     }
 
     [Serializable]
     public class ForSave 
     {
-        public Block block;
-        public List<Figure> figures;
+        public Block blockFirst;
+        public Block blockSecond;
+        public Block blockThird;
+        public List<Figure> figuresFirst;
+        public List<Figure> figuresSecond;
+        public List<Figure> figuresThird;
 
-        public ForSave(Block block, List<Figure> figures)
+        public ForSave(Block blockFirst, Block blockSecond, Block blockThird, List<Figure> figuresFirst, List<Figure> figuresSecond, List<Figure> figuresThird)
         {
-            this.block = block;
-            this.figures = figures;
+            this.blockFirst = blockFirst;
+            this.blockSecond = blockSecond;
+            this.blockThird = blockThird;
+            this.figuresFirst = figuresFirst;
+            this.figuresSecond = figuresSecond;
+            this.figuresThird = figuresThird;
         }
     }
 
