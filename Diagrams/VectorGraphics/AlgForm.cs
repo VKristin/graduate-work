@@ -30,6 +30,9 @@ namespace Diagrams
             this.Left = 0;
             this.Top = 0;
             InitializeComponent();
+            groupBox1.BackColor = Color.CornflowerBlue;
+            groupBox2.BackColor = Color.ForestGreen;
+            groupBox3.BackColor = Color.Orange;
             miNewDiagram_Click(null, null);
             AddWindow();
         }

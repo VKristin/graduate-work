@@ -10,3 +10,5 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\D
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.CopyComplete
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Release\VectorGraphics.exe
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Release\VectorGraphics.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\VectorGraphics.exe.config
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.SuggestedBindingRedirects.cache

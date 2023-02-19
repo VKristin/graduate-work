@@ -49,14 +49,20 @@
             this.btm4 = new System.Windows.Forms.Button();
             this.btm5 = new System.Windows.Forms.Button();
             this.btm6 = new System.Windows.Forms.Button();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.splitter3 = new System.Windows.Forms.Splitter();
-            this.dbDiagramT = new Diagrams.DiagramBox();
-            this.dbDiagramS = new Diagrams.DiagramBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dbDiagram = new Diagrams.DiagramBox();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dbDiagramS = new Diagrams.DiagramBox();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dbDiagramT = new Diagrams.DiagramBox();
+            this.splitter3 = new System.Windows.Forms.Splitter();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -69,7 +75,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1060, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(937, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -180,6 +186,7 @@
             this.btm1.TabIndex = 5;
             this.btm1.Text = "Вызов подпрограммы";
             this.btm1.UseVisualStyleBackColor = false;
+            this.btm1.Visible = false;
             this.btm1.Click += new System.EventHandler(this.btm1_Click);
             // 
             // btm2
@@ -250,65 +257,18 @@
             this.btm6.UseVisualStyleBackColor = false;
             this.btm6.Click += new System.EventHandler(this.btm6_Click);
             // 
-            // splitter1
+            // groupBox1
             // 
-            this.splitter1.Location = new System.Drawing.Point(429, 24);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 406);
-            this.splitter1.TabIndex = 8;
-            this.splitter1.TabStop = false;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Location = new System.Drawing.Point(724, 24);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 406);
-            this.splitter2.TabIndex = 10;
-            this.splitter2.TabStop = false;
-            // 
-            // splitter3
-            // 
-            this.splitter3.Location = new System.Drawing.Point(1019, 24);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(3, 406);
-            this.splitter3.TabIndex = 12;
-            this.splitter3.TabStop = false;
-            // 
-            // dbDiagramT
-            // 
-            this.dbDiagramT.AutoScroll = true;
-            this.dbDiagramT.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dbDiagramT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagramT.Diagram = null;
-            this.dbDiagramT.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dbDiagramT.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagramT.Location = new System.Drawing.Point(727, 24);
-            this.dbDiagramT.Margin = new System.Windows.Forms.Padding(4);
-            this.dbDiagramT.Name = "dbDiagramT";
-            this.dbDiagramT.SelectedFigure = null;
-            this.dbDiagramT.Size = new System.Drawing.Size(292, 406);
-            this.dbDiagramT.TabIndex = 11;
-            this.dbDiagramT.DoubleClick += new System.EventHandler(this.dbDiagramT_DoubleClick);
-            this.dbDiagramT.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramT_KeyDown);
-            this.dbDiagramT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramT_MouseClick);
-            // 
-            // dbDiagramS
-            // 
-            this.dbDiagramS.AutoScroll = true;
-            this.dbDiagramS.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dbDiagramS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagramS.Diagram = null;
-            this.dbDiagramS.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dbDiagramS.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagramS.Location = new System.Drawing.Point(432, 24);
-            this.dbDiagramS.Margin = new System.Windows.Forms.Padding(4);
-            this.dbDiagramS.Name = "dbDiagramS";
-            this.dbDiagramS.SelectedFigure = null;
-            this.dbDiagramS.Size = new System.Drawing.Size(292, 406);
-            this.dbDiagramS.TabIndex = 9;
-            this.dbDiagramS.DoubleClick += new System.EventHandler(this.dbDiagramS_DoubleClick);
-            this.dbDiagramS.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramS_KeyDown_1);
-            this.dbDiagramS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseClick);
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Highlight;
+            this.groupBox1.Controls.Add(this.dbDiagram);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(137, 24);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(250, 406);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
             // 
             // dbDiagram
             // 
@@ -316,17 +276,103 @@
             this.dbDiagram.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.dbDiagram.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.dbDiagram.Diagram = null;
-            this.dbDiagram.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dbDiagram.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dbDiagram.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagram.Location = new System.Drawing.Point(137, 24);
+            this.dbDiagram.Location = new System.Drawing.Point(2, 15);
             this.dbDiagram.Margin = new System.Windows.Forms.Padding(4);
             this.dbDiagram.Name = "dbDiagram";
             this.dbDiagram.SelectedFigure = null;
-            this.dbDiagram.Size = new System.Drawing.Size(292, 406);
+            this.dbDiagram.Size = new System.Drawing.Size(246, 389);
             this.dbDiagram.TabIndex = 3;
             this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
             this.dbDiagram.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseClick);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(387, 24);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(1, 406);
+            this.splitter1.TabIndex = 13;
+            this.splitter1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.groupBox2.Controls.Add(this.dbDiagramS);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox2.Location = new System.Drawing.Point(388, 24);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Size = new System.Drawing.Size(250, 406);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            // 
+            // dbDiagramS
+            // 
+            this.dbDiagramS.AutoScroll = true;
+            this.dbDiagramS.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dbDiagramS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dbDiagramS.Diagram = null;
+            this.dbDiagramS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbDiagramS.ForeColor = System.Drawing.Color.Black;
+            this.dbDiagramS.Location = new System.Drawing.Point(2, 15);
+            this.dbDiagramS.Margin = new System.Windows.Forms.Padding(4);
+            this.dbDiagramS.Name = "dbDiagramS";
+            this.dbDiagramS.SelectedFigure = null;
+            this.dbDiagramS.Size = new System.Drawing.Size(246, 389);
+            this.dbDiagramS.TabIndex = 9;
+            this.dbDiagramS.DoubleClick += new System.EventHandler(this.dbDiagramS_DoubleClick);
+            this.dbDiagramS.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramS_KeyDown_1);
+            this.dbDiagramS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseClick);
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(638, 24);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(1, 406);
+            this.splitter2.TabIndex = 15;
+            this.splitter2.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.groupBox3.Controls.Add(this.dbDiagramT);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox3.Location = new System.Drawing.Point(639, 24);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox3.Size = new System.Drawing.Size(250, 406);
+            this.groupBox3.TabIndex = 16;
+            this.groupBox3.TabStop = false;
+            // 
+            // dbDiagramT
+            // 
+            this.dbDiagramT.AutoScroll = true;
+            this.dbDiagramT.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dbDiagramT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dbDiagramT.Diagram = null;
+            this.dbDiagramT.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbDiagramT.ForeColor = System.Drawing.Color.Black;
+            this.dbDiagramT.Location = new System.Drawing.Point(2, 15);
+            this.dbDiagramT.Margin = new System.Windows.Forms.Padding(4);
+            this.dbDiagramT.Name = "dbDiagramT";
+            this.dbDiagramT.SelectedFigure = null;
+            this.dbDiagramT.Size = new System.Drawing.Size(246, 389);
+            this.dbDiagramT.TabIndex = 11;
+            this.dbDiagramT.DoubleClick += new System.EventHandler(this.dbDiagramT_DoubleClick);
+            this.dbDiagramT.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramT_KeyDown);
+            this.dbDiagramT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramT_MouseClick);
+            // 
+            // splitter3
+            // 
+            this.splitter3.Location = new System.Drawing.Point(889, 24);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(3, 406);
+            this.splitter3.TabIndex = 17;
+            this.splitter3.TabStop = false;
             // 
             // AlgForm
             // 
@@ -334,13 +380,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1060, 430);
+            this.ClientSize = new System.Drawing.Size(937, 430);
             this.Controls.Add(this.splitter3);
-            this.Controls.Add(this.dbDiagramT);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.splitter2);
-            this.Controls.Add(this.dbDiagramS);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.dbDiagram);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -351,6 +397,9 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,10 +428,13 @@
         public DiagramBox dbDiagram;
         private System.Windows.Forms.ToolStripMenuItem сохранитьАлгоритмToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьАлгоритмToolStripMenuItem;
-        private System.Windows.Forms.Splitter splitter1;
         public DiagramBox dbDiagramS;
-        private System.Windows.Forms.Splitter splitter2;
         public DiagramBox dbDiagramT;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Splitter splitter3;
     }
 }

@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Diagrams
 {
@@ -23,7 +27,7 @@ namespace Diagrams
         public Graphics g;
         public bool draw = false;
         public bool task = false;
-        public List<Coordinate> taskCoord = null;
+        public List<Coordinate> taskCoord = new List<Coordinate>();
 
         public List<Coordinate> coordListFirst = new List<Coordinate>();
         public List<Coordinate> coordListSecond = new List<Coordinate>();
@@ -176,34 +180,38 @@ namespace Diagrams
         public void OpenTask()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.InitialDirectory = directory;
             openFileDialog.Filter = "drawer task files (*.drawertask)|*.drawertask|All files (*.*)|*.*";
             openFileDialog.ShowDialog();
             string filename = openFileDialog.FileName;
             if (filename == "")
                 return;
-            //directory = filename;
-            //saveNewSettings(filename);
-            if (taskCoord != null && taskCoord.Count != 0)
-                taskCoord.Clear();
-            task = false;
-            pbDraw.Invalidate();
-            System.Xml.Serialization.XmlSerializer reader =
-            new System.Xml.Serialization.XmlSerializer(typeof(List<Coordinate>));
-
-            System.IO.StreamReader file = new System.IO.StreamReader(filename);
-            taskCoord = (List<Coordinate>)reader.Deserialize(file);
-            //numOfCellsX = Convert.ToInt32(Math.Ceiling(taskCoord.Max(x => x2))) + 1;
-            //numOfCellsY = Convert.ToInt32(Math.Ceiling(taskCoord.Max(x => x.y1))) + 1;
-            numOfCellsX = 20;
-            numOfCellsY = 10;
-            file.Close();
-            task = true;
-            //clear = false;
+            taskCoord.Clear();
+            draw = false;
+            using (StreamReader reader = new StreamReader(filename))
+            {
+                numOfCellsX = Convert.ToInt32(reader.ReadLine());
+                numOfCellsY = Convert.ToInt32(reader.ReadLine());
+                string line = "";
+                while ((line = reader.ReadLine()) != null)
+                {
+                    int[] c = Array.ConvertAll(line.Split(' '), int.Parse);
+                    taskCoord.Add(new Coordinate(new Point(c[0], c[1]), new Point(c[2], c[3])));
+                }
+                task = true;
+            }
             pbDraw.Invalidate();
         }
-
+        private Field LoadFile(string filename)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            formatter.Binder = new CustomBinder();
+            using (FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read))
+            {
+                return(formatter.Deserialize(fs) as Field);
+            }
+        }
     }
+
     public class Coordinate
     {
         public Point p1;
@@ -215,5 +223,28 @@ namespace Diagrams
         }
         public Coordinate() { }
     }
-    
+    [Serializable]
+    class Field
+    {
+        public int n; //количество строк
+        public int m; //количество столбцов
+        public List<Coordinate> task;
+
+        public Field(int n, int m, List<Coordinate> task)
+        {
+            this.n = n;
+            this.m = m;
+            this.task = task;
+        }
+    }
+
+    public class CustomBinder : SerializationBinder
+    {
+        public override Type BindToType(string assemblyName, string typeName)
+        {
+            Assembly currentasm = Assembly.GetExecutingAssembly();
+
+            return Type.GetType($"{currentasm.GetName().Name}.{typeName.Split('.')[1]}");
+        }
+    }
 }
