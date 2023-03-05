@@ -176,10 +176,23 @@ namespace Diagrams
         {
             if (sfdImage.ShowDialog() == DialogResult.OK)
             {
-                if (sfdImage.FilterIndex == 1)
-                    dbDiagram.GetImage().Save(sfdImage.FileName);
-                if (sfdImage.FilterIndex == 2)
-                    dbDiagram.SaveAsMetafile(sfdImage.FileName);
+
+                using (Bitmap bmp = new Bitmap(dbDiagram.GetImage().Width+ dbDiagramS.GetImage().Width+ dbDiagramT.GetImage().Width,
+                    dbDiagram.GetImage().Height))
+                {
+                    using (Graphics g = Graphics.FromImage(bmp))
+                    {
+                        using (Image img1 = dbDiagram.GetImage())
+                            g.DrawImage(img1, new Point(0, 0));
+
+                        using (Image img2 = dbDiagramS.GetImage())
+                            g.DrawImage(img2, new Point(dbDiagram.GetImage().Width));
+
+                        using (Image img3 = dbDiagramT.GetImage())
+                            g.DrawImage(img3, new Point(dbDiagram.GetImage().Width+dbDiagramS.Width));
+                    }
+                    bmp.Save(sfdImage.FileName);
+                }
             }
         }
 
@@ -546,10 +559,14 @@ namespace Diagrams
                 blockFirst = forsave.blockFirst; 
                 blockSecond = forsave.blockSecond;
                 blockThird = forsave.blockThird;
+                dbDiagram.blocks = blockFirst;
+                dbDiagramS.blocks = blockSecond;
+                dbDiagramT.blocks = blockThird;
                 dbDiagram.Diagram.figures = forsave.figuresFirst;
                 dbDiagramS.Diagram.figures = forsave.figuresSecond;
                 dbDiagramT.Diagram.figures = forsave.figuresThird;
                 dbDiagramS.Invalidate();
+                dbDiagram.Invalidate();
                 dbDiagramT.Invalidate();
             }
         }

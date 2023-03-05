@@ -253,7 +253,7 @@
             this.btm6.Name = "btm6";
             this.btm6.Size = new System.Drawing.Size(134, 45);
             this.btm6.TabIndex = 10;
-            this.btm6.Text = "Ветвление без else";
+            this.btm6.Text = "Исключение";
             this.btm6.UseVisualStyleBackColor = false;
             this.btm6.Click += new System.EventHandler(this.btm6_Click);
             // 

@@ -10,3 +10,15 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\D
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\obj\Release\Diagrams.csproj.CoreCompileInputs.cache
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\obj\Release\Diagrams.dll
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\Diagrams\obj\Release\Diagrams.pdb
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\bin\Release\Diagrams.dll
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\bin\Release\Diagrams.pdb
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.ChangeSize.resources
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.DiagramBox.resources
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.DrawForm.resources
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.EditBlock.resources
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.Properties.Resources.resources
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.dll
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\Diagrams\obj\Release\Diagrams.pdb

@@ -12,3 +12,17 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\D
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Release\VectorGraphics.pdb
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\VectorGraphics.exe.config
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\VectorGraphics.exe.config
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\VectorGraphics.exe
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\VectorGraphics.pdb
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\Diagrams.dll
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\Diagrams.pdb
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.SuggestedBindingRedirects.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\Diagrams.AlgForm.resources
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\Diagrams.Properties.Resources.resources
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.GenerateResource.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.CopyComplete
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\VectorGraphics.exe
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\VectorGraphics.pdb

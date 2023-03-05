@@ -153,7 +153,7 @@ namespace Diagrams
             if (block is ActionBlock) //если действие
             {
                 firstDrawer.Add(block);
-                DoAction(block, locationFirst);
+                DoAction(block, ref locationFirst);
                 return DrawPicFirst(block.nextBlock);
             }
             if (block is IfWithoutElseBlock)
@@ -210,7 +210,7 @@ namespace Diagrams
             if (block is ActionBlock) //если действие
             {
                 secondDrawer.Add(block);
-                DoAction(block, locationSecond);
+                DoAction(block, ref locationSecond);
                 return DrawPicSecond(block.nextBlock);
             }
             if (block is IfWithoutElseBlock)
@@ -267,7 +267,7 @@ namespace Diagrams
             if (block is ActionBlock) //если действие
             {
                 thirdDrawer.Add(block);
-                DoAction(block, locationThird);
+                DoAction(block, ref locationThird);
                 return DrawPicThird(block.nextBlock);
             }
             if (block is IfWithoutElseBlock)
@@ -361,7 +361,7 @@ namespace Diagrams
                 t.Wait();
             }
         }
-        private void DoAction(Block b, Point loc)
+        private void DoAction(Block b, ref Point loc)
         {
             Point n_loc = new Point(0, 0);
             switch ((b as ActionBlock).action)
