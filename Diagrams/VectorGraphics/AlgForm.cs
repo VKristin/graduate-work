@@ -33,6 +33,9 @@ namespace Diagrams
             groupBox1.BackColor = Color.CornflowerBlue;
             groupBox2.BackColor = Color.ForestGreen;
             groupBox3.BackColor = Color.Orange;
+            dbDiagram.markerColor = Color.CornflowerBlue;
+            dbDiagramS.markerColor = Color.ForestGreen;
+            dbDiagramT.markerColor = Color.Orange;
             miNewDiagram_Click(null, null);
             AddWindow();
         }
@@ -313,7 +316,6 @@ namespace Diagrams
                 dbDiagramS.SelectedDelete();
             }
         }
-
         private void btm1_Click(object sender, EventArgs e)
         {
             dbDiagram.CreateMarkers(3, blockFirst);

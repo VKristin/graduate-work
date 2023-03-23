@@ -913,6 +913,12 @@ namespace Diagrams
     //маркер для вставки элемента
     public class InsertMarker: Marker 
     {
+        public Color markerColor;
+
+        public InsertMarker(Color color)
+        {
+            markerColor = color;
+        }
         public override void UpdateLocation()
         {
             LedgeLineFigure line = (targetFigure as LedgeLineFigure);
@@ -931,7 +937,7 @@ namespace Diagrams
         public override void Draw(Graphics gr)
         {
             //обычные маркеры - эллипсы
-            Brush br = new SolidBrush(Color.MediumAquamarine);
+            Brush br = new SolidBrush(markerColor);
             gr.DrawEllipse(Pens.Black, location.X - defaultSize, location.Y - defaultSize, defaultSize * 2, defaultSize * 2);
             gr.FillEllipse(br, location.X - defaultSize, location.Y - defaultSize, defaultSize * 2, defaultSize * 2);
         }

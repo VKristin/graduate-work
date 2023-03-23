@@ -27,6 +27,7 @@ namespace Diagrams
         Pen drawPen;
         byte insertFigure = 0;
         public Block blocks;
+        public Color markerColor;
 
         public Figure drawFigure = null;
 
@@ -793,7 +794,7 @@ namespace Diagrams
                 if (Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13)
                 //if (Diagram.figures[i].type == 1)
                     {
-                    InsertMarker marker = new InsertMarker();
+                    InsertMarker marker = new InsertMarker(markerColor);
                     marker.targetFigure = Diagram.figures[i];
                     markers.Add(marker);
                     markers.Add(marker);
