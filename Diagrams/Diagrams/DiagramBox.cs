@@ -169,7 +169,7 @@ namespace Diagrams
                     break;
                 case 3:
                     figure = new RectFigureFrame(); //действие
-                    block = new ActionBlock(null, 0, ref figure);
+                    block = new ProcedureBlock(null, ref figure);
                     break;
                 case 4: //if else
                     figure = new RhombFigure();
@@ -515,6 +515,7 @@ namespace Diagrams
                 l_.secondLedgePosX = figure.location.X - defaultSize - 60;
                 Block t = findBlockWithGraphic(line.To, blocks);
                 l_.ledgePositionY = (t.nextBlock.figure.location.Y + figure.location.Y) / 2 - 1;
+                l_.type = 13;
                 Diagram.figures.Add(l_);
                 Minus m = new Minus(l_, 1);
                 l_.From.minus = m;
@@ -689,21 +690,27 @@ namespace Diagrams
             float b = -1;
             for (int i = 0; i < Diagram.figures.Count(); i++)
             {
-                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13 && Diagram.figures[i].type != 12
-                    && (Diagram.figures[i] as SolidFigure).location.X - defaultSize <= 0)
+                if (Diagram.figures[i] is SolidFigure && (Diagram.figures[i] as SolidFigure).location.X - defaultSize <= 0)
                     if ((Diagram.figures[i] as SolidFigure).location.X - defaultSize < b)
                         b = (Diagram.figures[i] as SolidFigure).location.X - defaultSize;
-                if ((Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13)
+                if ((Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
                     && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX < 0 && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX != -1)
                     b = (Diagram.figures[i] as LedgeLineFigure).ledgePositionX - 20;
+                if (Diagram.figures[i] is TripleLedgeLineFigure && (Diagram.figures[i] as TripleLedgeLineFigure).secondLedgePosX < 0)
+                    b = (Diagram.figures[i] as TripleLedgeLineFigure).secondLedgePosX - 20;
             }
             if (b != -1)
             {
                 for (int i = 0; i < Diagram.figures.Count(); i++)
                 {
-                    if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11)
+                    if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13)
                         (Diagram.figures[i] as SolidFigure).location.X -= b;
-                    else (Diagram.figures[i] as LedgeLineFigure).ledgePositionX -= b;
+                    else
+                    {
+                        (Diagram.figures[i] as LedgeLineFigure).ledgePositionX -= b;
+                        if (Diagram.figures[i].type == 13)
+                            (Diagram.figures[i] as TripleLedgeLineFigure).secondLedgePosX -= b;
+                    }
                 }
             }
             CalcAutoScrollPosition();
@@ -927,12 +934,12 @@ namespace Diagrams
             if (selectedFigure != null && (selectedFigure is SolidFigure))
             {
                 SolidFigure figure = (selectedFigure as SolidFigure);
-                if (figure.type != 6 || figure.type == 6 && Diagram.figures[0] == figure)
+                if (figure.type != 6)
                 {
                     Block block = findBlockWithGraphic(figure, blocks);
                     EditBlock editBlock = new EditBlock(this, block);
                     editBlock.Owner = form; //Передаём вновь созданной форме её владельца.
-                    editBlock.Show();
+                    editBlock.ShowDialog();
                 }
                 /*TextBox textBox = new TextBox();
                 textBox.Parent = this;

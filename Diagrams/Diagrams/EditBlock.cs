@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -36,23 +37,29 @@ namespace Diagrams
                 nudConditions.Visible = false;
                 FillListActions();
                 this.cbActions.Items.AddRange(actions.ToArray());
-                tbProcName.Visible = false;
                 cbActions.SelectedIndex = 0;
             }
             if (figure.figure.type == 8)
             {
                 nudConditions.Visible = false;
-                tbProcName.Visible = false;
                 cbActions.Visible = false;
                 lbAction.Text = "Кол-во повторов";
             }
             if (figure.figure.type == 4)
             {
-                tbProcName.Visible = false;
                 numActions.Visible = false;
                 lbAction.Text = "Есть место";
                 numActions.Visible = false;
                 FillListConditions();
+                this.cbActions.Items.AddRange(actions.ToArray());
+                cbActions.SelectedIndex = 0;
+            }
+            if (figure.figure.type == 7)
+            {
+                lbAction.Text = "Подпрограмма";
+                numActions.Visible = false;
+                nudConditions.Visible = false;
+                FillListProcedures();
                 this.cbActions.Items.AddRange(actions.ToArray());
                 cbActions.SelectedIndex = 0;
             }
@@ -89,6 +96,15 @@ namespace Diagrams
             actions.Add("Вправо вверх");
             actions.Add("Влево вниз");
             actions.Add("Влево вверх");
+        }
+
+        private void FillListProcedures()
+        {
+            string[] allfiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.drawerprocedure");
+            foreach (string filename in allfiles)
+            {
+                actions.Add(Path.GetFileNameWithoutExtension(filename));
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -146,10 +162,11 @@ namespace Diagrams
                 figure.text = numActions.Value.ToString();
                 (block as ForBlock).numOfRep = Convert.ToByte(numActions.Value);
             }
-            if (figure.type == 6)
+            if (figure.type == 7)
             {
-                figure.text = tbProcName.Text;
+                figure.text = cbActions.Text.ToString();
             }
+            this.Close();
             db.Invalidate();
         }
 

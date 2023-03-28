@@ -34,7 +34,6 @@
             this.numActions = new System.Windows.Forms.NumericUpDown();
             this.btnCancel = new System.Windows.Forms.Button();
             this.nudConditions = new System.Windows.Forms.NumericUpDown();
-            this.tbProcName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.numActions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudConditions)).BeginInit();
             this.SuspendLayout();
@@ -100,19 +99,11 @@
             0,
             0});
             // 
-            // tbProcName
-            // 
-            this.tbProcName.Location = new System.Drawing.Point(100, 39);
-            this.tbProcName.Name = "tbProcName";
-            this.tbProcName.Size = new System.Drawing.Size(226, 20);
-            this.tbProcName.TabIndex = 6;
-            // 
             // EditBlock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(467, 137);
-            this.Controls.Add(this.tbProcName);
             this.Controls.Add(this.nudConditions);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.numActions);
@@ -136,6 +127,5 @@
         private System.Windows.Forms.NumericUpDown numActions;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.NumericUpDown nudConditions;
-        private System.Windows.Forms.TextBox tbProcName;
     }
 }

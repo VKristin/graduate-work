@@ -208,8 +208,10 @@ namespace Diagrams
             gr.TranslateTransform(location.X, location.Y);
             gr.FillPath(brush, Path);
             gr.DrawPath(pen, Path);
+            Font font = new Font("Arial", 10);
+
             if (!string.IsNullOrEmpty(text))
-                gr.DrawString(text, SystemFonts.DefaultFont, Brushes.Black, textRect, StringFormat);
+                gr.DrawString(text, font, Brushes.Black, textRect, StringFormat);
             gr.Restore(transState);
         }
 

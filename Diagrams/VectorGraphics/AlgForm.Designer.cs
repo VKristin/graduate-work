@@ -34,6 +34,7 @@
             this.открытьЗаданиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьПодпрограммуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miExport = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +59,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dbDiagramT = new Diagrams.DiagramBox();
             this.splitter3 = new System.Windows.Forms.Splitter();
+            this.открытьПодпрограммуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -75,7 +77,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(937, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(973, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -86,6 +88,8 @@
             this.открытьЗаданиеToolStripMenuItem,
             this.открытьАлгоритмToolStripMenuItem,
             this.сохранитьАлгоритмToolStripMenuItem,
+            this.открытьПодпрограммуToolStripMenuItem,
+            this.сохранитьПодпрограммуToolStripMenuItem,
             this.miExport,
             this.toolStripMenuItem2,
             this.miClose});
@@ -120,6 +124,13 @@
             this.сохранитьАлгоритмToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.сохранитьАлгоритмToolStripMenuItem.Text = "Сохранить алгоритм";
             this.сохранитьАлгоритмToolStripMenuItem.Click += new System.EventHandler(this.сохранитьАлгоритмToolStripMenuItem_Click);
+            // 
+            // сохранитьПодпрограммуToolStripMenuItem
+            // 
+            this.сохранитьПодпрограммуToolStripMenuItem.Name = "сохранитьПодпрограммуToolStripMenuItem";
+            this.сохранитьПодпрограммуToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.сохранитьПодпрограммуToolStripMenuItem.Text = "Сохранить подпрограмму";
+            this.сохранитьПодпрограммуToolStripMenuItem.Click += new System.EventHandler(this.сохранитьПодпрограммуToolStripMenuItem_Click);
             // 
             // miExport
             // 
@@ -186,7 +197,6 @@
             this.btm1.TabIndex = 5;
             this.btm1.Text = "Вызов подпрограммы";
             this.btm1.UseVisualStyleBackColor = false;
-            this.btm1.Visible = false;
             this.btm1.Click += new System.EventHandler(this.btm1_Click);
             // 
             // btm2
@@ -374,13 +384,20 @@
             this.splitter3.TabIndex = 17;
             this.splitter3.TabStop = false;
             // 
+            // открытьПодпрограммуToolStripMenuItem
+            // 
+            this.открытьПодпрограммуToolStripMenuItem.Name = "открытьПодпрограммуToolStripMenuItem";
+            this.открытьПодпрограммуToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.открытьПодпрограммуToolStripMenuItem.Text = "Открыть подпрограмму";
+            this.открытьПодпрограммуToolStripMenuItem.Click += new System.EventHandler(this.открытьПодпрограммуToolStripMenuItem_Click);
+            // 
             // AlgForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(937, 430);
+            this.ClientSize = new System.Drawing.Size(973, 430);
             this.Controls.Add(this.splitter3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.splitter2);
@@ -436,6 +453,8 @@
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьПодпрограммуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem открытьПодпрограммуToolStripMenuItem;
     }
 }
 

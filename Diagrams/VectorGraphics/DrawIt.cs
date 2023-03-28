@@ -6,6 +6,9 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Diagrams
 {
@@ -21,6 +24,7 @@ namespace Diagrams
     }
     internal class DrawIt
     {
+        Dictionary<string, Block> procedures = new Dictionary<string, Block>(); //словарь процедур, где по названию процедуры можно будет получить её первый блок
         Point locationFirst = new Point(0, 0); //положение первого чертёжника
         Point locationSecond = new Point(0, 0); //положение второго чертёжника
         Point locationThird = new Point(0, 0); //положение третьего чертёжника
@@ -140,6 +144,7 @@ namespace Diagrams
             }
             
         }
+        Block procedure = null;
         private Block DrawPicFirst(Block block)
         {
             if (block == null)
@@ -194,6 +199,18 @@ namespace Diagrams
                 }
                 firstDrawer.Add(block);
             }
+            if (block is ProcedureBlock)
+            {
+                procedure = block;
+                firstDrawer.Add(block);
+                if (!procedures.ContainsKey((block as ProcedureBlock).figure.text))
+                    OpenProcedure((block as ProcedureBlock).figure.text);
+                DrawPicFirst(procedures[(block as ProcedureBlock).figure.text].nextBlock);
+                procedure = null;
+            }
+
+            if (procedure != null)
+                block.figure = procedure.figure;
             return DrawPicFirst(block.nextBlock);
         }
 
@@ -251,6 +268,17 @@ namespace Diagrams
                 }
                 secondDrawer.Add(block);
             }
+            if (block is ProcedureBlock)
+            {
+                procedure = block;
+                secondDrawer.Add(block);
+                if (!procedures.ContainsKey((block as ProcedureBlock).figure.text))
+                    OpenProcedure((block as ProcedureBlock).figure.text);
+                DrawPicSecond(procedures[(block as ProcedureBlock).figure.text].nextBlock);
+                procedure = null;
+            }
+            if (procedure != null)
+                block.figure = procedure.figure;
             return DrawPicSecond(block.nextBlock);
         }
 
@@ -308,6 +336,17 @@ namespace Diagrams
                 }
                 thirdDrawer.Add(block);
             }
+            if (block is ProcedureBlock)
+            {
+                procedure = block;
+                thirdDrawer.Add(block);
+                if (!procedures.ContainsKey((block as ProcedureBlock).figure.text))
+                    OpenProcedure((block as ProcedureBlock).figure.text);
+                DrawPicThird(procedures[(block as ProcedureBlock).figure.text].nextBlock);
+                procedure = null;
+            }
+            if (procedure != null)
+                block.figure = procedure.figure;
             return DrawPicThird(block.nextBlock);
         }
 
@@ -507,6 +546,17 @@ namespace Diagrams
             {
                 form.coordListThird.Add(new Diagrams.Coordinate(coord.p1, coord.p2));
             }
+        }
+        private void OpenProcedure(string filename)
+        {
+            string filenamePath = Directory.GetCurrentDirectory() + "\\" + filename + ".drawerprocedure";
+            ForSaveProcedure forsave = LoadFileP(filenamePath);
+            procedures[filename] = forsave.block;
+        }
+        private ForSaveProcedure LoadFileP(string filename)
+        {
+            using (FileStream fs = new FileStream(filename, FileMode.Open))
+                return (ForSaveProcedure)new BinaryFormatter().Deserialize(fs);
         }
     }
 }

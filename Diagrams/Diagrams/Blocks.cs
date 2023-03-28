@@ -95,6 +95,16 @@ namespace Diagrams
         }
     }
     [Serializable]
+    public class ProcedureBlock : Block //блок действия
+    {
+        public byte action; //номер команды, которую необходимо выполнить
+
+        public ProcedureBlock() { }
+        public ProcedureBlock(Block nextBlock, ref SolidFigure solidFigure) : base(nextBlock, solidFigure)
+        {
+        }
+    }
+    [Serializable]
     public class WhileBlock : Condition //блок предусловия
     {
         public byte condition; //номер условия

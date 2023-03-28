@@ -579,6 +579,12 @@ namespace Diagrams
                 return (ForSave)new BinaryFormatter().Deserialize(fs);
         }
 
+        private ForSaveProcedure LoadFileP(string filename)
+        {
+            using (FileStream fs = new FileStream(filename, FileMode.Open))
+                return (ForSaveProcedure)new BinaryFormatter().Deserialize(fs);
+        }
+
         private void dbDiagramS_DoubleClick(object sender, EventArgs e)
         {
             dbDiagramS.SelectedBeginEditText(this, blockSecond);
@@ -626,6 +632,43 @@ namespace Diagrams
             dbDiagram.SelectedFigure = null;
             dbDiagram.markers.Clear();
         }
+
+        private void сохранитьПодпрограммуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            saveFileDialog.Filter = "drawer algorithm files (*.drawerprocedure)|*.drawerprocedure|All files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = saveFileDialog.FileName;
+                ForSaveProcedure forsave = new ForSaveProcedure(blockFirst, dbDiagram.Diagram.figures);
+                using (FileStream fs = new FileStream(filename, FileMode.Create))
+                    new BinaryFormatter().Serialize(fs, forsave);
+            }
+        }
+
+        private void открытьПодпрограммуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+            openFileDialog.Filter = "drawer algorithm files (*.drawerprocedure)|*.drawerprocedure|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = openFileDialog.FileName;
+                dbDiagram.Diagram.figures.Clear();
+                dbDiagramS.Diagram.figures.Clear();
+                dbDiagramT.Diagram.figures.Clear();
+                NewDiagramSecond();
+                NewDiagramThird();
+                ForSaveProcedure forsave = LoadFileP(filename);
+                blockFirst = forsave.block;
+                dbDiagram.blocks = blockFirst;
+                dbDiagram.Diagram.figures = forsave.figures;
+                dbDiagramS.Invalidate();
+                dbDiagram.Invalidate();
+                dbDiagramT.Invalidate();
+            }
+        }
     }
 
     [Serializable]
@@ -646,6 +689,18 @@ namespace Diagrams
             this.figuresFirst = figuresFirst;
             this.figuresSecond = figuresSecond;
             this.figuresThird = figuresThird;
+        }
+    }
+
+    [Serializable]
+    public class ForSaveProcedure
+    {
+        public Block block;
+        public List<Figure> figures;
+        public ForSaveProcedure(Block block, List<Figure> figures)
+        {
+            this.block = block;
+            this.figures = figures;
         }
     }
 
