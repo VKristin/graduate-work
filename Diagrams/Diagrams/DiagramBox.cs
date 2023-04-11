@@ -868,11 +868,29 @@ namespace Diagrams
                     r = RectangleF.Union(r, (f as SolidFigure).Bounds);
             }
 
+            
+
             Size size = new Size((int)r.Width + 20, (int)r.Height + 10);
             if (size != AutoScrollMinSize)
                 AutoScrollMinSize = size;
         }
 
+        private float FindMax()
+        {
+            float max = 0;
+            foreach (Figure f in diagram.figures)
+            {
+                if (f is SolidFigure && (f as SolidFigure).location.X + SolidFigure.defaultSize > max - 20)
+                    max = (f as SolidFigure).location.X + SolidFigure.defaultSize + 20;
+                if (f is LineFigure)
+                {
+                    if (f is DoubleLedgeLineFigure && (f as DoubleLedgeLineFigure).ledgePositionX > max - 20)
+                        max = (f as DoubleLedgeLineFigure).ledgePositionX + SolidFigure.defaultSize + 20;
+                    if (f is LedgeLineFigure && (f as LedgeLineFigure).ledgePositionX > max - 20)
+                        max = (f as LedgeLineFigure).ledgePositionX + SolidFigure.defaultSize + 20;
+                }
+            }
+        }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
