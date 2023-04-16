@@ -688,22 +688,14 @@ namespace Diagrams
         {
             int defaultSize = SolidFigure.defaultSize;
             float b = -1;
-            for (int i = 0; i < Diagram.figures.Count(); i++)
-            {
-                if (Diagram.figures[i] is SolidFigure && (Diagram.figures[i] as SolidFigure).location.X - defaultSize <= 0)
-                    if ((Diagram.figures[i] as SolidFigure).location.X - defaultSize < b)
-                        b = (Diagram.figures[i] as SolidFigure).location.X - defaultSize;
-                if ((Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11)
-                    && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX < 0 && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX != -1)
-                    b = (Diagram.figures[i] as LedgeLineFigure).ledgePositionX - 20;
-                if (Diagram.figures[i] is TripleLedgeLineFigure && (Diagram.figures[i] as TripleLedgeLineFigure).secondLedgePosX < 0)
-                    b = (Diagram.figures[i] as TripleLedgeLineFigure).secondLedgePosX - 20;
-            }
+            b = FindMinCoord();
+            if (b > 0)
+                b = -1;
             if (b != -1)
             {
                 for (int i = 0; i < Diagram.figures.Count(); i++)
                 {
-                    if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13)
+                    if (Diagram.figures[i] is SolidFigure)
                         (Diagram.figures[i] as SolidFigure).location.X -= b;
                     else
                     {
@@ -716,26 +708,46 @@ namespace Diagrams
             CalcAutoScrollPosition();
         }
 
-        private void MoveFiguresXBack()
+        private int FindMinCoord()
         {
-            float coordX = float.MaxValue;
-            byte type = 0;
-            for (int i = 0; i < diagram.figures.Count(); i++)
+            int min = Int32.MaxValue - 20;
+            foreach (Figure f in diagram.figures)
             {
-                if (Diagram.figures[i].type != 1 && Diagram.figures[i].type != 10 && Diagram.figures[i].type != 11 && Diagram.figures[i].type != 13 && Diagram.figures[i].type != 12
-                    && (Diagram.figures[i] as SolidFigure).location.X < coordX)
+                if (f is SolidFigure && (f as SolidFigure).location.X - SolidFigure.defaultSize/2 < min)
                 {
-                    coordX = (Diagram.figures[i] as SolidFigure).location.X;
-                    type = Diagram.figures[i].type;
+                    min = (int)(f as SolidFigure).location.X - SolidFigure.defaultSize/2;
                 }
-                else
-                    if ((Diagram.figures[i].type == 1 || Diagram.figures[i].type == 10 || Diagram.figures[i].type == 11 || Diagram.figures[i].type == 13)
-                    && (Diagram.figures[i] as LedgeLineFigure).ledgePositionX < coordX)
+                if (f is LineFigure)
                 {
-                    coordX = (Diagram.figures[i] as LedgeLineFigure).ledgePositionX;
-                    type = Diagram.figures[i].type;
+                    if (f is DoubleLedgeLineFigure || f is DoubleLedgeLineFigureS)
+                    {
+                        if ((f as DoubleLedgeLineFigure).ledgePositionX < min && (f as DoubleLedgeLineFigure).ledgePositionX != -1)
+                            min = (int)(f as DoubleLedgeLineFigure).ledgePositionX;
+                    }
                 }
             }
+            return min;
+        }
+
+        private void MoveFiguresXBack()
+        {
+            int min = FindMinCoord() - SolidFigure.defaultSize/2;
+            if (min > 20)
+            {
+                min -= 20;
+                for (int i = 0; i < Diagram.figures.Count(); i++)
+                {
+                    if (Diagram.figures[i] is SolidFigure)
+                        (Diagram.figures[i] as SolidFigure).location.X -= min;
+                    else
+                    {
+                        (Diagram.figures[i] as LedgeLineFigure).ledgePositionX -= min;
+                        if (Diagram.figures[i].type == 13)
+                            (Diagram.figures[i] as TripleLedgeLineFigure).secondLedgePosX -= min;
+                    }
+                }
+            }
+            
         }
 
         //сдвигаем линии
@@ -867,10 +879,12 @@ namespace Diagrams
                 if (f != null && f is SolidFigure)
                     r = RectangleF.Union(r, (f as SolidFigure).Bounds);
             }
-
-            
-
-            Size size = new Size((int)r.Width + 20, (int)r.Height + 10);
+            Size size = new Size(0, 0);
+            float max = FindMax();
+            if (max > r.Width)
+                size = new Size((int)max + 20, (int)r.Height + 10);
+            else
+                size = new Size((int)r.Width + 20, (int)r.Height + 10);
             if (size != AutoScrollMinSize)
                 AutoScrollMinSize = size;
         }
@@ -890,6 +904,7 @@ namespace Diagrams
                         max = (f as LedgeLineFigure).ledgePositionX + SolidFigure.defaultSize + 20;
                 }
             }
+            return max;
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
@@ -1082,6 +1097,7 @@ namespace Diagrams
                     l.ledgePositionX = from.figure.location.X - SolidFigure.defaultSize - 30;
                     Diagram.figures.Add(l);
                 }
+                MoveFiguresXBack();
                 //CreateMarkers();
                 Invalidate();
             }
