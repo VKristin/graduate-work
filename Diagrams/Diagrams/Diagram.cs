@@ -883,7 +883,7 @@ namespace Diagrams
 
         public virtual string ToolTip
         {
-            get { return ToString(); }
+            get { return "Добавить блок"; }
         }
         public virtual System.Windows.Forms.Cursor Cursor
         {

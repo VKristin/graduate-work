@@ -831,7 +831,7 @@ namespace Diagrams
 
         Point startDragPoint;
 
-        /*protected override void OnMouseMove(MouseEventArgs e)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
             Point location = e.Location;
@@ -868,7 +868,7 @@ namespace Diagrams
             }
 
             startDragPoint = location;
-        }*/
+        }
 
         public void CalcAutoScrollPosition()
         {
