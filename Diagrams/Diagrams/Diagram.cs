@@ -47,7 +47,6 @@ namespace Diagrams
         protected Pen _pen;
         public byte type = 0;
         public SizeF defaultS = new SizeF(0, 0);
-
         public virtual Pen pen
         {
             get {

@@ -34,11 +34,19 @@
             this.открытьЗаданиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.открытьАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.открытьПодпрограммуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьПодпрограммуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.количествоИсполнителейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.одинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.дваToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.триToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
             this.нарисоватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.отменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.повторитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdDiagram = new System.Windows.Forms.SaveFileDialog();
             this.ofdDiagram = new System.Windows.Forms.OpenFileDialog();
             this.sfdImage = new System.Windows.Forms.SaveFileDialog();
@@ -59,7 +67,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dbDiagramT = new Diagrams.DiagramBox();
             this.splitter3 = new System.Windows.Forms.Splitter();
-            this.открытьПодпрограммуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -73,6 +80,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
+            this.редактированиеToolStripMenuItem,
             this.нарисоватьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -91,6 +99,7 @@
             this.открытьПодпрограммуToolStripMenuItem,
             this.сохранитьПодпрограммуToolStripMenuItem,
             this.miExport,
+            this.количествоИсполнителейToolStripMenuItem,
             this.toolStripMenuItem2,
             this.miClose});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
@@ -125,6 +134,13 @@
             this.сохранитьАлгоритмToolStripMenuItem.Text = "Сохранить алгоритм";
             this.сохранитьАлгоритмToolStripMenuItem.Click += new System.EventHandler(this.сохранитьАлгоритмToolStripMenuItem_Click);
             // 
+            // открытьПодпрограммуToolStripMenuItem
+            // 
+            this.открытьПодпрограммуToolStripMenuItem.Name = "открытьПодпрограммуToolStripMenuItem";
+            this.открытьПодпрограммуToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.открытьПодпрограммуToolStripMenuItem.Text = "Открыть подпрограмму";
+            this.открытьПодпрограммуToolStripMenuItem.Click += new System.EventHandler(this.открытьПодпрограммуToolStripMenuItem_Click);
+            // 
             // сохранитьПодпрограммуToolStripMenuItem
             // 
             this.сохранитьПодпрограммуToolStripMenuItem.Name = "сохранитьПодпрограммуToolStripMenuItem";
@@ -138,6 +154,42 @@
             this.miExport.Size = new System.Drawing.Size(231, 22);
             this.miExport.Text = "Сохранить как изображение";
             this.miExport.Click += new System.EventHandler(this.miExport_Click);
+            // 
+            // количествоИсполнителейToolStripMenuItem
+            // 
+            this.количествоИсполнителейToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.одинToolStripMenuItem,
+            this.дваToolStripMenuItem,
+            this.триToolStripMenuItem});
+            this.количествоИсполнителейToolStripMenuItem.Name = "количествоИсполнителейToolStripMenuItem";
+            this.количествоИсполнителейToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.количествоИсполнителейToolStripMenuItem.Text = "Количество исполнителей";
+            // 
+            // одинToolStripMenuItem
+            // 
+            this.одинToolStripMenuItem.CheckOnClick = true;
+            this.одинToolStripMenuItem.Name = "одинToolStripMenuItem";
+            this.одинToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.одинToolStripMenuItem.Text = "Один";
+            this.одинToolStripMenuItem.Click += new System.EventHandler(this.одинToolStripMenuItem_Click);
+            // 
+            // дваToolStripMenuItem
+            // 
+            this.дваToolStripMenuItem.CheckOnClick = true;
+            this.дваToolStripMenuItem.Name = "дваToolStripMenuItem";
+            this.дваToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.дваToolStripMenuItem.Text = "Два";
+            this.дваToolStripMenuItem.Click += new System.EventHandler(this.дваToolStripMenuItem_Click);
+            // 
+            // триToolStripMenuItem
+            // 
+            this.триToolStripMenuItem.Checked = true;
+            this.триToolStripMenuItem.CheckOnClick = true;
+            this.триToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.триToolStripMenuItem.Name = "триToolStripMenuItem";
+            this.триToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.триToolStripMenuItem.Text = "Три";
+            this.триToolStripMenuItem.Click += new System.EventHandler(this.триToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -157,6 +209,31 @@
             this.нарисоватьToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
             this.нарисоватьToolStripMenuItem.Text = "Нарисовать";
             this.нарисоватьToolStripMenuItem.Click += new System.EventHandler(this.нарисоватьToolStripMenuItem_Click);
+            // 
+            // редактированиеToolStripMenuItem
+            // 
+            this.редактированиеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.отменитьToolStripMenuItem,
+            this.повторитьToolStripMenuItem});
+            this.редактированиеToolStripMenuItem.Name = "редактированиеToolStripMenuItem";
+            this.редактированиеToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.редактированиеToolStripMenuItem.Text = "Редактирование";
+            // 
+            // отменитьToolStripMenuItem
+            // 
+            this.отменитьToolStripMenuItem.Name = "отменитьToolStripMenuItem";
+            this.отменитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.отменитьToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.отменитьToolStripMenuItem.Text = "Отменить";
+            this.отменитьToolStripMenuItem.Click += new System.EventHandler(this.отменитьToolStripMenuItem_Click);
+            // 
+            // повторитьToolStripMenuItem
+            // 
+            this.повторитьToolStripMenuItem.Name = "повторитьToolStripMenuItem";
+            this.повторитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.повторитьToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.повторитьToolStripMenuItem.Text = "Повторить";
+            this.повторитьToolStripMenuItem.Click += new System.EventHandler(this.повторитьToolStripMenuItem_Click);
             // 
             // sfdDiagram
             // 
@@ -274,6 +351,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(137, 24);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox1.MinimumSize = new System.Drawing.Size(10, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(250, 406);
@@ -301,6 +379,8 @@
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(387, 24);
+            this.splitter1.MinExtra = 5;
+            this.splitter1.MinSize = 0;
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(1, 406);
             this.splitter1.TabIndex = 13;
@@ -313,6 +393,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox2.Location = new System.Drawing.Point(388, 24);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox2.MinimumSize = new System.Drawing.Size(10, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(250, 406);
@@ -340,6 +421,8 @@
             // splitter2
             // 
             this.splitter2.Location = new System.Drawing.Point(638, 24);
+            this.splitter2.MinExtra = 5;
+            this.splitter2.MinSize = 0;
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(1, 406);
             this.splitter2.TabIndex = 15;
@@ -352,6 +435,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox3.Location = new System.Drawing.Point(639, 24);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.groupBox3.MinimumSize = new System.Drawing.Size(10, 0);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(250, 406);
@@ -379,17 +463,12 @@
             // splitter3
             // 
             this.splitter3.Location = new System.Drawing.Point(889, 24);
+            this.splitter3.MinExtra = 5;
+            this.splitter3.MinSize = 0;
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(3, 406);
             this.splitter3.TabIndex = 17;
             this.splitter3.TabStop = false;
-            // 
-            // открытьПодпрограммуToolStripMenuItem
-            // 
-            this.открытьПодпрограммуToolStripMenuItem.Name = "открытьПодпрограммуToolStripMenuItem";
-            this.открытьПодпрограммуToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.открытьПодпрограммуToolStripMenuItem.Text = "Открыть подпрограмму";
-            this.открытьПодпрограммуToolStripMenuItem.Click += new System.EventHandler(this.открытьПодпрограммуToolStripMenuItem_Click);
             // 
             // AlgForm
             // 
@@ -410,7 +489,9 @@
             this.Name = "AlgForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Чертёжник";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AlgForm_FormClosing);
             this.Load += new System.EventHandler(this.AlgForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AlgForm_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -455,6 +536,13 @@
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.ToolStripMenuItem сохранитьПодпрограммуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьПодпрограммуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem редактированиеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem отменитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem повторитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem количествоИсполнителейToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem одинToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem дваToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem триToolStripMenuItem;
     }
 }
 

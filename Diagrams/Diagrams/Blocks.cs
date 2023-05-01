@@ -18,7 +18,7 @@ namespace Diagrams
     [XmlInclude(typeof(WhileBlock))]
     [XmlInclude(typeof(ForBlock))]
     [XmlInclude(typeof(DoWhileBlock))]
-    public abstract class Block
+    public abstract class Block : ICloneable
     {
         public Block nextBlock;
         public SolidFigure figure;
@@ -27,6 +27,15 @@ namespace Diagrams
         {
             this.nextBlock = nextBlock;
             this.figure = figure;
+        }
+        public Block(Block b)
+        {
+            this.nextBlock = b.nextBlock;
+            this.figure = b.figure;
+        }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
         public Block() { }
     }
@@ -38,6 +47,7 @@ namespace Diagrams
         {
             figure = solidFigure;
         }
+        public EllipseBlock(Block b): base(b) { }
     }
     [Serializable]
     public class Condition : Block 
@@ -50,6 +60,8 @@ namespace Diagrams
         {
             this.trueBlock = trueBlock;
         }
+        public Condition(Block b) : base(b) { }
+
     }
     [Serializable]
     public class IfBlock : Condition
@@ -65,6 +77,8 @@ namespace Diagrams
             this.condition = condition;
             this.falseBlock = falseBlock;
         }
+        public IfBlock(Block b) : base(b) { }
+
     }
     /// 1 - встать в левый нижний угол
     /// 2 - начертить вправо
@@ -93,6 +107,8 @@ namespace Diagrams
         {
             this.action = action;
         }
+        public ActionBlock(Block b) : base(b) { }
+
     }
     [Serializable]
     public class ProcedureBlock : Block //блок действия
@@ -103,6 +119,8 @@ namespace Diagrams
         public ProcedureBlock(Block nextBlock, ref SolidFigure solidFigure) : base(nextBlock, solidFigure)
         {
         }
+        public ProcedureBlock(Block b) : base(b) { }
+
     }
     [Serializable]
     public class WhileBlock : Condition //блок предусловия
@@ -117,6 +135,8 @@ namespace Diagrams
             this.num_cond = num_cond;
             figure = solidFigure;
         }
+        public WhileBlock(Block b) : base(b) { }
+
     }
     [Serializable]
     public class DoWhileBlock : Condition //блок постусловия
@@ -131,6 +151,8 @@ namespace Diagrams
             this.trueBlock = trueBlock;
             this.condition = condition;
         }
+        public DoWhileBlock(Block b) : base(b) { }
+
     }
     [Serializable]
     public class ForBlock : Condition //блок цикла с параметром
@@ -142,6 +164,8 @@ namespace Diagrams
         {
             this.numOfRep = numOfRep;
         }
+        public ForBlock(Block b) : base(b) { }
+
     }
     [Serializable]
     public class IfWithoutElseBlock: Condition //блок условия без альтернативы
@@ -156,6 +180,8 @@ namespace Diagrams
             this.num_cond = num_cond;
             this.condition = condition;
         }
+        public IfWithoutElseBlock(Block b) : base(b) { }
+
     }
     /*public class SubroutineBlock: Block //блок с подпрограммой
     {

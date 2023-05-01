@@ -157,6 +157,7 @@ namespace Diagrams
         {
             SolidFigure figure = new RectFigure();
             int defaultSize = SolidFigure.defaultSize;
+            
             Block block = null;
             switch (num)
             {
@@ -249,20 +250,31 @@ namespace Diagrams
             //при добавлении блока после двойного цикла
             if (m.targetFigure.type == 13)
             {
-                LedgeLineFigure l_ = new LedgeLineFigure();
-                DoubleLedgeLineFigure line_ = new DoubleLedgeLineFigure();
-                figure.location = findFigureHigher(m.location).location;
-                l_.From = (m.targetFigure as TripleLedgeLineFigure).From;
-                l_.To = figure;
-                l_.ledgePositionX = (m.targetFigure as TripleLedgeLineFigure).ledgePositionX;
-                //l_.ledgePositionY = (m.targetFigure as TripleLedgeLineFigure).ledgePositionY;
-                l = l_;
-                line_.ledgePositionX = (m.targetFigure as TripleLedgeLineFigure).secondLedgePosX;
-                line_.From = figure;
-                line_.To = (m.targetFigure as TripleLedgeLineFigure).To;
-                Diagram.figures.Add(figure);
-                Diagram.figures.Add(line_);
-                MoveFiguresY(findFigureHigher(m.location));
+                if (block is IfBlock || block is ActionBlock || block is IfWithoutElseBlock)
+                {
+                    LedgeLineFigure l_ = new LedgeLineFigure();
+                    DoubleLedgeLineFigure line_ = new DoubleLedgeLineFigure();
+                    figure.location = findFigureHigher(m.location).location;
+                    l_.From = (m.targetFigure as TripleLedgeLineFigure).From;
+                    l_.To = figure;
+                    l_.ledgePositionX = (m.targetFigure as TripleLedgeLineFigure).ledgePositionX;
+                    //l_.ledgePositionY = (m.targetFigure as TripleLedgeLineFigure).ledgePositionY;
+                    l = l_;
+                    line_.ledgePositionX = (m.targetFigure as TripleLedgeLineFigure).secondLedgePosX;
+                    line_.From = figure;
+                    line_.To = (m.targetFigure as TripleLedgeLineFigure).To;
+                    Diagram.figures.Add(figure);
+                    Diagram.figures.Add(line_);
+                    MoveFiguresY(findFigureHigher(m.location));
+                }
+                else
+                {
+                    Cursor.Show();
+                    MessageBox.Show("Невозможно добавить ещё один цикл!", "Ошибка!");
+                    Cursor.Show();
+                    return;
+                }
+                
             }
             Block from = findBlockWithGraphic(l.From, blocks);
             /*line.From = l.From;
@@ -838,13 +850,13 @@ namespace Diagrams
             location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                if (draggedFigure != null && (draggedFigure is SolidFigure))
+                /*if (draggedFigure != null && (draggedFigure is SolidFigure))
                 {
                     (draggedFigure as SolidFigure).Offset(location.X - startDragPoint.X, location.Y - startDragPoint.Y);
                     UpdateMarkers();
                     Invalidate();
                     CalcAutoScrollPosition();
-                }
+                }*/
             }
             else
             {

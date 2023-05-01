@@ -24,9 +24,18 @@ namespace Diagrams
         Block blockThird;
         DrawForm drawForm;
         string directory;
+        private int currentIdx = -1; //индекс в истории
+        //списки для хранения истории для каждой диаграммы отдельно
+        private List<FiguresForSave> diagrams = new List<FiguresForSave>();
+        private List<BlocksForSave> blocks = new List<BlocksForSave>();
         List<Coord> coordList = new List<Coord>(); //необходимые для отрисовки балки
         public AlgForm()
         {
+            if (File.Exists(Environment.CurrentDirectory + @"\history.bin"))
+                File.Delete(Environment.CurrentDirectory + @"\history.bin");
+            FileStream fs = new FileStream(Environment.CurrentDirectory + @"\history.bin", FileMode.Create);
+            System.IO.File.SetAttributes(Environment.CurrentDirectory + @"\history.bin", System.IO.FileAttributes.Hidden);
+            fs.Close();
             this.Left = 0;
             this.Top = 0;
             InitializeComponent();
@@ -39,6 +48,16 @@ namespace Diagrams
             miNewDiagram_Click(null, null);
             AddWindow();
         }
+        public List<Figure> CloneFigures(List<Figure> fgrs)
+        {
+            List<Figure> clone = new List<Figure>();
+            foreach (Figure f in fgrs)
+            {
+                clone.Add(f.Clone());
+            }
+            return clone;
+        }
+
         public void AddWindow()
         {
             drawForm = new DrawForm(this);
@@ -61,7 +80,11 @@ namespace Diagrams
             NewDiagramFirst();
             NewDiagramSecond();
             NewDiagramThird();
-
+            if (diagrams.Count < 20) //если сохранено действий меньше 20, то просто сохраняем очередное
+            {
+                //AddInHistory();
+                SaveHistory();
+            }
         }
 
         private void NewDiagramFirst()
@@ -273,6 +296,7 @@ namespace Diagrams
         private void miDelete_Click(object sender, EventArgs e)
         {
             dbDiagram.SelectedDelete();
+            SaveHistory();
         }
 
         private void miAddLine_Click(object sender, EventArgs e)
@@ -307,6 +331,7 @@ namespace Diagrams
             if (e.KeyCode == Keys.Delete)
             {
                 dbDiagram.SelectedDelete();
+                SaveHistory();
             }
         }
         private void dbDiagramS_KeyDown(object sender, KeyEventArgs e)
@@ -335,6 +360,7 @@ namespace Diagrams
             dbDiagramT.CreateMarkers(4, blockThird);
             dbDiagramT.Invalidate();
 
+
         }
 
         private void прямоугольникСРамкойToolStripMenuItem_Click(object sender, EventArgs e)
@@ -355,6 +381,7 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(1, blockThird);
             dbDiagramT.Invalidate();
+
         }
 
         private void двойнаяToolStripMenuItem_Click(object sender, EventArgs e)
@@ -370,6 +397,7 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(5, blockThird);
             dbDiagramT.Invalidate();
+
         }
 
         private void btm4_Click(object sender, EventArgs e)
@@ -380,6 +408,7 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(6, blockThird);
             dbDiagramT.Invalidate();
+
         }
 
         private void btm6_Click(object sender, EventArgs e)
@@ -390,6 +419,7 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(7, blockThird);
             dbDiagramT.Invalidate();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -400,6 +430,7 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(8, blockThird);
             dbDiagramT.Invalidate();
+
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -579,6 +610,19 @@ namespace Diagrams
                 return (ForSave)new BinaryFormatter().Deserialize(fs);
         }
 
+        private InfoForSave LoadFile()
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(Environment.CurrentDirectory + @"\history.bin", FileMode.Open))
+                    return (InfoForSave)new BinaryFormatter().Deserialize(fs);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         private ForSaveProcedure LoadFileP(string filename)
         {
             using (FileStream fs = new FileStream(filename, FileMode.Open))
@@ -600,6 +644,7 @@ namespace Diagrams
             if (e.KeyCode == Keys.Delete)
             {
                 dbDiagramS.SelectedDelete();
+                SaveHistory();
             }
         }
 
@@ -608,6 +653,8 @@ namespace Diagrams
             if (e.KeyCode == Keys.Delete)
             {
                 dbDiagramT.SelectedDelete();
+                SaveHistory();
+
             }
         }
 
@@ -617,6 +664,9 @@ namespace Diagrams
             dbDiagramS.markers.Clear();
             dbDiagramT.SelectedFigure = null;
             dbDiagramT.markers.Clear();
+            //AddInHistory();
+            SaveHistory();
+
         }
         private void dbDiagramS_MouseClick(object sender, MouseEventArgs e)
         {
@@ -624,6 +674,9 @@ namespace Diagrams
             dbDiagram.markers.Clear();
             dbDiagramT.SelectedFigure = null;
             dbDiagramT.markers.Clear();
+            //AddInHistory();
+            SaveHistory();
+
         }
         private void dbDiagramT_MouseClick(object sender, MouseEventArgs e)
         {
@@ -631,6 +684,8 @@ namespace Diagrams
             dbDiagramS.markers.Clear();
             dbDiagram.SelectedFigure = null;
             dbDiagram.markers.Clear();
+            //AddInHistory();
+            SaveHistory();
         }
 
         private void сохранитьПодпрограммуToolStripMenuItem_Click(object sender, EventArgs e)
@@ -645,6 +700,87 @@ namespace Diagrams
                 using (FileStream fs = new FileStream(filename, FileMode.Create))
                     new BinaryFormatter().Serialize(fs, forsave);
             }
+        }
+
+        private bool Different(InfoForSave fs)
+        {
+            //если добавились какие-либо фигуры
+            if (fs.figuresForSave[currentIdx].figureFirst.Count != dbDiagram.Diagram.figures.Count ||
+                fs.figuresForSave[currentIdx].figureSecond.Count != dbDiagramS.Diagram.figures.Count ||
+                fs.figuresForSave[currentIdx].figureThird.Count != dbDiagramT.Diagram.figures.Count)
+                return true;
+            //посмотрим, изменились ли фигуры и их надписи
+            for (int i = 0; i < fs.figuresForSave[currentIdx].figureFirst.Count; i++)
+            {
+                if (fs.figuresForSave[currentIdx].figureFirst[i] is SolidFigure && (fs.figuresForSave[currentIdx].figureFirst[i] as SolidFigure).text != (dbDiagram.Diagram.figures[i] as SolidFigure).text)
+                    return true;
+            }
+            for (int i = 0; i < fs.figuresForSave[currentIdx].figureSecond.Count; i++)
+            {
+                if (fs.figuresForSave[currentIdx].figureSecond[i] is SolidFigure && (fs.figuresForSave[currentIdx].figureSecond[i] as SolidFigure).text != (dbDiagramS.Diagram.figures[i] as SolidFigure).text)
+                    return true;
+            }
+            for (int i = 0; i < fs.figuresForSave[currentIdx].figureThird.Count; i++)
+            {
+                if (fs.figuresForSave[currentIdx].figureThird[i] is SolidFigure && (fs.figuresForSave[currentIdx].figureThird[i] as SolidFigure).text != (dbDiagramT.Diagram.figures[i] as SolidFigure).text)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private void SaveHistory()
+        {
+            InfoForSave forsave = LoadFile();
+            //если что-то поменялось - добавляем в историю
+            Figure figure1 = dbDiagram.selectedFigure;
+            Figure figure2 = dbDiagramS.selectedFigure;
+            Figure figure3 = dbDiagramT.selectedFigure;
+            dbDiagram.selectedFigure = null;
+            dbDiagramS.selectedFigure = null;
+            dbDiagramT.selectedFigure = null;
+
+            if (forsave != null && forsave.blocksForSave.Count != 0 && Different(forsave))
+            {
+                if (currentIdx == forsave.figuresForSave.Count() - 1)
+                {
+                    forsave.figuresForSave.Add(new FiguresForSave(dbDiagram.Diagram.figures, dbDiagramS.Diagram.figures, dbDiagramT.Diagram.figures));
+                    forsave.blocksForSave.Add(new BlocksForSave(blockFirst, blockSecond, blockThird));
+                    using (FileStream fs = new FileStream("history.bin", FileMode.Open))
+                        new BinaryFormatter().Serialize(fs, forsave);
+                    currentIdx += 1;
+                }
+                else
+                {
+                    forsave.blocksForSave.RemoveRange(currentIdx + 1, forsave.blocksForSave.Count - currentIdx - 1);
+                    forsave.figuresForSave.RemoveRange(currentIdx + 1, forsave.figuresForSave.Count - currentIdx - 1);
+                    forsave.figuresForSave.Add(new FiguresForSave(dbDiagram.Diagram.figures, dbDiagramS.Diagram.figures, dbDiagramT.Diagram.figures));
+                    forsave.blocksForSave.Add(new BlocksForSave(blockFirst, blockSecond, blockThird));
+                    using (FileStream fs = new FileStream("history.bin", FileMode.Open))
+                        new BinaryFormatter().Serialize(fs, forsave);
+                    currentIdx += 1;
+                }
+            }
+            if (forsave == null)
+            {
+                forsave = new InfoForSave(new List<FiguresForSave>(), new List<BlocksForSave>());
+                forsave.figuresForSave.Add(new FiguresForSave(dbDiagram.Diagram.figures, dbDiagramS.Diagram.figures, dbDiagramT.Diagram.figures));
+                forsave.blocksForSave.Add(new BlocksForSave(blockFirst, blockSecond, blockThird));
+                using (FileStream fs = new FileStream("history.bin", FileMode.Open))
+                    new BinaryFormatter().Serialize(fs, forsave);
+                currentIdx += 1;
+            }
+
+            dbDiagram.selectedFigure = figure1;
+            dbDiagramS.selectedFigure = figure2;
+            dbDiagramT.selectedFigure = figure3;
+        }
+
+        private void ReturnHistory()
+        {
+            InfoForSave forsave = LoadFile();
+            blocks = forsave.blocksForSave;
+            diagrams = forsave.figuresForSave;
         }
 
         private void открытьПодпрограммуToolStripMenuItem_Click(object sender, EventArgs e)
@@ -667,6 +803,130 @@ namespace Diagrams
                 dbDiagramS.Invalidate();
                 dbDiagram.Invalidate();
                 dbDiagramT.Invalidate();
+            }
+        }
+
+        private void Cancel()
+        {
+            if (currentIdx > 0)
+            {
+                dbDiagram.selectedFigure = null;
+                dbDiagramS.selectedFigure = null;
+                dbDiagramT.selectedFigure = null;
+                currentIdx -= 1;
+                ReturnHistory();
+                dbDiagram.Diagram.figures.Clear();
+                dbDiagramS.Diagram.figures.Clear();
+                dbDiagramT.Diagram.figures.Clear();
+                dbDiagram.Diagram.figures = diagrams[currentIdx].figureFirst;
+                dbDiagram.Invalidate();
+                dbDiagramS.Diagram.figures = diagrams[currentIdx].figureSecond;
+                dbDiagramS.Invalidate();
+                dbDiagramT.Diagram.figures = diagrams[currentIdx].figureThird;
+                dbDiagramT.Invalidate();
+                blockFirst = blocks[currentIdx].blockFirst;
+                blockSecond = blocks[currentIdx].blockSecond;
+                blockThird = blocks[currentIdx].blockThird;
+                dbDiagram.blocks = blockFirst;
+                dbDiagramS.blocks = blockSecond;
+                dbDiagramT.blocks = blockThird;
+            }
+        }
+
+        private void отменитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cancel();
+        }
+
+        private void одинToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            дваToolStripMenuItem.Checked = false;
+            триToolStripMenuItem.Checked = false;
+            groupBox1.Width = this.Width - flowLayoutPanel1.Width - 50;
+            groupBox2.Width = 10;
+            groupBox2.Visible = false;
+            groupBox3.Width = 10;
+            groupBox3.Visible = false;
+            splitter2.Visible = false;
+            splitter3.Visible = false;
+        }
+
+        private void дваToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            одинToolStripMenuItem.Checked = false;
+            триToolStripMenuItem.Checked = false;
+            groupBox2.Visible = true;
+            groupBox3.Width = 10;
+            groupBox3.Visible = false;
+            splitter2.Visible = true;
+            splitter3.Visible = false;
+            groupBox1.Width = (this.Width - flowLayoutPanel1.Width - 50)/2;
+            groupBox2.Width = (this.Width - flowLayoutPanel1.Width - 50) / 2;
+
+        }
+
+        private void триToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            одинToolStripMenuItem.Checked = false;
+            дваToolStripMenuItem.Checked = false;
+            groupBox2.Visible = true;
+            groupBox3.Visible = true;
+            splitter2.Visible = true;
+            splitter3.Visible = true;
+            groupBox1.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
+            groupBox2.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
+            groupBox3.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
+        }
+
+        private void AlgForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (File.Exists("history.bin"))
+            {
+                File.Delete("history.bin");
+            }
+        }
+
+        private void повторитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Return();
+        }
+
+        private void Return()
+        {
+            ReturnHistory();
+            if (currentIdx < diagrams.Count() - 1)
+            {
+                dbDiagram.selectedFigure = null;
+                dbDiagramS.selectedFigure = null;
+                dbDiagramT.selectedFigure = null;
+                currentIdx += 1;
+                dbDiagram.Diagram.figures.Clear();
+                dbDiagramS.Diagram.figures.Clear();
+                dbDiagramT.Diagram.figures.Clear();
+                dbDiagram.Diagram.figures = diagrams[currentIdx].figureFirst;
+                dbDiagram.Invalidate();
+                dbDiagramS.Diagram.figures = diagrams[currentIdx].figureSecond;
+                dbDiagramS.Invalidate();
+                dbDiagramT.Diagram.figures = diagrams[currentIdx].figureThird;
+                dbDiagramT.Invalidate();
+                blockFirst = blocks[currentIdx].blockFirst;
+                blockSecond = blocks[currentIdx].blockSecond;
+                blockThird = blocks[currentIdx].blockThird;
+                dbDiagram.blocks = blockFirst;
+                dbDiagramS.blocks = blockSecond;
+                dbDiagramT.blocks = blockThird;
+            }
+        }
+
+        private void AlgForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Alt && e.KeyCode == Keys.Z)
+            {
+                Cancel();
+            }
+            if (e.KeyCode == Keys.Alt && e.KeyCode == Keys.X)
+            {
+                Return();
             }
         }
     }
@@ -701,6 +961,55 @@ namespace Diagrams
         {
             this.block = block;
             this.figures = figures;
+        }
+    }
+    [Serializable]
+
+    public class FiguresForSave
+    {
+        public List<Figure> figureFirst;
+        public List<Figure> figureSecond;
+        public List<Figure> figureThird;
+
+        public FiguresForSave(List<Figure> figureFirts, List<Figure> figureSecond, List<Figure> figureThird)
+        {
+            this.figureFirst = figureFirts;
+            this.figureSecond = figureSecond;
+            this.figureThird = figureThird;
+
+        }
+        public FiguresForSave()
+        {
+            figureFirst= new List<Figure>();
+            figureSecond= new List<Figure>();
+            figureThird= new List<Figure>();
+        }
+    }
+    [Serializable]
+
+    public class BlocksForSave
+    {
+        public Block blockFirst;
+        public Block blockSecond;
+        public Block blockThird;
+        public BlocksForSave(Block blockFirst, Block blockSecond, Block blockThird)
+        {
+            this.blockFirst = blockFirst;
+            this.blockSecond = blockSecond;
+            this.blockThird = blockThird;
+        }
+    }
+
+    [Serializable]
+    public class InfoForSave
+    {
+        public List<FiguresForSave> figuresForSave;
+        public List<BlocksForSave> blocksForSave;
+
+        public InfoForSave(List<FiguresForSave> figuresForSaves, List<BlocksForSave> blocksForSaves)
+        {
+            blocksForSave = blocksForSaves;
+            figuresForSave= figuresForSaves;
         }
     }
 
