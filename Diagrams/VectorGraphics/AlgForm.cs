@@ -23,12 +23,26 @@ namespace Diagrams
         Block blockSecond;
         Block blockThird;
         DrawForm drawForm;
-        string directory;
+        string historyFile = "";
+        string directory; 
+        private Size formSize; //Keep form size when it is minimized and restored.Since the form is resized because it takes into account the size of the title bar and borders.
+        private int borderSize = 2;
         private int currentIdx = -1; //индекс в истории
         //списки для хранения истории для каждой диаграммы отдельно
         private List<FiguresForSave> diagrams = new List<FiguresForSave>();
         private List<BlocksForSave> blocks = new List<BlocksForSave>();
         List<Coord> coordList = new List<Coord>(); //необходимые для отрисовки балки
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse
+        );
+
         public AlgForm()
         {
             if (File.Exists(Environment.CurrentDirectory + @"\history.bin"))
@@ -39,9 +53,9 @@ namespace Diagrams
             this.Left = 0;
             this.Top = 0;
             InitializeComponent();
-            groupBox1.BackColor = Color.CornflowerBlue;
-            groupBox2.BackColor = Color.ForestGreen;
-            groupBox3.BackColor = Color.Orange;
+            panel1.BackColor = Color.CornflowerBlue;
+            panel2.BackColor = Color.ForestGreen;
+            panel3.BackColor = Color.Orange;
             dbDiagram.markerColor = Color.CornflowerBlue;
             dbDiagramS.markerColor = Color.ForestGreen;
             dbDiagramT.markerColor = Color.Orange;
@@ -61,7 +75,6 @@ namespace Diagrams
         public void AddWindow()
         {
             drawForm = new DrawForm(this);
-            drawForm.Owner = this; //Передаём вновь созданной форме её владельца.
             drawForm.Show();
         }
         private void miExit_Click(object sender, EventArgs e)
@@ -80,16 +93,15 @@ namespace Diagrams
             NewDiagramFirst();
             NewDiagramSecond();
             NewDiagramThird();
-            if (diagrams.Count < 20) //если сохранено действий меньше 20, то просто сохраняем очередное
-            {
-                //AddInHistory();
-                SaveHistory();
-            }
+            SaveHistory();
+            dbDiagram.CalcAutoScrollPosition();
+            dbDiagramS.CalcAutoScrollPosition();
+            dbDiagramT.CalcAutoScrollPosition();
         }
 
         private void NewDiagramFirst()
         {
-            
+
             SolidFigure.defaultSize = 70;
             SolidFigure figure = null;
             Block figureSt = null;
@@ -203,7 +215,7 @@ namespace Diagrams
             if (sfdImage.ShowDialog() == DialogResult.OK)
             {
 
-                using (Bitmap bmp = new Bitmap(dbDiagram.GetImage().Width+ dbDiagramS.GetImage().Width+ dbDiagramT.GetImage().Width,
+                using (Bitmap bmp = new Bitmap(dbDiagram.GetImage().Width + dbDiagramS.GetImage().Width + dbDiagramT.GetImage().Width,
                     dbDiagram.GetImage().Height))
                 {
                     using (Graphics g = Graphics.FromImage(bmp))
@@ -215,7 +227,7 @@ namespace Diagrams
                             g.DrawImage(img2, new Point(dbDiagram.GetImage().Width));
 
                         using (Image img3 = dbDiagramT.GetImage())
-                            g.DrawImage(img3, new Point(dbDiagram.GetImage().Width+dbDiagramS.Width));
+                            g.DrawImage(img3, new Point(dbDiagram.GetImage().Width + dbDiagramS.Width));
                     }
                     bmp.Save(sfdImage.FileName);
                 }
@@ -231,7 +243,7 @@ namespace Diagrams
         }
         private void dbDiagramS_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            dbDiagramS.SelectedBeginEditText(this, blockFirst);
+            dbDiagramS.SelectedBeginEditText(this, blockSecond);
             /*EditBlock editBlock = new EditBlock(blocks);
             editBlock.Owner = this; //Передаём вновь созданной форме её владельца.
             editBlock.Show();*/
@@ -239,7 +251,7 @@ namespace Diagrams
 
         private void dbDiagramT_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            dbDiagramT.SelectedBeginEditText(this, blockFirst);
+            dbDiagramT.SelectedBeginEditText(this, blockThird);
             /*EditBlock editBlock = new EditBlock(blocks);
             editBlock.Owner = this; //Передаём вновь созданной форме её владельца.
             editBlock.Show();*/
@@ -330,15 +342,22 @@ namespace Diagrams
         {
             if (e.KeyCode == Keys.Delete)
             {
-                dbDiagram.SelectedDelete();
-                SaveHistory();
+                if (!(dbDiagram.SelectedFigure is EllipseFigure))
+                {
+                    dbDiagram.SelectedDelete();
+                    SaveHistory();
+                }
             }
         }
         private void dbDiagramS_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
-                dbDiagramS.SelectedDelete();
+                if (!(dbDiagramS.SelectedFigure is EllipseFigure))
+                {
+                    dbDiagramS.SelectedDelete();
+                    SaveHistory();
+                }
             }
         }
         private void btm1_Click(object sender, EventArgs e)
@@ -443,6 +462,19 @@ namespace Diagrams
         {
             //SolidFigure.defaultSize = trackBar1.Value;
             //dbDiagram.Invalidate();
+            RoundPanels(); 
+            formSize = this.ClientSize;
+        }
+
+        private void RoundPanels()
+        {
+
+            panel1.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, panel1.Width,
+            panel1.Height, 5, 5));
+            panel2.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, panel2.Width,
+            panel2.Height, 5, 5));
+            panel3.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, panel3.Width,
+            panel3.Height, 5, 5));
         }
         /*private void ChangeSize()
         {
@@ -503,14 +535,16 @@ namespace Diagrams
             List<LedgeLineFigure> list = new List<LedgeLineFigure>();
             for (int i = 0; i < dbDiagram.Diagram.figures.Count; i++)
             {
-                switch (dbDiagram.Diagram.figures[i].type) 
+                switch (dbDiagram.Diagram.figures[i].type)
                 {
-                    case 1: case 10: case 11:
+                    case 1:
+                    case 10:
+                    case 11:
                         list.Add(dbDiagram.Diagram.figures[i] as LedgeLineFigure);
                         break;
                 }
             }
-            list.Sort((a,b) => a.From.location.Y.CompareTo(b.From.location.Y));
+            list.Sort((a, b) => a.From.location.Y.CompareTo(b.From.location.Y));
             return list;
         }
 
@@ -520,16 +554,16 @@ namespace Diagrams
             float d = float.MaxValue;
             for (int i = 0; i < lines.Count; i++)
             {
-                        if (lines[i].To.location.Y - lines[i].From.location.Y > 0 &&
-                            lines[i].To.location.Y - lines[i].From.location.Y < d)
-                            d = lines[i].To.location.Y - lines[i].From.location.Y;
+                if (lines[i].To.location.Y - lines[i].From.location.Y > 0 &&
+                    lines[i].To.location.Y - lines[i].From.location.Y < d)
+                    d = lines[i].To.location.Y - lines[i].From.location.Y;
             }
             return d;
         }
         private List<Distance> NumDouble(List<LedgeLineFigure> lines)
         {
             float oneD = MinDist(lines);
-            List <Distance> list = new List<Distance>();
+            List<Distance> list = new List<Distance>();
             for (int i = 0; i < lines.Count; i++)
             {
                 Distance dist = new Distance(i, (int)(Math.Abs(lines[i].To.location.Y - lines[i].From.location.Y) / oneD));
@@ -544,19 +578,31 @@ namespace Diagrams
 
         private void ChangePosition(float ds)
         {
-            
+
         }
 
         private void нарисоватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DrawIt draw = new DrawIt();
             draw.Draw(blockFirst, blockSecond, blockThird, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this);
+            List<Block> drawer1 = draw.firstDrawer;
+            List<Block> drawer2 = draw.secondDrawer;
+            List<Block> drawer3 = draw.thirdDrawer;
+            if (!draw.error)
+            {
+                string s = "Количество шагов: " + drawer1.Count + " + " + drawer2.Count + " + " + drawer3.Count + " = " + (drawer1.Count + drawer2.Count + drawer3.Count) + "\n";
+                MessageBox.Show(s, "Алгоритм выполнен!");
+            }
+            this.Activate();
+            drawForm.Activate();
         }
-        public void Repaint(Point location)
+
+        /*public List<int> Repaint(Point location)
         {
+            List<int> list = new List<int>();
             DrawIt draw = new DrawIt();
             draw.DrawAgain(coordList, location);
-        }
+        }*/
 
         private void открытьЗаданиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -589,7 +635,7 @@ namespace Diagrams
                 dbDiagramS.Diagram.figures.Clear();
                 dbDiagramT.Diagram.figures.Clear();
                 ForSave forsave = LoadFile(filename);
-                blockFirst = forsave.blockFirst; 
+                blockFirst = forsave.blockFirst;
                 blockSecond = forsave.blockSecond;
                 blockThird = forsave.blockThird;
                 dbDiagram.blocks = blockFirst;
@@ -601,6 +647,9 @@ namespace Diagrams
                 dbDiagramS.Invalidate();
                 dbDiagram.Invalidate();
                 dbDiagramT.Invalidate();
+                dbDiagram.CalcAutoScrollPosition();
+                dbDiagramS.CalcAutoScrollPosition();
+                dbDiagramT.CalcAutoScrollPosition();
             }
         }
 
@@ -652,8 +701,11 @@ namespace Diagrams
         {
             if (e.KeyCode == Keys.Delete)
             {
-                dbDiagramT.SelectedDelete();
-                SaveHistory();
+                if (!(dbDiagramT.SelectedFigure is EllipseFigure))
+                {
+                    dbDiagramT.SelectedDelete();
+                    SaveHistory();
+                }
 
             }
         }
@@ -803,6 +855,8 @@ namespace Diagrams
                 dbDiagramS.Invalidate();
                 dbDiagram.Invalidate();
                 dbDiagramT.Invalidate();
+                dbDiagram.CalcAutoScrollPosition();
+
             }
         }
 
@@ -842,40 +896,45 @@ namespace Diagrams
         {
             дваToolStripMenuItem.Checked = false;
             триToolStripMenuItem.Checked = false;
-            groupBox1.Width = this.Width - flowLayoutPanel1.Width - 50;
-            groupBox2.Width = 10;
-            groupBox2.Visible = false;
-            groupBox3.Width = 10;
-            groupBox3.Visible = false;
+            panel1.Width = this.Width - flowLayoutPanel1.Width - 50;
+            panel2.Width = 10;
+            panel2.Visible = false;
+            panel3.Width = 10;
+            panel3.Visible = false;
             splitter2.Visible = false;
             splitter3.Visible = false;
+            dbDiagramS.Diagram = new Diagram();
+            dbDiagramT.Diagram = new Diagram();
+            NewDiagramSecond();
+            NewDiagramThird();
         }
 
         private void дваToolStripMenuItem_Click(object sender, EventArgs e)
         {
             одинToolStripMenuItem.Checked = false;
             триToolStripMenuItem.Checked = false;
-            groupBox2.Visible = true;
-            groupBox3.Width = 10;
-            groupBox3.Visible = false;
+            panel2.Visible = true;
+            panel3.Width = 10;
+            panel3.Visible = false;
             splitter2.Visible = true;
             splitter3.Visible = false;
-            groupBox1.Width = (this.Width - flowLayoutPanel1.Width - 50)/2;
-            groupBox2.Width = (this.Width - flowLayoutPanel1.Width - 50) / 2;
-
+            panel1.Width = (this.Width - flowLayoutPanel1.Width - 50) / 2;
+            panel2.Width = (this.Width - flowLayoutPanel1.Width - 50) / 2;
+            dbDiagramT.Diagram = new Diagram();
+            NewDiagramThird();
         }
 
         private void триToolStripMenuItem_Click(object sender, EventArgs e)
         {
             одинToolStripMenuItem.Checked = false;
             дваToolStripMenuItem.Checked = false;
-            groupBox2.Visible = true;
-            groupBox3.Visible = true;
+            panel2.Visible = true;
+            panel3.Visible = true;
             splitter2.Visible = true;
             splitter3.Visible = true;
-            groupBox1.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
-            groupBox2.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
-            groupBox3.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
+            panel1.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
+            panel2.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
+            panel3.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
         }
 
         private void AlgForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -929,6 +988,101 @@ namespace Diagrams
                 Return();
             }
         }
+
+        private void xuiButton2_Click(object sender, EventArgs e) //цикл в предусловием
+        {
+            dbDiagram.CreateMarkers(5, blockFirst);
+            dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(5, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(5, blockThird);
+            dbDiagramT.Invalidate();
+        }
+
+        private void xuiButton1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void xuiButton3_Click(object sender, EventArgs e)
+        {
+            dbDiagram.CreateMarkers(6, blockFirst);
+            dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(6, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(6, blockThird);
+            dbDiagramT.Invalidate();
+        }
+
+        private void xuiButton4_Click(object sender, EventArgs e)
+        {
+            dbDiagram.CreateMarkers(1, blockFirst);
+            dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(1, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(1, blockThird);
+            dbDiagramT.Invalidate();
+        }
+
+        private void xuiButton5_Click(object sender, EventArgs e)
+        {
+            dbDiagram.CreateMarkers(7, blockFirst);
+            dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(7, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(7, blockThird);
+            dbDiagramT.Invalidate();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void splitter2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            RoundPanels();
+        }
+
+        private void splitter3_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            RoundPanels();
+
+        }
+
+        private void splitter4_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            RoundPanels();
+
+        }
+
+        private void dbDiagram_Resize(object sender, EventArgs e)
+        {
+            RoundPanels();
+        }
+
+        private void dbDiagramS_Resize(object sender, EventArgs e)
+        {
+            RoundPanels();
+        }
+
+        private void dbDiagramT_Resize(object sender, EventArgs e)
+        {
+            RoundPanels();
+        }
+
+        private void xuiButton6_Click(object sender, EventArgs e)
+        {
+            dbDiagram.CreateMarkers(3, blockFirst);
+            dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(3, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(3, blockThird);
+            dbDiagramT.Invalidate();
+        }
+        //Overridden methods
+
+
     }
 
     [Serializable]
@@ -950,6 +1104,7 @@ namespace Diagrams
             this.figuresSecond = figuresSecond;
             this.figuresThird = figuresThird;
         }
+
     }
 
     [Serializable]

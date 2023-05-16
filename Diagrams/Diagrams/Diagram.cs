@@ -41,7 +41,8 @@ namespace Diagrams
         readonly SerializableGraphicsPath serializablePath = new SerializableGraphicsPath();
         protected GraphicsPath Path { get { return serializablePath.path; } }
         //карандаш отрисовки линий
-        Color _penColor = Color.Black;
+        Color _penColor = System.Drawing.ColorTranslator.FromHtml("#262626");
+
         public float _penWidth = 2;
         [NonSerialized]
         protected Pen _pen;

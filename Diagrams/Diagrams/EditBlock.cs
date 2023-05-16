@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -24,11 +25,16 @@ namespace Diagrams
             this.db = db;
             block = figure;
             cbActions.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            FormBorderStyle = FormBorderStyle.None;
             if (db.Diagram.figures[0] == figure.figure)
             {
                 nudConditions.Visible = false;
                 numActions.Visible = false;
-                cbActions.Visible=false;
+                cbActions.Visible = false;
                 lbAction.Text = "Название";
             }
             if (figure.figure.type == 2)
@@ -61,7 +67,8 @@ namespace Diagrams
                 nudConditions.Visible = false;
                 FillListProcedures();
                 this.cbActions.Items.AddRange(actions.ToArray());
-                cbActions.SelectedIndex = 0;
+                if (actions.Count() != 0)
+                    cbActions.SelectedIndex = 0;
             }
         }
 
@@ -82,7 +89,7 @@ namespace Diagrams
             actions.Add("Переставить вниз");
             actions.Add("Переставить вправо вверх");
             actions.Add("Переставить вправо вниз");
-            actions.Add("Переставить влево вниз");
+            actions.Add("Переставить влево вверх");
             actions.Add("Переставить влево вниз");
         }
 
@@ -107,7 +114,7 @@ namespace Diagrams
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void Save()
         {
             if (figure.type == 2)
             {
@@ -131,11 +138,11 @@ namespace Diagrams
                     case 15: figure.text = "Переставить ↖"; break;
                     case 16: figure.text = "Переставить ↙"; break;
                 }
-                (block as ActionBlock).action = Convert.ToByte(cbActions.SelectedIndex+1);
+                (block as ActionBlock).action = Convert.ToByte(cbActions.SelectedIndex + 1);
             }
             if (figure.type == 4)
             {
-                switch (cbActions.SelectedIndex) 
+                switch (cbActions.SelectedIndex)
                 {
                     case 0: figure.text = "→ " + nudConditions.Value.ToString(); break;
                     case 1: figure.text = "← " + nudConditions.Value.ToString(); break;
@@ -164,15 +171,41 @@ namespace Diagrams
             }
             if (figure.type == 7)
             {
-                figure.text = cbActions.Text.ToString();
+                if (cbActions.Items.Count != 0)
+                    figure.text = cbActions.Text.ToString();
             }
             this.Close();
             db.Invalidate();
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void EditBlock_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Save();
+            }
+        }
+
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
     }
 }

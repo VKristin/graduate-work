@@ -59,5 +59,35 @@ namespace Diagrams.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _462e78b93afcc280ca29c0be869fe17f {
+            get {
+                object obj = ResourceManager.GetObject("462e78b93afcc280ca29c0be869fe17f", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Карандаш {
+            get {
+                object obj = ResourceManager.GetObject("Карандаш", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Подрограмма1 {
+            get {
+                object obj = ResourceManager.GetObject("Подрограмма1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

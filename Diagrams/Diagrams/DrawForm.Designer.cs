@@ -32,16 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DrawForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.изменитьРазмерПоляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trackBarSize = new System.Windows.Forms.TrackBar();
             this.lbSize = new System.Windows.Forms.Label();
             this.pbDraw = new System.Windows.Forms.PictureBox();
             this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.lbSpeed = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.trackBarSize = new System.Windows.Forms.TrackBar();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -63,22 +63,6 @@
             this.изменитьРазмерПоляToolStripMenuItem.Size = new System.Drawing.Size(146, 20);
             this.изменитьРазмерПоляToolStripMenuItem.Text = "Изменить размер поля";
             this.изменитьРазмерПоляToolStripMenuItem.Click += new System.EventHandler(this.изменитьРазмерПоляToolStripMenuItem_Click);
-            // 
-            // trackBarSize
-            // 
-            this.trackBarSize.AutoSize = false;
-            this.trackBarSize.LargeChange = 8;
-            this.trackBarSize.Location = new System.Drawing.Point(12, 55);
-            this.trackBarSize.Maximum = 128;
-            this.trackBarSize.Minimum = 16;
-            this.trackBarSize.Name = "trackBarSize";
-            this.trackBarSize.Size = new System.Drawing.Size(277, 21);
-            this.trackBarSize.SmallChange = 8;
-            this.trackBarSize.TabIndex = 4;
-            this.trackBarSize.TabStop = false;
-            this.trackBarSize.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarSize.Value = 30;
-            this.trackBarSize.Scroll += new System.EventHandler(this.trackBarSize_Scroll);
             // 
             // lbSize
             // 
@@ -131,6 +115,23 @@
             this.imageList1.Images.SetKeyName(1, "Карандаш 2.png");
             this.imageList1.Images.SetKeyName(2, "Карандаш 3.png");
             // 
+            // trackBarSize
+            // 
+            this.trackBarSize.AutoSize = false;
+            this.trackBarSize.LargeChange = 8;
+            this.trackBarSize.Location = new System.Drawing.Point(12, 55);
+            this.trackBarSize.Maximum = 100;
+            this.trackBarSize.Minimum = 10;
+            this.trackBarSize.Name = "trackBarSize";
+            this.trackBarSize.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.trackBarSize.Size = new System.Drawing.Size(277, 21);
+            this.trackBarSize.SmallChange = 8;
+            this.trackBarSize.TabIndex = 10;
+            this.trackBarSize.TabStop = false;
+            this.trackBarSize.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBarSize.Value = 30;
+            this.trackBarSize.Scroll += new System.EventHandler(this.trackBarSize_Scroll);
+            // 
             // DrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,21 +139,22 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(933, 640);
+            this.Controls.Add(this.trackBarSize);
             this.Controls.Add(this.lbSpeed);
             this.Controls.Add(this.tbSpeed);
             this.Controls.Add(this.lbSize);
-            this.Controls.Add(this.trackBarSize);
             this.Controls.Add(this.pbDraw);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DrawForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Поле";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,9 +165,9 @@
         private System.Windows.Forms.Label lbSize;
         private System.Windows.Forms.ToolStripMenuItem изменитьРазмерПоляToolStripMenuItem;
         public System.Windows.Forms.PictureBox pbDraw;
-        public System.Windows.Forms.TrackBar trackBarSize;
         public System.Windows.Forms.TrackBar tbSpeed;
         private System.Windows.Forms.Label lbSpeed;
         public System.Windows.Forms.ImageList imageList1;
+        public System.Windows.Forms.TrackBar trackBarSize;
     }
 }

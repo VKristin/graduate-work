@@ -24,6 +24,7 @@ namespace Diagrams
     }
     internal class DrawIt
     {
+        public bool error = false;
         Dictionary<string, Block> procedures = new Dictionary<string, Block>(); //словарь процедур, где по названию процедуры можно будет получить её первый блок
         Point locationFirst = new Point(0, 0); //положение первого чертёжника
         Point locationSecond = new Point(0, 0); //положение второго чертёжника
@@ -37,9 +38,9 @@ namespace Diagrams
         AlgForm parentForm;
         Graphics graph;
         bool draw;
-        List<Block> firstDrawer = new List<Block>();
-        List<Block> secondDrawer = new List<Block>();
-        List<Block> thirdDrawer = new List<Block>();
+        public List<Block> firstDrawer = new List<Block>();
+        public List<Block> secondDrawer = new List<Block>();
+        public List<Block> thirdDrawer = new List<Block>();
         int speed = 300;
         Block blockFirst;
         Block blockSecond;
@@ -106,6 +107,8 @@ namespace Diagrams
                                     MessageBoxIcon.Information,
                                     MessageBoxDefaultButton.Button1,
                                     MessageBoxOptions.ServiceNotification);
+
+                error = true;
             }
         }
 
@@ -150,7 +153,9 @@ namespace Diagrams
             if (block == null)
                 return null;
             if (block.figure.text == null)
-                throw new Exception("Был обнаружен пустой блок!");
+            {
+                throw new Exception(" Был обнаружен пустой блок!");
+            }
 
             if (block is EllipseBlock)
                 firstDrawer.Add(block);

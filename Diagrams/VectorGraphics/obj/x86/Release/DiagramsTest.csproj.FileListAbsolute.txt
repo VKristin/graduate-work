@@ -26,3 +26,7 @@ C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGrap
 C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\DiagramsTest.csproj.CopyComplete
 C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\VectorGraphics.exe
 C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\VectorGraphics.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\Xander.UI.Web.dll
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\XanderUI.dll
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\Xander.UI.Web.pdb
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\FontAwesome.Sharp.dll

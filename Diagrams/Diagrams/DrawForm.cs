@@ -23,6 +23,7 @@ namespace Diagrams
         public Point positionFirst;
         public Point positionSecond;
         public Point positionThird;
+        public byte dr = 3;
         Form Main;
         public Graphics g;
         public bool draw = false;
@@ -52,7 +53,7 @@ namespace Diagrams
             positionFirst = new Point(0, 0);
         }
 
-        private void pbDraw_Paint(object sender, PaintEventArgs e)
+        public void pbDraw_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.White);
             Pen pen = new Pen(Color.LightGray, 1);
@@ -90,10 +91,10 @@ namespace Diagrams
             if (positionFirst.X == 0 && positionFirst.Y == 0)
                 e.Graphics.DrawImage(imageList1.Images[0], startPosition.X, startPosition.Y, cellSize - 2, cellSize - 2);
 
-            if (positionSecond.X == 0 && positionSecond.Y == 0)
+            if (positionSecond.X == 0 && positionSecond.Y == 0 && dr > 1)
                 e.Graphics.DrawImage(imageList1.Images[1], startPosition.X, startPosition.Y, cellSize - 2, cellSize - 2);
 
-            if (positionThird.X == 0 && positionThird.Y == 0)
+            if (positionThird.X == 0 && positionThird.Y == 0 && dr > 2)
                 e.Graphics.DrawImage(imageList1.Images[2], startPosition.X, startPosition.Y, cellSize - 2, cellSize - 2);
 
             if (coordListFirst.Count() != 0 && draw)
@@ -107,6 +108,7 @@ namespace Diagrams
             }
             if (coordListSecond.Count() != 0 && draw)
             {
+                if (dr > 1)
                 e.Graphics.DrawImage(imageList1.Images[1], startPosition.X + cellSize * positionSecond.X, startPosition.Y - 1 - cellSize * positionSecond.Y, cellSize - 2, cellSize - 2);
 
                 for (int i = 0; i < coordListSecond.Count(); i++)
@@ -116,6 +118,7 @@ namespace Diagrams
             }
             if (coordListThird.Count() != 0 && draw)
             {
+                if (dr > 2)
                 e.Graphics.DrawImage(imageList1.Images[2], startPosition.X + cellSize * positionThird.X, startPosition.Y - 1 - cellSize * positionThird.Y, cellSize - 2, cellSize - 2);
 
                 for (int i = 0; i < coordListThird.Count(); i++)
