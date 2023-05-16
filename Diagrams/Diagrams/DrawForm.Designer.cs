@@ -32,12 +32,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DrawForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.изменитьРазмерПоляToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.очиститьПолеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSize = new System.Windows.Forms.Label();
             this.pbDraw = new System.Windows.Forms.PictureBox();
             this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.lbSpeed = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.trackBarSize = new System.Windows.Forms.TrackBar();
+            this.удалитьЗаданиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbDraw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
@@ -49,7 +51,9 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.изменитьРазмерПоляToolStripMenuItem});
+            this.изменитьРазмерПоляToolStripMenuItem,
+            this.очиститьПолеToolStripMenuItem,
+            this.удалитьЗаданиеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -63,6 +67,13 @@
             this.изменитьРазмерПоляToolStripMenuItem.Size = new System.Drawing.Size(146, 20);
             this.изменитьРазмерПоляToolStripMenuItem.Text = "Изменить размер поля";
             this.изменитьРазмерПоляToolStripMenuItem.Click += new System.EventHandler(this.изменитьРазмерПоляToolStripMenuItem_Click);
+            // 
+            // очиститьПолеToolStripMenuItem
+            // 
+            this.очиститьПолеToolStripMenuItem.Name = "очиститьПолеToolStripMenuItem";
+            this.очиститьПолеToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.очиститьПолеToolStripMenuItem.Text = "Очистить поле";
+            this.очиститьПолеToolStripMenuItem.Click += new System.EventHandler(this.очиститьПолеToolStripMenuItem_Click);
             // 
             // lbSize
             // 
@@ -132,6 +143,13 @@
             this.trackBarSize.Value = 30;
             this.trackBarSize.Scroll += new System.EventHandler(this.trackBarSize_Scroll);
             // 
+            // удалитьЗаданиеToolStripMenuItem
+            // 
+            this.удалитьЗаданиеToolStripMenuItem.Name = "удалитьЗаданиеToolStripMenuItem";
+            this.удалитьЗаданиеToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.удалитьЗаданиеToolStripMenuItem.Text = "Удалить задание";
+            this.удалитьЗаданиеToolStripMenuItem.Click += new System.EventHandler(this.удалитьЗаданиеToolStripMenuItem_Click);
+            // 
             // DrawForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,5 +187,7 @@
         private System.Windows.Forms.Label lbSpeed;
         public System.Windows.Forms.ImageList imageList1;
         public System.Windows.Forms.TrackBar trackBarSize;
+        private System.Windows.Forms.ToolStripMenuItem очиститьПолеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьЗаданиеToolStripMenuItem;
     }
 }

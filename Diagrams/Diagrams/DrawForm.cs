@@ -213,6 +213,21 @@ namespace Diagrams
                 return(formatter.Deserialize(fs) as Field);
             }
         }
+
+        private void очиститьПолеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            coordListFirst.Clear();
+            coordListSecond.Clear();
+            coordListThird.Clear();
+            pbDraw.Invalidate();
+        }
+
+        private void удалитьЗаданиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            taskCoord.Clear();
+            task = false;
+            pbDraw.Invalidate();
+        }
     }
 
     public class Coordinate
