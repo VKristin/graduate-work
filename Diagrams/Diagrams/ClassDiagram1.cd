@@ -13,14 +13,14 @@
       <Field Name="serializablePath" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAAgJgAAwgBAAAAAgAAAAAAAAAAAAEABA=</HashCode>
+      <HashCode>AAAgAAAAAAAAAgJgAAwABAAAAAgBQAAAAAAAAAAEAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Diagrams.SolidFigure">
     <Position X="3.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACIAAAAAAgAIggAAAAJgAAACAAAIAACIEAAAgAAEggA=</HashCode>
+      <HashCode>ACIAAAAAAgAIggAAAAMAAABCAAAIIACIEAAAgAAEhgA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,7 +31,7 @@
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.RoundRectFigure" Collapsed="true">
+  <Class Name="Diagrams.RoundRectFigure">
     <Position X="1" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -59,14 +59,7 @@
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.StackFigure" Collapsed="true">
-    <Position X="1" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Diagram.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Diagrams.FrameFigure" Collapsed="true">
+  <Class Name="Diagrams.FrameFigure">
     <Position X="1" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAgAAAAAAAAAAAAAAAAAQAAAAAAAEAAA=</HashCode>
@@ -79,7 +72,7 @@
       <Field Name="clickPen" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AgACAAAAAAAAAgAAAAAgAAAAAAAIAAAQAAAAAAAEAAA=</HashCode>
+      <HashCode>AgACAAAAAAAAAgAAAAAAAAAAAAAIAAAQAAAAAAAEAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,7 +87,7 @@
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAACQAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -105,7 +98,7 @@
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.SizeMarker" Collapsed="true">
+  <Class Name="Diagrams.SizeMarker">
     <Position X="7.25" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
@@ -119,7 +112,7 @@
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.LedgeMarker" Collapsed="true">
+  <Class Name="Diagrams.LedgeMarker">
     <Position X="7.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>

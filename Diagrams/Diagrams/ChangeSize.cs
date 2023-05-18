@@ -25,5 +25,12 @@ namespace Diagrams
             frm.gridSize((int)numericUpDownX.Value, (int)numericUpDownY.Value);
             this.Close();
         }
+
+        private void xuiButton1_Click(object sender, EventArgs e)
+        {
+            frm = (DrawForm)this.Owner;
+            frm.gridSize((int)numericUpDownX.Value, (int)numericUpDownY.Value);
+            this.Close();
+        }
     }
 }

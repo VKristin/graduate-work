@@ -30,9 +30,9 @@
         {
             this.labelY = new System.Windows.Forms.Label();
             this.labelX = new System.Windows.Forms.Label();
-            this.buttonApply = new System.Windows.Forms.Button();
             this.numericUpDownY = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownX = new System.Windows.Forms.NumericUpDown();
+            this.xuiButton1 = new XanderUI.XUIButton();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownX)).BeginInit();
             this.SuspendLayout();
@@ -56,18 +56,6 @@
             this.labelX.Size = new System.Drawing.Size(58, 16);
             this.labelX.TabIndex = 9;
             this.labelX.Text = "Ширина";
-            // 
-            // buttonApply
-            // 
-            this.buttonApply.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.buttonApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonApply.Location = new System.Drawing.Point(46, 172);
-            this.buttonApply.Name = "buttonApply";
-            this.buttonApply.Size = new System.Drawing.Size(120, 39);
-            this.buttonApply.TabIndex = 8;
-            this.buttonApply.Text = "Применить";
-            this.buttonApply.UseVisualStyleBackColor = false;
-            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
             // 
             // numericUpDownY
             // 
@@ -115,15 +103,37 @@
             0,
             0});
             // 
+            // xuiButton1
+            // 
+            this.xuiButton1.BackgroundColor = System.Drawing.Color.LightGray;
+            this.xuiButton1.ButtonImage = null;
+            this.xuiButton1.ButtonStyle = XanderUI.XUIButton.Style.MaterialRounded;
+            this.xuiButton1.ButtonText = "Применить";
+            this.xuiButton1.ClickBackColor = System.Drawing.Color.LightGreen;
+            this.xuiButton1.ClickTextColor = System.Drawing.Color.Black;
+            this.xuiButton1.CornerRadius = 5;
+            this.xuiButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.xuiButton1.Horizontal_Alignment = System.Drawing.StringAlignment.Center;
+            this.xuiButton1.HoverBackgroundColor = System.Drawing.Color.LightGreen;
+            this.xuiButton1.HoverTextColor = System.Drawing.Color.Black;
+            this.xuiButton1.ImagePosition = XanderUI.XUIButton.imgPosition.Left;
+            this.xuiButton1.Location = new System.Drawing.Point(34, 168);
+            this.xuiButton1.Name = "xuiButton1";
+            this.xuiButton1.Size = new System.Drawing.Size(146, 32);
+            this.xuiButton1.TabIndex = 11;
+            this.xuiButton1.TextColor = System.Drawing.Color.Black;
+            this.xuiButton1.Vertical_Alignment = System.Drawing.StringAlignment.Center;
+            this.xuiButton1.Click += new System.EventHandler(this.xuiButton1_Click);
+            // 
             // ChangeSize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(211, 223);
+            this.Controls.Add(this.xuiButton1);
             this.Controls.Add(this.labelY);
             this.Controls.Add(this.labelX);
-            this.Controls.Add(this.buttonApply);
             this.Controls.Add(this.numericUpDownY);
             this.Controls.Add(this.numericUpDownX);
             this.Name = "ChangeSize";
@@ -139,8 +149,8 @@
 
         private System.Windows.Forms.Label labelY;
         private System.Windows.Forms.Label labelX;
-        private System.Windows.Forms.Button buttonApply;
         private System.Windows.Forms.NumericUpDown numericUpDownY;
         private System.Windows.Forms.NumericUpDown numericUpDownX;
+        private XanderUI.XUIButton xuiButton1;
     }
 }

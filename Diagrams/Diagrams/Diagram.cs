@@ -79,10 +79,6 @@ namespace Diagrams
         //получение маркеров
         //public abstract IEnumerable<Marker> GetMarkers(Diagram diagram);
 
-        public virtual Figure Clone()
-        {
-            return (Figure)MemberwiseClone();
-        }
     }
     //многоугольник с текстом внутри
     [Serializable]

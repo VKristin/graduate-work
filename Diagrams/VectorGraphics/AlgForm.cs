@@ -62,15 +62,6 @@ namespace Diagrams
             miNewDiagram_Click(null, null);
             AddWindow();
         }
-        public List<Figure> CloneFigures(List<Figure> fgrs)
-        {
-            List<Figure> clone = new List<Figure>();
-            foreach (Figure f in fgrs)
-            {
-                clone.Add(f.Clone());
-            }
-            return clone;
-        }
 
         public void AddWindow()
         {
