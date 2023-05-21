@@ -35,6 +35,7 @@
             this.xuiButton1 = new XanderUI.XUIButton();
             this.xuiButton2 = new XanderUI.XUIButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbDirection = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numActions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudConditions)).BeginInit();
             this.SuspendLayout();
@@ -57,11 +58,12 @@
             this.cbActions.Name = "cbActions";
             this.cbActions.Size = new System.Drawing.Size(226, 23);
             this.cbActions.TabIndex = 1;
+            this.cbActions.SelectedIndexChanged += new System.EventHandler(this.cbActions_SelectedIndexChanged);
             // 
             // numActions
             // 
             this.numActions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numActions.Location = new System.Drawing.Point(99, 64);
+            this.numActions.Location = new System.Drawing.Point(99, 65);
             this.numActions.Name = "numActions";
             this.numActions.Size = new System.Drawing.Size(226, 21);
             this.numActions.TabIndex = 3;
@@ -136,12 +138,23 @@
             this.panel1.TabIndex = 22;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
+            // cbDirection
+            // 
+            this.cbDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbDirection.FormattingEnabled = true;
+            this.cbDirection.Location = new System.Drawing.Point(331, 65);
+            this.cbDirection.Name = "cbDirection";
+            this.cbDirection.Size = new System.Drawing.Size(70, 23);
+            this.cbDirection.TabIndex = 23;
+            // 
             // EditBlock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(462, 172);
+            this.Controls.Add(this.cbDirection);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.xuiButton2);
             this.Controls.Add(this.xuiButton1);
@@ -170,5 +183,6 @@
         private XanderUI.XUIButton xuiButton1;
         private XanderUI.XUIButton xuiButton2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox cbDirection;
     }
 }

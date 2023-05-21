@@ -50,7 +50,7 @@ namespace Diagrams
         public EllipseBlock(Block b): base(b) { }
     }
     [Serializable]
-    public class Condition : Block 
+    public abstract class Condition : Block 
     {
         public Block trueBlock;
 

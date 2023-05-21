@@ -25,6 +25,8 @@ namespace Diagrams
     internal class DrawIt
     {
         public bool error = false;
+        public List<Coord> missingCoords = new List<Coord>(); //список для недостающих координат
+        public List<Coord> extraCoords = new List<Coord>(); //список для лишних координат
         Dictionary<string, Block> procedures = new Dictionary<string, Block>(); //словарь процедур, где по названию процедуры можно будет получить её первый блок
         Point locationFirst = new Point(0, 0); //положение первого чертёжника
         Point locationSecond = new Point(0, 0); //положение второго чертёжника
@@ -103,10 +105,7 @@ namespace Diagrams
             }
             catch (Exception e)
             {
-                MessageBox.Show("Невозможно выполнение алгоритма!" + e.Message, "Ошибка!", MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information,
-                                    MessageBoxDefaultButton.Button1,
-                                    MessageBoxOptions.ServiceNotification);
+                MessageBox.Show("Невозможно выполнение алгоритма!" + e.Message, "Ошибка!", MessageBoxButtons.OK);
 
                 error = true;
             }
@@ -114,8 +113,8 @@ namespace Diagrams
 
         private void checkTask()
         {
-            List <Coord> missingCoords = new List<Coord>(); //список для недостающих координат
-            List <Coord> extraCoords = new List<Coord>(); //список для лишних координат
+            missingCoords = new List<Coord>(); //список для недостающих координат
+            extraCoords = new List<Coord>(); //список для лишних координат
 
             if (form.task)
             {
@@ -134,16 +133,6 @@ namespace Diagrams
                         missingCoords.Add(b);
                     }
                 }
-                if (missingCoords.Count() != 0 || extraCoords.Count() != 0)
-                    MessageBox.Show("Задание было выполнено некорретно!", "Алгоритм выполнен", MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information,
-                                    MessageBoxDefaultButton.Button1,
-                                    MessageBoxOptions.ServiceNotification);
-                else
-                    MessageBox.Show("Задание было выполнено успешно!", "Алгоритм выполнен", MessageBoxButtons.OK,
-                                    MessageBoxIcon.Information,
-                                    MessageBoxDefaultButton.Button1,
-                                    MessageBoxOptions.ServiceNotification);
             }
             
         }
@@ -156,6 +145,8 @@ namespace Diagrams
             {
                 throw new Exception(" Был обнаружен пустой блок!");
             }
+            if (procedure != null)
+                block.figure = procedure.figure;
 
             if (block is EllipseBlock)
                 firstDrawer.Add(block);
@@ -226,6 +217,8 @@ namespace Diagrams
             if (block.figure.text == null)
                 throw new Exception("Был обнаружен пустой блок!");
 
+            if (procedure != null)
+                block.figure = procedure.figure;
             if (block is EllipseBlock)
                 secondDrawer.Add(block);
 
@@ -282,8 +275,6 @@ namespace Diagrams
                 DrawPicSecond(procedures[(block as ProcedureBlock).figure.text].nextBlock);
                 procedure = null;
             }
-            if (procedure != null)
-                block.figure = procedure.figure;
             return DrawPicSecond(block.nextBlock);
         }
 
@@ -294,6 +285,8 @@ namespace Diagrams
             if (block.figure.text == null)
                 throw new Exception("Был обнаружен пустой блок!");
 
+            if (procedure != null)
+                block.figure = procedure.figure;
             if (block is EllipseBlock)
                 thirdDrawer.Add(block);
 

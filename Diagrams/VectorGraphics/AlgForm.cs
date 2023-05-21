@@ -14,6 +14,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 
 namespace Diagrams
 {
@@ -579,10 +580,37 @@ namespace Diagrams
             List<Block> drawer1 = draw.firstDrawer;
             List<Block> drawer2 = draw.secondDrawer;
             List<Block> drawer3 = draw.thirdDrawer;
+            dbDiagram.selectedFigure = null;
+            dbDiagramS.selectedFigure = null;
+            dbDiagramT.selectedFigure = null;
             if (!draw.error)
             {
-                string s = "Количество шагов: " + drawer1.Count + " + " + drawer2.Count + " + " + drawer3.Count + " = " + (drawer1.Count + drawer2.Count + drawer3.Count) + "\n";
-                MessageBox.Show(s, "Алгоритм выполнен!");
+                string str = "";
+                string s = "Количество шагов: " + drawer1.Count;
+                string st = "Количество блоков: " + dbDiagram.Diagram.figures.Count(x => x is SolidFigure && !(x is Minus) && !(x is Plus));
+                string message = "";
+
+                if (drawForm.task)
+                {
+                    if (draw.missingCoords.Count() != 0 || draw.extraCoords.Count() != 0)
+                        message = "Задание было выполнено некорретно!" + "\n" + "\n";
+                    else
+                        message = "Задание было выполнено успешно!" + "\n" + "\n";
+                }
+                if (дваToolStripMenuItem.Checked)
+                {
+                    s += " + " + drawer2.Count + " = " + (drawer1.Count + drawer2.Count) + "\n";
+                    int count = (dbDiagram.Diagram.figures.Count(x => x is SolidFigure && !(x is Minus) && !(x is Plus)) + dbDiagramS.Diagram.figures.Count(x => x is SolidFigure && !(x is Minus) && !(x is Plus)));
+                    st += " + " + dbDiagramS.Diagram.figures.Count(x => x is SolidFigure) + " = " + count;
+                }
+                if (триToolStripMenuItem.Checked)
+                {
+                    s += " + " + drawer2.Count + " + " + drawer3.Count + " = " + (drawer1.Count + drawer2.Count + drawer3.Count) + "\n";
+                    int count = dbDiagram.Diagram.figures.Count(x => x is SolidFigure && !(x is Minus) && !(x is Plus)) + dbDiagramS.Diagram.figures.Count(x => x is SolidFigure && !(x is Minus) && !(x is Plus)) + dbDiagramT.Diagram.figures.Count(x => x is SolidFigure && !(x is Minus) && !(x is Plus));
+                    st += " + " + dbDiagramS.Diagram.figures.Count(x => x is SolidFigure) + " + " + dbDiagramT.Diagram.figures.Count(x => x is SolidFigure) + " = " + count;
+
+                }
+                MessageBox.Show(message + s + st, "Алгоритм выполнен!");
             }
             this.Activate();
             drawForm.Activate();

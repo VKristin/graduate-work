@@ -14,6 +14,7 @@ namespace Diagrams
     public partial class EditBlock : Form
     {
         List<string> actions = new List<string>();
+        List<string> directions = new List<string>();
         SolidFigure figure;
         Block block;
         DiagramBox db;
@@ -35,6 +36,7 @@ namespace Diagrams
                 nudConditions.Visible = false;
                 numActions.Visible = false;
                 cbActions.Visible = false;
+                cbDirection.Visible = false;
                 lbAction.Text = "Название";
             }
             if (figure.figure.type == 2)
@@ -43,12 +45,15 @@ namespace Diagrams
                 nudConditions.Visible = false;
                 FillListActions();
                 this.cbActions.Items.AddRange(actions.ToArray());
+                this.cbDirection.Items.AddRange(directions.ToArray());
+                cbDirection.SelectedIndex = 0;
                 cbActions.SelectedIndex = 0;
             }
             if (figure.figure.type == 8)
             {
                 nudConditions.Visible = false;
                 cbActions.Visible = false;
+                cbDirection.Visible = false;
                 lbAction.Text = "Кол-во повторов";
             }
             if (figure.figure.type == 4)
@@ -57,8 +62,11 @@ namespace Diagrams
                 lbAction.Text = "Есть место";
                 numActions.Visible = false;
                 FillListConditions();
+                //this.cbDirection.Items.AddRange(directions.ToArray());
+                cbDirection.Visible = false;
                 this.cbActions.Items.AddRange(actions.ToArray());
                 cbActions.SelectedIndex = 0;
+                //cbDirection.SelectedIndex = 0;
             }
             if (figure.figure.type == 7)
             {
@@ -66,7 +74,9 @@ namespace Diagrams
                 numActions.Visible = false;
                 nudConditions.Visible = false;
                 FillListProcedures();
+                this.cbDirection.Items.AddRange(directions.ToArray());
                 this.cbActions.Items.AddRange(actions.ToArray());
+                cbDirection.Visible = false;
                 if (actions.Count() != 0)
                     cbActions.SelectedIndex = 0;
             }
@@ -75,6 +85,18 @@ namespace Diagrams
         private void FillListActions()
         {
             actions.Add("Встать в левый нижний угол");
+            actions.Add("Начертить");
+            actions.Add("Переставить");
+
+            directions.Add("→");
+            directions.Add("←");
+            directions.Add("↑");
+            directions.Add("↓");
+            directions.Add("↘");
+            directions.Add("↗");
+            directions.Add("↙");
+            directions.Add("↖");
+            /*actions.Add("Встать в левый нижний угол");
             actions.Add("Начертить вправо");
             actions.Add("Начертить влево");
             actions.Add("Начертить вверх");
@@ -90,19 +112,29 @@ namespace Diagrams
             actions.Add("Переставить вправо вверх");
             actions.Add("Переставить вправо вниз");
             actions.Add("Переставить влево вверх");
-            actions.Add("Переставить влево вниз");
+            actions.Add("Переставить влево вниз");*/
         }
+
+        /*
+                    case 0: figure.text = "→ " + nudConditions.Value.ToString(); break;
+                    case 1: figure.text = "← " + nudConditions.Value.ToString(); break;
+                    case 2: figure.text = "↑ " + nudConditions.Value.ToString(); break;
+                    case 3: figure.text = "↓ " + nudConditions.Value.ToString(); break;
+                    case 4: figure.text = "↘ " + nudConditions.Value.ToString(); break;
+                    case 5: figure.text = "↗ " + nudConditions.Value.ToString(); break;
+                    case 6: figure.text = "↙ " + nudConditions.Value.ToString(); break;
+                    case 7: figure.text = "↖ " + nudConditions.Value.ToString(); break;*/
 
         private void FillListConditions()
         {
-            actions.Add("Вправо");
-            actions.Add("Влево");
-            actions.Add("Вверх");
-            actions.Add("Вниз");
-            actions.Add("Вправо вниз");
-            actions.Add("Вправо вверх");
-            actions.Add("Влево вниз");
-            actions.Add("Влево вверх");
+            actions.Add("→");
+            actions.Add("←");
+            actions.Add("↑");
+            actions.Add("↓");
+            actions.Add("↘");
+            actions.Add("↗");
+            actions.Add("↙");
+            actions.Add("↖");
         }
 
         private void FillListProcedures()
@@ -118,27 +150,32 @@ namespace Diagrams
         {
             if (figure.type == 2)
             {
-                switch (cbActions.SelectedIndex)
+                int idx = -1;   
+                if (cbActions.SelectedIndex == 0)
+                    figure.text = "Встать в ↙ угол";
+                else
+                    figure.text = cbActions.Text + " " + cbDirection.Text;
+                switch (figure.text)
                 {
-                    case 0: figure.text = "Встать в ↙ угол"; break;
-                    case 1: figure.text = "Начертить →"; break;
-                    case 2: figure.text = "Начертить ←"; break;
-                    case 3: figure.text = "Начертить ↑"; break;
-                    case 4: figure.text = "Начертить ↓"; break;
-                    case 5: figure.text = "Начертить ↗"; break;
-                    case 6: figure.text = "Начертить ↘"; break;
-                    case 7: figure.text = "Начертить ↖"; break;
-                    case 8: figure.text = "Начертить ↙"; break;
-                    case 9: figure.text = "Переставить →"; break;
-                    case 10: figure.text = "Переставить ←"; break;
-                    case 11: figure.text = "Переставить ↑"; break;
-                    case 12: figure.text = "Переставить ↓"; break;
-                    case 13: figure.text = "Переставить ↗"; break;
-                    case 14: figure.text = "Переставить ↘"; break;
-                    case 15: figure.text = "Переставить ↖"; break;
-                    case 16: figure.text = "Переставить ↙"; break;
+                    case "Встать в ↙ угол": idx = 1; break;
+                    case "Начертить →": idx = 2; break;
+                    case "Начертить ←": idx = 3; break;
+                    case "Начертить ↑": idx = 4; break;
+                    case "Начертить ↓": idx = 5; break;
+                    case "Начертить ↗": idx = 6; break;
+                    case "Начертить ↘": idx = 7; break;
+                    case "Начертить ↖": idx = 8; break;
+                    case "Начертить ↙": idx = 9; break;
+                    case "Переставить →": idx = 10; break;
+                    case "Переставить ←": idx = 11; break;
+                    case "Переставить ↑": idx = 12; break;
+                    case "Переставить ↓": idx = 13; break;
+                    case "Переставить ↗": idx = 14; break;
+                    case "Переставить ↘": idx = 15; break;
+                    case "Переставить ↖": idx = 16; break;
+                    case "Переставить ↙": idx = 17; break;
                 }
-                (block as ActionBlock).action = Convert.ToByte(cbActions.SelectedIndex + 1);
+                (block as ActionBlock).action = Convert.ToByte(idx);
             }
             if (figure.type == 4)
             {
@@ -206,6 +243,15 @@ namespace Diagrams
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void cbActions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbActions.SelectedIndex == 0)
+                cbDirection.Visible = false;
+            else
+                cbDirection.Visible = true;
+
         }
     }
 }

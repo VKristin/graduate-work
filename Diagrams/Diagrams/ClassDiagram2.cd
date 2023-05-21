@@ -1,317 +1,317 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Diagrams.ActionBlock">
-    <Position X="26.25" Y="19.75" Width="1.5" />
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Diagrams.ActionBlock" Collapsed="true">
+    <Position X="22" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Block">
-    <Position X="22.75" Y="17" Width="1.5" />
+  <Class Name="Diagrams.Block" Collapsed="true">
+    <Position X="29.75" Y="20.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAABA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Diagrams.ChangeSize">
-    <Position X="56.25" Y="3.5" Width="1.5" />
+  <Class Name="Diagrams.ChangeSize" Collapsed="true">
+    <Position X="63.75" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAACAAABAAAACYAAASQAAAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>ChangeSize.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Condition">
-    <Position X="19.5" Y="19.75" Width="1.5" />
+  <Class Name="Diagrams.Condition" Collapsed="true">
+    <Position X="28.75" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Coordinate">
-    <Position X="65.25" Y="3.5" Width="1.5" />
+  <Class Name="Diagrams.Coordinate" Collapsed="true">
+    <Position X="65.5" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAAAAAAAAAA=</HashCode>
       <FileName>DrawForm.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.CustomBinder">
-    <Position X="59.75" Y="3.5" Width="1.5" />
+  <Class Name="Diagrams.CustomBinder" Collapsed="true">
+    <Position X="67.25" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DrawForm.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Diagram">
-    <Position X="61.5" Y="3.5" Width="1.5" />
+  <Class Name="Diagrams.Diagram" Collapsed="true">
+    <Position X="69" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAgKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.DiagramBox">
-    <Position X="56.25" Y="4.5" Width="1.5" />
+  <Class Name="Diagrams.DiagramBox" Collapsed="true">
+    <Position X="63.75" Y="14.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AomEICABBKC0CgCYAAKKQIYaAhQQAYBmNQiAARgCTIA=</HashCode>
       <FileName>DiagramBox.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.DoubleLedgeLineFigure">
-    <Position X="10.25" Y="14" Width="1.5" />
+  <Class Name="Diagrams.DoubleLedgeLineFigure" Collapsed="true">
+    <Position X="24.25" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.DoubleLedgeLineFigureS">
-    <Position X="11.25" Y="16.25" Width="1.5" />
+  <Class Name="Diagrams.DoubleLedgeLineFigureS" Collapsed="true">
+    <Position X="25.25" Y="19.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.DoWhileBlock">
-    <Position X="21.75" Y="22" Width="1.5" />
+  <Class Name="Diagrams.DoWhileBlock" Collapsed="true">
+    <Position X="31" Y="23.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.DrawForm">
-    <Position X="58" Y="4.5" Width="1.5" />
+  <Class Name="Diagrams.DrawForm" Collapsed="true">
+    <Position X="65.5" Y="14.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQgAACgAACAAopAAgAKBQRACEBAAQAIIQ8AATCBABIE=</HashCode>
       <FileName>DrawForm.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.EditBlock">
-    <Position X="59.75" Y="4.5" Width="1.5" />
+  <Class Name="Diagrams.EditBlock" Collapsed="true">
+    <Position X="67.25" Y="14.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACQAAIAAACAQAGAAACCAAECaAAgAADAAMBAAAQAQBAA=</HashCode>
       <FileName>EditBlock.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.EllipseBlock">
-    <Position X="28.5" Y="19.75" Width="1.5" />
+  <Class Name="Diagrams.EllipseBlock" Collapsed="true">
+    <Position X="37.75" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.EllipseFigure">
-    <Position X="13.5" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.EllipseFigure" Collapsed="true">
+    <Position X="27.5" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.EndLineMarker">
-    <Position X="40.5" Y="17.75" Width="1.5" />
+  <Class Name="Diagrams.EndLineMarker" Collapsed="true">
+    <Position X="52.25" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAggCAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Field">
-    <Position X="61.5" Y="4.5" Width="1.5" />
+  <Class Name="Diagrams.Field" Collapsed="true">
+    <Position X="69" Y="14.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAABAAAA=</HashCode>
       <FileName>DrawForm.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Figure">
-    <Position X="28.25" Y="3" Width="1.5" />
+  <Class Name="Diagrams.Figure" Collapsed="true">
+    <Position X="42.25" Y="13.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAAAAAAAgJgAAwABAAAAAgBQAAAAAAAAAAEAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.ForBlock">
-    <Position X="24" Y="22" Width="1.5" />
+  <Class Name="Diagrams.ForBlock" Collapsed="true">
+    <Position X="33.25" Y="23.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.FrameFigure">
-    <Position X="38.25" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.FrameFigure" Collapsed="true">
+    <Position X="50" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAgAAAAAAAAAAAAAAAAAQAAAAAAAEAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.GraphicsPathHelper">
-    <Position X="56.25" Y="5.5" Width="1.5" />
+  <Class Name="Diagrams.GraphicsPathHelper" Collapsed="true">
+    <Position X="63.75" Y="15.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.IfBlock">
-    <Position X="15" Y="22" Width="1.5" />
+  <Class Name="Diagrams.IfBlock" Collapsed="true">
+    <Position X="24.25" Y="23.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.IfWithoutElseBlock">
-    <Position X="19.5" Y="22" Width="1.5" />
+  <Class Name="Diagrams.IfWithoutElseBlock" Collapsed="true">
+    <Position X="26.5" Y="23.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.InsertMarker">
-    <Position X="42.75" Y="17.75" Width="1.5" />
+  <Class Name="Diagrams.InsertMarker" Collapsed="true">
+    <Position X="54.5" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAgAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.LedgeLineFigure">
-    <Position X="10.25" Y="11" Width="1.5" />
+  <Class Name="Diagrams.LedgeLineFigure" Collapsed="true">
+    <Position X="24.25" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.LedgeMarker">
-    <Position X="45" Y="17.75" Width="1.5" />
+  <Class Name="Diagrams.LedgeMarker" Collapsed="true">
+    <Position X="56.75" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.LineFigure">
-    <Position X="10.25" Y="7.75" Width="1.5" />
+  <Class Name="Diagrams.LineFigure" Collapsed="true">
+    <Position X="24.25" Y="14.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgACAAAAAAAAAgAAAAAAAAAAAAAIAAAQAAAAAAAEAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Marker">
-    <Position X="44" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.Marker" Collapsed="true">
+    <Position X="55.75" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAAQAAAgAAAAAAAAgAAAAIAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Minus">
-    <Position X="15.75" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.Minus" Collapsed="true">
+    <Position X="29.75" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAECAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.ParalelogrammFigure">
-    <Position X="22.5" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.ParalelogrammFigure" Collapsed="true">
+    <Position X="36.5" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.PictureFigure">
-    <Position X="27" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.PictureFigure" Collapsed="true">
+    <Position X="41" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAEAAAAAAAAEAAAABAgAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.Plus">
-    <Position X="33.75" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.Plus" Collapsed="true">
+    <Position X="45.5" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAECAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.PointHelper">
-    <Position X="58" Y="5.5" Width="1.5" />
+  <Class Name="Diagrams.PointHelper" Collapsed="true">
+    <Position X="65.5" Y="15.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAIABAAAAAAAABAAAAAgABAAEAAAAAAgAQ=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.ProcedureBlock">
-    <Position X="30.75" Y="19.75" Width="1.5" />
+  <Class Name="Diagrams.ProcedureBlock" Collapsed="true">
+    <Position X="35.5" Y="21.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blocks.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.RectFigure">
-    <Position X="31.5" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.RectFigure" Collapsed="true">
+    <Position X="61.25" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.RectFigureFrame">
-    <Position X="18" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.RectFigureFrame" Collapsed="true">
+    <Position X="32" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.RhombFigure">
-    <Position X="24.75" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.RhombFigure" Collapsed="true">
+    <Position X="38.75" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.RoundRectFigure">
-    <Position X="29.25" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.RoundRectFigure" Collapsed="true">
+    <Position X="43.25" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.SerializableGraphicsPath" BaseTypeListCollapsed="true">
-    <Position X="59.75" Y="5.5" Width="1.5" />
+  <Class Name="Diagrams.SerializableGraphicsPath" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="67.25" Y="15.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAACAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Diagrams.SexangleFigure">
-    <Position X="36" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.SexangleFigure" Collapsed="true">
+    <Position X="47.75" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.SizeMarker">
-    <Position X="47.25" Y="17.75" Width="1.5" />
+  <Class Name="Diagrams.SizeMarker" Collapsed="true">
+    <Position X="59" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.SolidFigure">
-    <Position X="30.5" Y="7.75" Width="1.5" />
+  <Class Name="Diagrams.SolidFigure" Collapsed="true">
+    <Position X="44.5" Y="14.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACIAAAAAAgAIggAAAAMAAABCAAAIIACIEAAAgAAEhgA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.StackFigure">
-    <Position X="20.25" Y="13.75" Width="1.5" />
+  <Class Name="Diagrams.StackFigure" Collapsed="true">
+    <Position X="34.25" Y="16.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.TripleLedgeLineFigure">
-    <Position X="9" Y="16.25" Width="1.5" />
+  <Class Name="Diagrams.TripleLedgeLineFigure" Collapsed="true">
+    <Position X="23" Y="19.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Diagram.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Diagrams.WhileBlock">
-    <Position X="17.25" Y="22" Width="1.5" />
+  <Class Name="Diagrams.WhileBlock" Collapsed="true">
+    <Position X="28.75" Y="23.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Blocks.cs</FileName>
