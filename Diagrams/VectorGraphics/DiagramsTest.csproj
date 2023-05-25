@@ -72,6 +72,12 @@
     <Compile Include="DrawIt.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepsOfBlockSchema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StepsOfBlockSchema.Designer.cs">
+      <DependentUpon>StepsOfBlockSchema.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AlgForm.resx">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +91,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="StepsOfBlockSchema.resx">
+      <DependentUpon>StepsOfBlockSchema.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
