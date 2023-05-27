@@ -35,6 +35,7 @@ namespace Diagrams
         List<Coord> coordListSecond = new List<Coord>(); //линии, которые отображены на рисунке  (зелёные)
         List<Coord> coordListFirst = new List<Coord>(); //линии, которые отображены на рисунке  (синие)
         List<Coord> coordListThird = new List<Coord>(); //линии, которые отображены на рисунке (оранжевые)
+        StepsOfBlockSchema blockSchema;
         Point field;
         DrawForm form;
         AlgForm parentForm;
@@ -51,10 +52,11 @@ namespace Diagrams
         Pen penSecond;
         Pen penThird;
         int cellSize;
-        public void Draw(Block blockFirst, Block blockSecond, Block blockThird, int numX, int numY, DrawForm drawForm, AlgForm parentForm)
+        public void Draw(Block blockFirst, Block blockSecond, Block blockThird, int numX, int numY, DrawForm drawForm, AlgForm parentForm, StepsOfBlockSchema blockSchema)
         {
             form = drawForm;
             speed = drawForm.tbSpeed.Value;
+            this.blockSchema = blockSchema;
             form.draw = false;
             form.pbDraw.Refresh();
             field = new Point(numX, numY); //размер поля
@@ -91,7 +93,7 @@ namespace Diagrams
                 locationFirst = new Point(0, 0);
                 locationSecond = new Point(0, 0);
                 locationThird= new Point(0, 0);
-                moveBlock();
+                MoveBlock();
                 Replace();
                 form.g = graph;
                 form.draw = true;
@@ -358,7 +360,7 @@ namespace Diagrams
                     case 6: figure.text = "↙ " + nudConditions.Value.ToString(); break;
                     case 7: figure.text = "↖ " + nudConditions.Value.ToString(); break;*/
 
-        private void moveBlock()
+        private void MoveBlock()
         {
             //здесь посмотреть, у кого из исполнителей блоков больше
             int n = new[] { firstDrawer.Count(), secondDrawer.Count(), thirdDrawer.Count() }.Max();
@@ -372,6 +374,9 @@ namespace Diagrams
                     {
                         DrawAction(firstDrawer[i], ref locationFirst, 0);
                     }
+                    if (blockSchema != null)
+                        blockSchema.dgvFirst.Rows.Add(firstDrawer[i].figure.text);
+                    
                 }
                 if (secondDrawer.Count() > i)
                 {

@@ -15,11 +15,13 @@ using System.Xml.Serialization;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 
 namespace Diagrams
 {
     public partial class AlgForm : Form
     {
+        StepsOfBlockSchema blockSchema;
         Block blockFirst;
         Block blockSecond;
         Block blockThird;
@@ -576,7 +578,7 @@ namespace Diagrams
         private void нарисоватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DrawIt draw = new DrawIt();
-            draw.Draw(blockFirst, blockSecond, blockThird, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this);
+            draw.Draw(blockFirst, blockSecond, blockThird, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this, blockSchema);
             List<Block> drawer1 = draw.firstDrawer;
             List<Block> drawer2 = draw.secondDrawer;
             List<Block> drawer3 = draw.thirdDrawer;
@@ -1098,6 +1100,24 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(3, blockThird);
             dbDiagramT.Invalidate();
+        }
+
+        private void развёрткаБлоксхемToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (развёрткаБлоксхемToolStripMenuItem.Checked)
+            {
+                развёрткаБлоксхемToolStripMenuItem.Checked = false;
+                blockSchema.Close();
+                blockSchema = null;
+            }
+            else
+            {
+                развёрткаБлоксхемToolStripMenuItem.Checked = true;
+                blockSchema= new StepsOfBlockSchema();
+                blockSchema.Show();
+                blockSchema.Left = 0;
+                blockSchema.Top = this.Height;
+            }
         }
         //Overridden methods
 

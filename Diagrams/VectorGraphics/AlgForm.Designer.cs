@@ -44,6 +44,7 @@
             this.триToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.развёрткаБлоксхемToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.повторитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +103,7 @@
             this.сохранитьПодпрограммуToolStripMenuItem,
             this.miExport,
             this.количествоИсполнителейToolStripMenuItem,
+            this.развёрткаБлоксхемToolStripMenuItem,
             this.toolStripMenuItem2,
             this.miClose});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
@@ -204,6 +206,13 @@
             this.miClose.Size = new System.Drawing.Size(231, 22);
             this.miClose.Text = "Выход";
             this.miClose.Click += new System.EventHandler(this.miExit_Click);
+            // 
+            // развёрткаБлоксхемToolStripMenuItem
+            // 
+            this.развёрткаБлоксхемToolStripMenuItem.Name = "развёрткаБлоксхемToolStripMenuItem";
+            this.развёрткаБлоксхемToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.развёрткаБлоксхемToolStripMenuItem.Text = "Развёртка блок-схем";
+            this.развёрткаБлоксхемToolStripMenuItem.Click += new System.EventHandler(this.развёрткаБлоксхемToolStripMenuItem_Click);
             // 
             // редактированиеToolStripMenuItem
             // 
@@ -603,6 +612,7 @@
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.Splitter splitter4;
         private XanderUI.XUIButton xuiButton6;
+        private System.Windows.Forms.ToolStripMenuItem развёрткаБлоксхемToolStripMenuItem;
     }
 }
 

@@ -30,22 +30,22 @@
         {
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.dgvThird = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dgvSecond = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dgvFirst = new System.Windows.Forms.DataGridView();
             this.Action = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSecond = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvThird = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvThird)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSecond)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFirst)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSecond)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvThird)).BeginInit();
             this.SuspendLayout();
             // 
             // splitter4
@@ -67,6 +67,22 @@
             this.panel3.Size = new System.Drawing.Size(259, 318);
             this.panel3.TabIndex = 24;
             // 
+            // dgvThird
+            // 
+            this.dgvThird.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvThird.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2});
+            this.dgvThird.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvThird.Location = new System.Drawing.Point(3, 3);
+            this.dgvThird.Name = "dgvThird";
+            this.dgvThird.Size = new System.Drawing.Size(253, 312);
+            this.dgvThird.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Действие";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
             // splitter3
             // 
             this.splitter3.Location = new System.Drawing.Point(521, 0);
@@ -85,6 +101,22 @@
             this.panel2.Padding = new System.Windows.Forms.Padding(3);
             this.panel2.Size = new System.Drawing.Size(259, 318);
             this.panel2.TabIndex = 25;
+            // 
+            // dgvSecond
+            // 
+            this.dgvSecond.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSecond.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1});
+            this.dgvSecond.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvSecond.Location = new System.Drawing.Point(3, 3);
+            this.dgvSecond.Name = "dgvSecond";
+            this.dgvSecond.Size = new System.Drawing.Size(253, 312);
+            this.dgvSecond.TabIndex = 1;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Действие";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
             // splitter2
             // 
@@ -121,38 +153,6 @@
             this.Action.HeaderText = "Действие";
             this.Action.Name = "Action";
             // 
-            // dgvSecond
-            // 
-            this.dgvSecond.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSecond.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1});
-            this.dgvSecond.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSecond.Location = new System.Drawing.Point(3, 3);
-            this.dgvSecond.Name = "dgvSecond";
-            this.dgvSecond.Size = new System.Drawing.Size(253, 312);
-            this.dgvSecond.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Действие";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dgvThird
-            // 
-            this.dgvThird.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvThird.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2});
-            this.dgvThird.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvThird.Location = new System.Drawing.Point(3, 3);
-            this.dgvThird.Name = "dgvThird";
-            this.dgvThird.Size = new System.Drawing.Size(253, 312);
-            this.dgvThird.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Действие";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
             // StepsOfBlockSchema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,11 +167,11 @@
             this.Name = "StepsOfBlockSchema";
             this.Text = "StepsOfBlockSchema";
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvThird)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSecond)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFirst)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSecond)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvThird)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -180,15 +180,15 @@
 
         private System.Windows.Forms.Splitter splitter4;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridView dgvThird;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dgvSecond;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Splitter splitter2;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView dgvFirst;
         private System.Windows.Forms.DataGridViewTextBoxColumn Action;
+        public System.Windows.Forms.DataGridView dgvSecond;
+        public System.Windows.Forms.DataGridView dgvFirst;
+        public System.Windows.Forms.DataGridView dgvThird;
     }
 }

@@ -30,3 +30,8 @@ D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\D
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\XanderUI.dll
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\Xander.UI.Web.pdb
 D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\bin\Release\FontAwesome.Sharp.dll
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\FontAwesome.Sharp.dll
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\Xander.UI.Web.dll
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\XanderUI.dll
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\Xander.UI.Web.pdb
+C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\Diagrams.StepsOfBlockSchema.resources
