@@ -66,17 +66,21 @@
             this.panel3.Padding = new System.Windows.Forms.Padding(3);
             this.panel3.Size = new System.Drawing.Size(259, 318);
             this.panel3.TabIndex = 24;
+            this.panel3.Resize += new System.EventHandler(this.panel3_Resize);
             // 
             // dgvThird
             // 
+            this.dgvThird.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvThird.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvThird.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2});
             this.dgvThird.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvThird.Location = new System.Drawing.Point(3, 3);
             this.dgvThird.Name = "dgvThird";
+            this.dgvThird.RowHeadersWidth = 70;
             this.dgvThird.Size = new System.Drawing.Size(253, 312);
             this.dgvThird.TabIndex = 1;
+            this.dgvThird.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvThird_RowPrePaint);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -101,17 +105,21 @@
             this.panel2.Padding = new System.Windows.Forms.Padding(3);
             this.panel2.Size = new System.Drawing.Size(259, 318);
             this.panel2.TabIndex = 25;
+            this.panel2.Resize += new System.EventHandler(this.panel2_Resize);
             // 
             // dgvSecond
             // 
+            this.dgvSecond.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvSecond.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSecond.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1});
             this.dgvSecond.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSecond.Location = new System.Drawing.Point(3, 3);
             this.dgvSecond.Name = "dgvSecond";
+            this.dgvSecond.RowHeadersWidth = 70;
             this.dgvSecond.Size = new System.Drawing.Size(253, 312);
             this.dgvSecond.TabIndex = 1;
+            this.dgvSecond.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvSecond_RowPrePaint);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -136,17 +144,21 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(3);
             this.panel1.Size = new System.Drawing.Size(259, 318);
             this.panel1.TabIndex = 23;
+            this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             // 
             // dgvFirst
             // 
+            this.dgvFirst.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvFirst.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFirst.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Action});
             this.dgvFirst.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFirst.Location = new System.Drawing.Point(3, 3);
             this.dgvFirst.Name = "dgvFirst";
+            this.dgvFirst.RowHeadersWidth = 70;
             this.dgvFirst.Size = new System.Drawing.Size(253, 312);
             this.dgvFirst.TabIndex = 0;
+            this.dgvFirst.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvFirst_RowPrePaint);
             // 
             // Action
             // 
@@ -165,7 +177,7 @@
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.panel1);
             this.Name = "StepsOfBlockSchema";
-            this.Text = "StepsOfBlockSchema";
+            this.Text = "Развёртка блок-схем";
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvThird)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -179,16 +191,16 @@
         #endregion
 
         private System.Windows.Forms.Splitter splitter4;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.Splitter splitter3;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Action;
         public System.Windows.Forms.DataGridView dgvSecond;
         public System.Windows.Forms.DataGridView dgvFirst;
         public System.Windows.Forms.DataGridView dgvThird;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Action;
+        public System.Windows.Forms.Panel panel3;
+        public System.Windows.Forms.Panel panel2;
+        public System.Windows.Forms.Panel panel1;
     }
 }

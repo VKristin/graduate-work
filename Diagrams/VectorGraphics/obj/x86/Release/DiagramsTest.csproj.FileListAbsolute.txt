@@ -35,3 +35,4 @@ C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGrap
 C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\XanderUI.dll
 C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\bin\Release\Xander.UI.Web.pdb
 C:\Users\User\Desktop\Учёба\4 курс\Диплом\nir\Diagrams\VectorGraphics\obj\x86\Release\Diagrams.StepsOfBlockSchema.resources
+D:\User\Desktop\Учёба\4 курс\Диплом\Diagrams — копия\nir\Diagrams\VectorGraphics\obj\x86\Release\Diagrams.StepsOfBlockSchema.resources

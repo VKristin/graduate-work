@@ -247,10 +247,13 @@ namespace Diagrams
 
         private void cbActions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbActions.SelectedIndex == 0)
-                cbDirection.Visible = false;
-            else
-                cbDirection.Visible = true;
+            if (block is ActionBlock)
+            {
+                if (cbActions.SelectedIndex == 0)
+                    cbDirection.Visible = false;
+                else
+                    cbDirection.Visible = true;
+            }
 
         }
     }

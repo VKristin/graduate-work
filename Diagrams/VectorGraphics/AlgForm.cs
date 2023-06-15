@@ -928,6 +928,14 @@ namespace Diagrams
             dbDiagramT.Diagram = new Diagram();
             NewDiagramSecond();
             NewDiagramThird();
+            if (blockSchema != null)
+            {
+                blockSchema.panel1.Width = blockSchema.Width - 50;
+                blockSchema.panel2.Visible = false;
+                blockSchema.panel3.Visible = false;
+                blockSchema.dgvThird.Rows.Clear();
+                blockSchema.dgvSecond.Rows.Clear();
+            }
         }
 
         private void дваToolStripMenuItem_Click(object sender, EventArgs e)
@@ -943,6 +951,16 @@ namespace Diagrams
             panel2.Width = (this.Width - flowLayoutPanel1.Width - 50) / 2;
             dbDiagramT.Diagram = new Diagram();
             NewDiagramThird();
+            if (blockSchema != null)
+            {
+                blockSchema.panel1.Width = blockSchema.Width/2 - 50;
+                blockSchema.panel2.Width = blockSchema.Width/2 - 50;
+
+                blockSchema.panel2.Visible = true;
+                blockSchema.panel3.Visible = false;
+                blockSchema.dgvThird.Rows.Clear();
+                blockSchema.dgvSecond.Rows.Clear();
+            }
         }
 
         private void триToolStripMenuItem_Click(object sender, EventArgs e)
@@ -956,6 +974,17 @@ namespace Diagrams
             panel1.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
             panel2.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
             panel3.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
+            if (blockSchema != null)
+            {
+                blockSchema.panel1.Width = blockSchema.Width - 50;
+                blockSchema.panel2.Width = blockSchema.Width - 50;
+                blockSchema.panel3.Width = blockSchema.Width - 50;
+
+                blockSchema.panel2.Visible = true;
+                blockSchema.panel3.Visible = true;
+                blockSchema.dgvThird.Rows.Clear();
+                blockSchema.dgvSecond.Rows.Clear();
+            }
         }
 
         private void AlgForm_FormClosing(object sender, FormClosingEventArgs e)

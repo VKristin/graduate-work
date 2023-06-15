@@ -35,6 +35,9 @@ namespace Diagrams
         List<Coord> coordListSecond = new List<Coord>(); //линии, которые отображены на рисунке  (зелёные)
         List<Coord> coordListFirst = new List<Coord>(); //линии, которые отображены на рисунке  (синие)
         List<Coord> coordListThird = new List<Coord>(); //линии, которые отображены на рисунке (оранжевые)
+        List<String> firstBlocks= new List<String>();
+        List<String> secondBlocks= new List<String>();
+        List<String> thirdBlocks= new List<String>();
         StepsOfBlockSchema blockSchema;
         Point field;
         DrawForm form;
@@ -52,11 +55,20 @@ namespace Diagrams
         Pen penSecond;
         Pen penThird;
         int cellSize;
+        List<Block> selectedList = new List<Block>();
+        List<Block> selectedListS = new List<Block>();
+        List<Block> selectedListT = new List<Block>();
         public void Draw(Block blockFirst, Block blockSecond, Block blockThird, int numX, int numY, DrawForm drawForm, AlgForm parentForm, StepsOfBlockSchema blockSchema)
         {
             form = drawForm;
             speed = drawForm.tbSpeed.Value;
             this.blockSchema = blockSchema;
+            if (blockSchema != null)
+            {
+                blockSchema.dgvFirst.Rows.Clear();
+                blockSchema.dgvSecond.Rows.Clear();
+                blockSchema.dgvThird.Rows.Clear();
+            }
             form.draw = false;
             form.pbDraw.Refresh();
             field = new Point(numX, numY); //размер поля
@@ -108,7 +120,12 @@ namespace Diagrams
             catch (Exception e)
             {
                 MessageBox.Show("Невозможно выполнение алгоритма!" + e.Message, "Ошибка!", MessageBoxButtons.OK);
-
+                parentForm.dbDiagram.drawFigure = null;
+                parentForm.dbDiagramS.drawFigure = null;
+                parentForm.dbDiagramT.drawFigure = null;
+                parentForm.dbDiagram.Invalidate();
+                parentForm.dbDiagramS.Invalidate();
+                parentForm.dbDiagramT.Invalidate();
                 error = true;
             }
         }
@@ -147,68 +164,81 @@ namespace Diagrams
             {
                 throw new Exception(" Был обнаружен пустой блок!");
             }
-            if (procedure != null)
-                block.figure = procedure.figure;
 
             if (block is EllipseBlock)
+            {
                 firstDrawer.Add(block);
+                selectedList.Add(procedure == null? block: procedure);
+                firstBlocks.Add(block.figure.text);
+
+            }
 
             if (block is ActionBlock) //если действие
             {
                 firstDrawer.Add(block);
+                selectedList.Add(procedure == null ? block : procedure);
                 DoAction(block, ref locationFirst);
+                firstBlocks.Add(block.figure.text);
                 return DrawPicFirst(block.nextBlock);
             }
             if (block is IfWithoutElseBlock)
             {
                 firstDrawer.Add(block);
+                firstBlocks.Add("Есть место " + block.figure.text + "?");
                 switch ((block as IfWithoutElseBlock).condition)
                 {
-                    case 1: if (field.X - locationFirst.X >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 2: if (locationFirst.X >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 3: if (field.Y - locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 4: if (locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 5: if (field.X - locationFirst.X >= (block as IfWithoutElseBlock).num_cond && locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 6: if (field.X - locationFirst.X >= (block as IfWithoutElseBlock).num_cond && field.Y - locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 7: if (locationFirst.X >= (block as IfWithoutElseBlock).num_cond && locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 8: if (locationFirst.X >= (block as IfWithoutElseBlock).num_cond && (field.Y - locationFirst.Y >= (block as IfWithoutElseBlock).num_cond)) { firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 1: if (field.X - locationFirst.X >= (block as IfWithoutElseBlock).num_cond) { firstBlocks[firstBlocks.Count - 1] += " Да"; selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } else { firstBlocks[firstBlocks.Count - 1] += "Нет"; } selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 2: if (locationFirst.X >= (block as IfWithoutElseBlock).num_cond) { firstBlocks[firstBlocks.Count - 1] += " Да"; selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } else { firstBlocks[firstBlocks.Count - 1] += "Нет"; } selectedList.Add(block); firstDrawer.Add(block); break;
+                    case 3: if (field.Y - locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstBlocks[firstBlocks.Count - 1] += " Да"; selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } else { firstBlocks[firstBlocks.Count - 1] += "Нет"; } selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 4: if (locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstBlocks[firstBlocks.Count - 1] += " Да"; selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } else { firstBlocks[firstBlocks.Count - 1] += "Нет"; } selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 5: if (field.X - locationFirst.X >= (block as IfWithoutElseBlock).num_cond && locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstBlocks[firstBlocks.Count - 1] += " Да"; selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } else { firstBlocks[firstBlocks.Count - 1] += "Нет"; } selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 6: if (field.X - locationFirst.X >= (block as IfWithoutElseBlock).num_cond && field.Y - locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstBlocks[firstBlocks.Count - 1] += " Да"; selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } else { firstBlocks[firstBlocks.Count - 1] += "Нет"; } selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 7: if (locationFirst.X >= (block as IfWithoutElseBlock).num_cond && locationFirst.Y >= (block as IfWithoutElseBlock).num_cond) { firstBlocks[firstBlocks.Count - 1] += " Да"; selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } else { firstBlocks[firstBlocks.Count - 1] += "Нет"; } selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 8: if (locationFirst.X >= (block as IfWithoutElseBlock).num_cond && (field.Y - locationFirst.Y >= (block as IfWithoutElseBlock).num_cond)) { firstBlocks[firstBlocks.Count - 1] += " Да"; selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as IfWithoutElseBlock).trueBlock); } else { firstBlocks[firstBlocks.Count - 1] += "Нет"; } selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
                 }
             }
             if (block is WhileBlock)
             {
+                
                 switch ((block as WhileBlock).condition)
                 {
-                    case 1: while (field.X - locationFirst.X >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 2: while (locationFirst.X >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 3: while (field.Y - locationFirst.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 4: while (locationFirst.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 5: while (field.X - locationFirst.X >= (block as WhileBlock).num_cond && locationFirst.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 6: while (field.X - locationFirst.X >= (block as WhileBlock).num_cond && field.Y - locationFirst.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 7: while (locationFirst.X >= (block as WhileBlock).num_cond && locationFirst.Y >= (block as WhileBlock).num_cond) { firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
-                    case 8: while (locationFirst.X >= (block as WhileBlock).num_cond && (field.Y - locationFirst.Y >= (block as WhileBlock).num_cond)) { firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstDrawer.Add(block); break;
+                    case 1: while (field.X - locationFirst.X >= (block as WhileBlock).num_cond) { firstBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } selectedList.Add(procedure == null ? block : procedure); firstBlocks.Add("Есть место " + block.figure.text + "? Нет"); firstDrawer.Add(block); break;
+                    case 2: while (locationFirst.X >= (block as WhileBlock).num_cond) { firstBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } selectedList.Add(procedure == null ? block : procedure); firstBlocks.Add("Есть место " + block.figure.text + "? Нет"); firstDrawer.Add(block); break;
+                    case 3: while (field.Y - locationFirst.Y >= (block as WhileBlock).num_cond) { firstBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } selectedList.Add(procedure == null ? block : procedure); firstBlocks.Add("Есть место " + block.figure.text + "? Нет"); firstDrawer.Add(block); break;
+                    case 4: while (locationFirst.Y >= (block as WhileBlock).num_cond) { firstBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } selectedList.Add(procedure == null ? block : procedure); firstBlocks.Add("Есть место " + block.figure.text + "? Нет"); firstDrawer.Add(block); break;
+                    case 5: while (field.X - locationFirst.X >= (block as WhileBlock).num_cond && locationFirst.Y >= (block as WhileBlock).num_cond) { firstBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 6: while (field.X - locationFirst.X >= (block as WhileBlock).num_cond && field.Y - locationFirst.Y >= (block as WhileBlock).num_cond) { firstBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 7: while (locationFirst.X >= (block as WhileBlock).num_cond && locationFirst.Y >= (block as WhileBlock).num_cond) { firstBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
+                    case 8: while (locationFirst.X >= (block as WhileBlock).num_cond && (field.Y - locationFirst.Y >= (block as WhileBlock).num_cond)) { firstBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); DrawPicFirst((block as WhileBlock).trueBlock); } firstBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedList.Add(procedure == null ? block : procedure); firstDrawer.Add(block); break;
                 }
             }
             if (block is ForBlock)
             {
                 for (int i = 0; i < (block as ForBlock).numOfRep; i++)
                 {
-                    firstDrawer.Add(block);
+                    firstBlocks.Add($"{i} из {(block as ForBlock).numOfRep}");
+                    firstDrawer.Add(block); selectedList.Add(procedure == null ? block : procedure);
                     DrawPicFirst((block as ForBlock).trueBlock);
                 }
+                firstBlocks.Add($"{(block as ForBlock).numOfRep} из {(block as ForBlock).numOfRep}");
                 firstDrawer.Add(block);
+                selectedList.Add(procedure == null ? block : procedure);
             }
             if (block is ProcedureBlock)
             {
-                procedure = block;
-                firstDrawer.Add(block);
+                if (procedure == null)
+                    procedure = block;
+                firstBlocks.Add($"{block.figure.text} НАЧАЛО");
+                firstDrawer.Add(block); selectedList.Add(procedure == null ? block : procedure);
                 if (!procedures.ContainsKey((block as ProcedureBlock).figure.text))
                     OpenProcedure((block as ProcedureBlock).figure.text);
                 DrawPicFirst(procedures[(block as ProcedureBlock).figure.text].nextBlock);
-                procedure = null;
+                if (block == procedure)
+                    procedure = null;
+                firstBlocks[firstBlocks.Count - 1] = $"{block.figure.text} КОНЕЦ";
+
             }
 
-            if (procedure != null)
-                block.figure = procedure.figure;
             return DrawPicFirst(block.nextBlock);
         }
 
@@ -222,60 +252,77 @@ namespace Diagrams
             if (procedure != null)
                 block.figure = procedure.figure;
             if (block is EllipseBlock)
+            {
                 secondDrawer.Add(block);
+                selectedListS.Add(procedure == null ? block : procedure);
+                secondBlocks.Add(block.figure.text);
+
+            }
 
             if (block is ActionBlock) //если действие
             {
                 secondDrawer.Add(block);
+                selectedListS.Add(procedure == null ? block : procedure);
                 DoAction(block, ref locationSecond);
+                secondBlocks.Add(block.figure.text);
                 return DrawPicSecond(block.nextBlock);
             }
             if (block is IfWithoutElseBlock)
             {
                 secondDrawer.Add(block);
+                secondBlocks.Add("Есть место " + block.figure.text + "?");
                 switch ((block as IfWithoutElseBlock).condition)
                 {
-                    case 1: if (field.X - locationSecond.X >= (block as IfWithoutElseBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 2: if (locationSecond.X >= (block as IfWithoutElseBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 3: if (field.Y - locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 4: if (locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 5: if (field.X - locationSecond.X >= (block as IfWithoutElseBlock).num_cond && locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 6: if (field.X - locationSecond.X >= (block as IfWithoutElseBlock).num_cond && field.Y - locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 7: if (locationSecond.X >= (block as IfWithoutElseBlock).num_cond && locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 8: if (locationSecond.X >= (block as IfWithoutElseBlock).num_cond && (field.Y - locationSecond.Y >= (block as IfWithoutElseBlock).num_cond)) { secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } secondDrawer.Add(block); break;
+                    case 1: if (field.X - locationSecond.X >= (block as IfWithoutElseBlock).num_cond) { secondBlocks[secondBlocks.Count - 1] += " Да"; selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } else { secondBlocks[secondBlocks.Count - 1] += "Нет"; } selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 2: if (locationSecond.X >= (block as IfWithoutElseBlock).num_cond) { secondBlocks[secondBlocks.Count - 1] += " Да"; selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } else { secondBlocks[secondBlocks.Count - 1] += "Нет"; } selectedListS.Add(block); secondDrawer.Add(block); break;
+                    case 3: if (field.Y - locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondBlocks[secondBlocks.Count - 1] += " Да"; selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } else { secondBlocks[secondBlocks.Count - 1] += "Нет"; } selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 4: if (locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondBlocks[secondBlocks.Count - 1] += " Да"; selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } else { secondBlocks[secondBlocks.Count - 1] += "Нет"; } selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 5: if (field.X - locationSecond.X >= (block as IfWithoutElseBlock).num_cond && locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondBlocks[secondBlocks.Count - 1] += " Да"; selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } else { secondBlocks[secondBlocks.Count - 1] += "Нет"; } selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 6: if (field.X - locationSecond.X >= (block as IfWithoutElseBlock).num_cond && field.Y - locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondBlocks[secondBlocks.Count - 1] += " Да"; selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } else { secondBlocks[secondBlocks.Count - 1] += "Нет"; } selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 7: if (locationSecond.X >= (block as IfWithoutElseBlock).num_cond && locationSecond.Y >= (block as IfWithoutElseBlock).num_cond) { secondBlocks[secondBlocks.Count - 1] += " Да"; selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } else { secondBlocks[secondBlocks.Count - 1] += "Нет"; } selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 8: if (locationSecond.X >= (block as IfWithoutElseBlock).num_cond && (field.Y - locationSecond.Y >= (block as IfWithoutElseBlock).num_cond)) { secondBlocks[secondBlocks.Count - 1] += " Да"; selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as IfWithoutElseBlock).trueBlock); } else { secondBlocks[secondBlocks.Count - 1] += "Нет"; } selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
                 }
             }
             if (block is WhileBlock)
             {
+
                 switch ((block as WhileBlock).condition)
                 {
-                    case 1: while (field.X - locationSecond.X >= (block as WhileBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 2: while (locationSecond.X >= (block as WhileBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 3: while (field.Y - locationSecond.Y >= (block as WhileBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 4: while (locationSecond.Y >= (block as WhileBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 5: while (field.X - locationSecond.X >= (block as WhileBlock).num_cond && locationSecond.Y >= (block as WhileBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 6: while (field.X - locationSecond.X >= (block as WhileBlock).num_cond && field.Y - locationSecond.Y >= (block as WhileBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 7: while (locationSecond.X >= (block as WhileBlock).num_cond && locationSecond.Y >= (block as WhileBlock).num_cond) { secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondDrawer.Add(block); break;
-                    case 8: while (locationSecond.X >= (block as WhileBlock).num_cond && (field.Y - locationSecond.Y >= (block as WhileBlock).num_cond)) { secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondDrawer.Add(block); break;
+                    case 1: while (field.X - locationSecond.X >= (block as WhileBlock).num_cond) { secondBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } selectedListS.Add(procedure == null ? block : procedure); secondBlocks.Add("Есть место " + block.figure.text + "? Нет"); secondDrawer.Add(block); break;
+                    case 2: while (locationSecond.X >= (block as WhileBlock).num_cond) { secondBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } selectedListS.Add(procedure == null ? block : procedure); secondBlocks.Add("Есть место " + block.figure.text + "? Нет"); secondDrawer.Add(block); break;
+                    case 3: while (field.Y - locationSecond.Y >= (block as WhileBlock).num_cond) { secondBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } selectedListS.Add(procedure == null ? block : procedure); secondBlocks.Add("Есть место " + block.figure.text + "? Нет"); secondDrawer.Add(block); break;
+                    case 4: while (locationSecond.Y >= (block as WhileBlock).num_cond) { secondBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } selectedListS.Add(procedure == null ? block : procedure); secondBlocks.Add("Есть место " + block.figure.text + "? Нет"); secondDrawer.Add(block); break;
+                    case 5: while (field.X - locationSecond.X >= (block as WhileBlock).num_cond && locationSecond.Y >= (block as WhileBlock).num_cond) { secondBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 6: while (field.X - locationSecond.X >= (block as WhileBlock).num_cond && field.Y - locationSecond.Y >= (block as WhileBlock).num_cond) { secondBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 7: while (locationSecond.X >= (block as WhileBlock).num_cond && locationSecond.Y >= (block as WhileBlock).num_cond) { secondBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
+                    case 8: while (locationSecond.X >= (block as WhileBlock).num_cond && (field.Y - locationSecond.Y >= (block as WhileBlock).num_cond)) { secondBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); DrawPicSecond((block as WhileBlock).trueBlock); } secondBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedListS.Add(procedure == null ? block : procedure); secondDrawer.Add(block); break;
                 }
             }
             if (block is ForBlock)
             {
                 for (int i = 0; i < (block as ForBlock).numOfRep; i++)
                 {
-                    secondDrawer.Add(block);
+                    secondBlocks.Add($"{i} из {(block as ForBlock).numOfRep}");
+                    secondDrawer.Add(block); selectedListS.Add(procedure == null ? block : procedure);
                     DrawPicSecond((block as ForBlock).trueBlock);
                 }
+                secondBlocks.Add($"{(block as ForBlock).numOfRep} из {(block as ForBlock).numOfRep}");
                 secondDrawer.Add(block);
+                selectedListS.Add(procedure == null ? block : procedure);
             }
             if (block is ProcedureBlock)
             {
-                procedure = block;
-                secondDrawer.Add(block);
+                if (procedure == null)
+                    procedure = block;
+                secondBlocks.Add($"{block.figure.text} НАЧАЛО");
+                secondDrawer.Add(block); selectedListS.Add(procedure == null ? block : procedure);
                 if (!procedures.ContainsKey((block as ProcedureBlock).figure.text))
                     OpenProcedure((block as ProcedureBlock).figure.text);
                 DrawPicSecond(procedures[(block as ProcedureBlock).figure.text].nextBlock);
-                procedure = null;
+                if (block == procedure)
+                    procedure = null;
+                secondBlocks[secondBlocks.Count - 1] = $"{block.figure.text} КОНЕЦ";
+
             }
             return DrawPicSecond(block.nextBlock);
         }
@@ -289,64 +336,81 @@ namespace Diagrams
 
             if (procedure != null)
                 block.figure = procedure.figure;
+            if (procedure != null)
+                block.figure = procedure.figure;
             if (block is EllipseBlock)
+            {
                 thirdDrawer.Add(block);
+                selectedListT.Add(procedure == null ? block : procedure);
+                thirdBlocks.Add(block.figure.text);
+
+            }
 
             if (block is ActionBlock) //если действие
             {
                 thirdDrawer.Add(block);
+                selectedListT.Add(procedure == null ? block : procedure);
                 DoAction(block, ref locationThird);
+                thirdBlocks.Add(block.figure.text);
                 return DrawPicThird(block.nextBlock);
             }
             if (block is IfWithoutElseBlock)
             {
                 thirdDrawer.Add(block);
+                thirdBlocks.Add("Есть место " + block.figure.text + "?");
                 switch ((block as IfWithoutElseBlock).condition)
                 {
-                    case 1: if (field.X - locationThird.X >= (block as IfWithoutElseBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 2: if (locationThird.X >= (block as IfWithoutElseBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 3: if (field.Y - locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 4: if (locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 5: if (field.X - locationThird.X >= (block as IfWithoutElseBlock).num_cond && locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 6: if (field.X - locationThird.X >= (block as IfWithoutElseBlock).num_cond && field.Y - locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 7: if (locationThird.X >= (block as IfWithoutElseBlock).num_cond && locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 8: if (locationThird.X >= (block as IfWithoutElseBlock).num_cond && (field.Y - locationThird.Y >= (block as IfWithoutElseBlock).num_cond)) { thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } thirdDrawer.Add(block); break;
+                    case 1: if (field.X - locationThird.X >= (block as IfWithoutElseBlock).num_cond) { thirdBlocks[thirdBlocks.Count - 1] += " Да"; selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } else { thirdBlocks[thirdBlocks.Count - 1] += "Нет"; } selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 2: if (locationThird.X >= (block as IfWithoutElseBlock).num_cond) { thirdBlocks[thirdBlocks.Count - 1] += " Да"; selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } else { thirdBlocks[thirdBlocks.Count - 1] += "Нет"; } selectedListT.Add(block); thirdDrawer.Add(block); break;
+                    case 3: if (field.Y - locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdBlocks[thirdBlocks.Count - 1] += " Да"; selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } else { thirdBlocks[thirdBlocks.Count - 1] += "Нет"; } selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 4: if (locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdBlocks[thirdBlocks.Count - 1] += " Да"; selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } else { thirdBlocks[thirdBlocks.Count - 1] += "Нет"; } selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 5: if (field.X - locationThird.X >= (block as IfWithoutElseBlock).num_cond && locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdBlocks[thirdBlocks.Count - 1] += " Да"; selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } else { thirdBlocks[thirdBlocks.Count - 1] += "Нет"; } selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 6: if (field.X - locationThird.X >= (block as IfWithoutElseBlock).num_cond && field.Y - locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdBlocks[thirdBlocks.Count - 1] += " Да"; selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } else { thirdBlocks[thirdBlocks.Count - 1] += "Нет"; } selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 7: if (locationThird.X >= (block as IfWithoutElseBlock).num_cond && locationThird.Y >= (block as IfWithoutElseBlock).num_cond) { thirdBlocks[thirdBlocks.Count - 1] += " Да"; selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } else { thirdBlocks[thirdBlocks.Count - 1] += "Нет"; } selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 8: if (locationThird.X >= (block as IfWithoutElseBlock).num_cond && (field.Y - locationThird.Y >= (block as IfWithoutElseBlock).num_cond)) { thirdBlocks[thirdBlocks.Count - 1] += " Да"; selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as IfWithoutElseBlock).trueBlock); } else { thirdBlocks[thirdBlocks.Count - 1] += "Нет"; } selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
                 }
             }
             if (block is WhileBlock)
             {
+
                 switch ((block as WhileBlock).condition)
                 {
-                    case 1: while (field.X - locationThird.X >= (block as WhileBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 2: while (locationThird.X >= (block as WhileBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 3: while (field.Y - locationThird.Y >= (block as WhileBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 4: while (locationThird.Y >= (block as WhileBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 5: while (field.X - locationThird.X >= (block as WhileBlock).num_cond && locationThird.Y >= (block as WhileBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 6: while (field.X - locationThird.X >= (block as WhileBlock).num_cond && field.Y - locationThird.Y >= (block as WhileBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 7: while (locationThird.X >= (block as WhileBlock).num_cond && locationThird.Y >= (block as WhileBlock).num_cond) { thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdDrawer.Add(block); break;
-                    case 8: while (locationThird.X >= (block as WhileBlock).num_cond && (field.Y - locationThird.Y >= (block as WhileBlock).num_cond)) { thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdDrawer.Add(block); break;
+                    case 1: while (field.X - locationThird.X >= (block as WhileBlock).num_cond) { thirdBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } selectedListT.Add(procedure == null ? block : procedure); thirdBlocks.Add("Есть место " + block.figure.text + "? Нет"); thirdDrawer.Add(block); break;
+                    case 2: while (locationThird.X >= (block as WhileBlock).num_cond) { thirdBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } selectedListT.Add(procedure == null ? block : procedure); thirdBlocks.Add("Есть место " + block.figure.text + "? Нет"); thirdDrawer.Add(block); break;
+                    case 3: while (field.Y - locationThird.Y >= (block as WhileBlock).num_cond) { thirdBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } selectedListT.Add(procedure == null ? block : procedure); thirdBlocks.Add("Есть место " + block.figure.text + "? Нет"); thirdDrawer.Add(block); break;
+                    case 4: while (locationThird.Y >= (block as WhileBlock).num_cond) { thirdBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } selectedListT.Add(procedure == null ? block : procedure); thirdBlocks.Add("Есть место " + block.figure.text + "? Нет"); thirdDrawer.Add(block); break;
+                    case 5: while (field.X - locationThird.X >= (block as WhileBlock).num_cond && locationThird.Y >= (block as WhileBlock).num_cond) { thirdBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 6: while (field.X - locationThird.X >= (block as WhileBlock).num_cond && field.Y - locationThird.Y >= (block as WhileBlock).num_cond) { thirdBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 7: while (locationThird.X >= (block as WhileBlock).num_cond && locationThird.Y >= (block as WhileBlock).num_cond) { thirdBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
+                    case 8: while (locationThird.X >= (block as WhileBlock).num_cond && (field.Y - locationThird.Y >= (block as WhileBlock).num_cond)) { thirdBlocks.Add("Есть место " + block.figure.text + "? Да"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); DrawPicThird((block as WhileBlock).trueBlock); } thirdBlocks.Add("Есть место " + block.figure.text + "? Нет"); selectedListT.Add(procedure == null ? block : procedure); thirdDrawer.Add(block); break;
                 }
             }
             if (block is ForBlock)
             {
                 for (int i = 0; i < (block as ForBlock).numOfRep; i++)
                 {
-                    thirdDrawer.Add(block);
+                    thirdBlocks.Add($"{i} из {(block as ForBlock).numOfRep}");
+                    thirdDrawer.Add(block); selectedListT.Add(procedure == null ? block : procedure);
                     DrawPicThird((block as ForBlock).trueBlock);
                 }
+                thirdBlocks.Add($"{(block as ForBlock).numOfRep} из {(block as ForBlock).numOfRep}");
                 thirdDrawer.Add(block);
+                selectedListT.Add(procedure == null ? block : procedure);
             }
             if (block is ProcedureBlock)
             {
-                procedure = block;
-                thirdDrawer.Add(block);
+                if (procedure == null)
+                    procedure = block;
+                thirdBlocks.Add($"{block.figure.text} НАЧАЛО");
+                thirdDrawer.Add(block); selectedListT.Add(procedure == null ? block : procedure);
                 if (!procedures.ContainsKey((block as ProcedureBlock).figure.text))
                     OpenProcedure((block as ProcedureBlock).figure.text);
                 DrawPicThird(procedures[(block as ProcedureBlock).figure.text].nextBlock);
-                procedure = null;
+                if (block == procedure)
+                    procedure = null;
+                thirdBlocks[thirdBlocks.Count - 1] = $"{block.figure.text} КОНЕЦ";
+
             }
-            if (procedure != null)
-                block.figure = procedure.figure;
             return DrawPicThird(block.nextBlock);
         }
 
@@ -360,6 +424,7 @@ namespace Diagrams
                     case 6: figure.text = "↙ " + nudConditions.Value.ToString(); break;
                     case 7: figure.text = "↖ " + nudConditions.Value.ToString(); break;*/
 
+        
         private void MoveBlock()
         {
             //здесь посмотреть, у кого из исполнителей блоков больше
@@ -368,32 +433,52 @@ namespace Diagrams
             {
                 if (firstDrawer.Count() > i)
                 {
-                    parentForm.dbDiagram.drawFigure = firstDrawer[i].figure;
+                    parentForm.dbDiagram.drawFigure = selectedList[i].figure;
                     parentForm.dbDiagram.Refresh();
                     if (firstDrawer[i] is ActionBlock)
                     {
                         DrawAction(firstDrawer[i], ref locationFirst, 0);
                     }
                     if (blockSchema != null)
-                        blockSchema.dgvFirst.Rows.Add(firstDrawer[i].figure.text);
+                    {
+                        blockSchema.dgvFirst.Rows.Add(firstBlocks[i]);
+                        blockSchema.dgvFirst.FirstDisplayedScrollingRowIndex = blockSchema.dgvFirst.Rows.Count - 1;
+                        blockSchema.dgvFirst.Refresh();
+                    }
+
                     
                 }
                 if (secondDrawer.Count() > i)
                 {
-                    parentForm.dbDiagramS.drawFigure = secondDrawer[i].figure;
+                    parentForm.dbDiagramS.drawFigure = selectedListS[i].figure;
                     parentForm.dbDiagramS.Refresh();
                     if (secondDrawer[i] is ActionBlock)
                     {
                         DrawAction(secondDrawer[i], ref locationSecond, 1);
                     }
+                    if (blockSchema != null)
+                    {
+                        blockSchema.dgvSecond.Rows.Add(secondBlocks[i]);
+                        blockSchema.dgvSecond.FirstDisplayedScrollingRowIndex = blockSchema.dgvSecond.Rows.Count - 1;
+                        blockSchema.dgvSecond.Refresh();
+
+
+                    }
                 }
                 if (thirdDrawer.Count() > i)
                 {
-                    parentForm.dbDiagramT.drawFigure = thirdDrawer[i].figure;
+                    parentForm.dbDiagramT.drawFigure = selectedListT[i].figure;
                     parentForm.dbDiagramT.Refresh();
                     if (thirdDrawer[i] is ActionBlock)
                     {
                         DrawAction(thirdDrawer[i], ref locationThird, 2);
+                    }
+                    if (blockSchema != null)
+                    {
+                        blockSchema.dgvThird.Rows.Add(thirdBlocks[i]);
+                        blockSchema.dgvThird.FirstDisplayedScrollingRowIndex = blockSchema.dgvThird.Rows.Count - 1;
+                        blockSchema.dgvThird.Refresh();
+
                     }
                 }
                 var t = Task.Run(async delegate
@@ -492,11 +577,7 @@ namespace Diagrams
             }
             else
             {
-                MessageBox.Show("Чертёжник вышел за пределы поля", "Обнаружена ошибка", MessageBoxButtons.OK,
-                                MessageBoxIcon.Error,
-                                MessageBoxDefaultButton.Button1,
-                                MessageBoxOptions.ServiceNotification);
-                return;
+                throw new Exception(" Чертёжник вышел за пределы поля!");
             }
         }
         public void RefreshField()
