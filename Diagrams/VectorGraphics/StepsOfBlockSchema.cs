@@ -13,14 +13,15 @@ namespace Diagrams
 {
     public partial class StepsOfBlockSchema : Form
     {
-        public StepsOfBlockSchema()
+        AlgForm parent;
+        public StepsOfBlockSchema(AlgForm parent)
         {
             InitializeComponent();
             ControlBox = false;
             dgvFirst.Columns[0].Width = panel1.Width - dgvFirst.RowHeadersWidth - 10;
             dgvSecond.Columns[0].Width = panel2.Width - dgvSecond.RowHeadersWidth - 10;
             dgvThird.Columns[0].Width = panel3.Width - dgvThird.RowHeadersWidth - 10;
-
+            this.parent = parent;
         }
 
 
@@ -66,6 +67,33 @@ namespace Diagrams
         {
             dgvThird.Columns[0].Width = panel3.Width - dgvThird.RowHeadersWidth - 10;
 
+        }
+
+        private void dgvFirst_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (dgvFirst.SelectedRows.Count != 0 && dgvFirst.Rows.Count > 1 && parent.развёрткаБлоксхемToolStripMenuItem.Checked && dgvFirst.SelectedRows[0].Index <= parent.draw.selectedList.Count)
+            {
+                parent.dbDiagram.selectedFigure = parent.draw.selectedList[dgvFirst.SelectedRows[0].Index].figure;
+                parent.dbDiagram.Invalidate();
+            }
+        }
+
+        private void dgvSecond_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (dgvSecond.SelectedRows.Count != 0 && dgvSecond.Rows.Count > 1 && parent.развёрткаБлоксхемToolStripMenuItem.Checked && dgvSecond.SelectedRows[0].Index <= parent.draw.selectedListS.Count)
+            {
+                parent.dbDiagramS.selectedFigure = parent.draw.selectedListS[dgvSecond.SelectedRows[0].Index].figure;
+                parent.dbDiagramS.Invalidate();
+            }
+        }
+
+        private void dgvThird_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (dgvThird.SelectedRows.Count != 0 && dgvThird.Rows.Count > 1 && parent.развёрткаБлоксхемToolStripMenuItem.Checked && dgvThird.SelectedRows[0].Index <= parent.draw.selectedListT.Count)
+            {
+                parent.dbDiagramT.selectedFigure = parent.draw.selectedListT[dgvThird.SelectedRows[0].Index].figure;
+                parent.dbDiagramT.Invalidate();
+            }
         }
     }
 }

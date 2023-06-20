@@ -225,13 +225,28 @@ namespace Diagrams
                     DoubleLedgeLineFigureS l_ = new DoubleLedgeLineFigureS();
                     DoubleLedgeLineFigureS line_ = new DoubleLedgeLineFigureS();
                     l_ = m.targetFigure as DoubleLedgeLineFigureS;
-                    l = l_;
-                    figure.location = new PointF(l_.From.location.X, l_.To.location.Y);
-                    line_.ledgePositionX = l_.ledgePositionX;
-                    line_.From = l_.From;
-                    line_.To = figure;
-                    Diagram.figures.Add(figure);
-                    Diagram.figures.Add(line_);
+                    Block fromBlock = findBlockWithGraphic(l_.From, blocks);
+                    if (fromBlock is IfWithoutElseBlock)
+                    {
+                        LedgeLineFigure llf = m.targetFigure as LedgeLineFigure;
+                        figure.location = new PointF(llf.To.location.X + 2 * defaultSize, llf.To.location.Y);
+                        l = llf;
+                        line_.From = llf.From;
+                        line_.To = figure;
+                        line_.ledgePositionX = figure.location.X;
+                        Diagram.figures.Add(figure);
+                        Diagram.figures.Add(line_);
+                    }
+                    else
+                    {
+                        l = l_;
+                        figure.location = new PointF(l_.From.location.X, l_.To.location.Y);
+                        line_.ledgePositionX = l_.ledgePositionX;
+                        line_.From = l_.From;
+                        line_.To = figure;
+                        Diagram.figures.Add(figure);
+                        Diagram.figures.Add(line_);
+                    }
                 }
                 else
                 {
@@ -451,7 +466,7 @@ namespace Diagrams
         {
             SolidFigure figure = new RectFigure();
             int defaultSize = SolidFigure.defaultSize;
-            figure.location = new PointF(line.To.location.X - defaultSize - 30, line.To.location.Y);
+            figure.location = new PointF(line.To.location.X - defaultSize - 20, line.To.location.Y);
             Diagram.figures.Add(figure);
             LedgeLineFigure l = new LedgeLineFigure();
             l.From = line.From;
@@ -463,7 +478,7 @@ namespace Diagrams
             Diagram.figures.Add(p);
 
             SolidFigure figure1 = new RectFigure();
-            figure1.location = new PointF(line.To.location.X + defaultSize + 30, line.To.location.Y);
+            figure1.location = new PointF(line.To.location.X + defaultSize + 20, line.To.location.Y);
             Diagram.figures.Add(figure1);
             l = new LedgeLineFigure();
             l.From = line.From;
@@ -708,12 +723,12 @@ namespace Diagrams
                 for (int i = 0; i < Diagram.figures.Count(); i++)
                 {
                     if (Diagram.figures[i] is SolidFigure)
-                        (Diagram.figures[i] as SolidFigure).location.X -= b;
+                        (Diagram.figures[i] as SolidFigure).location.X -= b - 50;
                     else
                     {
-                        (Diagram.figures[i] as LedgeLineFigure).ledgePositionX -= b;
+                        (Diagram.figures[i] as LedgeLineFigure).ledgePositionX -= b - 50;
                         if (Diagram.figures[i].type == 13)
-                            (Diagram.figures[i] as TripleLedgeLineFigure).secondLedgePosX -= b;
+                            (Diagram.figures[i] as TripleLedgeLineFigure).secondLedgePosX -= b - 50;
                     }
                 }
             }
@@ -725,7 +740,7 @@ namespace Diagrams
             int min = Int32.MaxValue - 20;
             foreach (Figure f in diagram.figures)
             {
-                if (f is SolidFigure && (f as SolidFigure).location.X - SolidFigure.defaultSize/2 < min)
+                if (f is SolidFigure && !(f is Minus) && !(f is Plus) && (f as SolidFigure).location.X - SolidFigure.defaultSize/2 <= min)
                 {
                     min = (int)(f as SolidFigure).location.X - SolidFigure.defaultSize/2;
                 }
@@ -1103,11 +1118,22 @@ namespace Diagrams
                 }
                 if (to == null && !(from is EllipseBlock))
                 {
-                    LedgeLineFigure l = new DoubleLedgeLineFigure();
-                    l.From = from.figure;
-                    l.To = f_to;
-                    l.ledgePositionX = from.figure.location.X - SolidFigure.defaultSize - 30;
-                    Diagram.figures.Add(l);
+                    if (!(from is IfWithoutElseBlock))
+                    {
+                        LedgeLineFigure l = new DoubleLedgeLineFigure();
+                        l.From = from.figure;
+                        l.To = f_to;
+                        l.ledgePositionX = from.figure.location.X - SolidFigure.defaultSize - 30;
+                        Diagram.figures.Add(l);
+                    }
+                    else
+                    {
+                        LedgeLineFigure l = new DoubleLedgeLineFigureS();
+                        l.From = from.figure;
+                        l.To = f_to;
+                        l.ledgePositionX = from.figure.location.X + SolidFigure.defaultSize + 30;
+                        Diagram.figures.Add(l);
+                    }
                 }
                 MoveFiguresXBack();
                 //CreateMarkers();
@@ -1328,7 +1354,7 @@ namespace Diagrams
             {
                 Block b = null;
                 b = findBlockWithGraphic(figure, (block as Condition).trueBlock);
-                if (block is IfBlock)
+                if (block is IfBlock && b == null)
                     b = findBlockWithGraphic(figure, (block as IfBlock).falseBlock);
                 if (b == null)
                     return findBlockWithGraphic(figure, block.nextBlock);

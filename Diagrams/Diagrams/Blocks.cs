@@ -67,6 +67,7 @@ namespace Diagrams
     public class IfBlock : Condition
     {
         public byte condition; //номер условия
+        public byte num_cond;
         public Block falseBlock;
 
         public IfBlock() { }

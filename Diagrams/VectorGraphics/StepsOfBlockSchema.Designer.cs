@@ -81,6 +81,7 @@
             this.dgvThird.Size = new System.Drawing.Size(253, 312);
             this.dgvThird.TabIndex = 1;
             this.dgvThird.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvThird_RowPrePaint);
+            this.dgvThird.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvThird_MouseClick);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -120,6 +121,7 @@
             this.dgvSecond.Size = new System.Drawing.Size(253, 312);
             this.dgvSecond.TabIndex = 1;
             this.dgvSecond.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvSecond_RowPrePaint);
+            this.dgvSecond.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvSecond_MouseClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -159,6 +161,7 @@
             this.dgvFirst.Size = new System.Drawing.Size(253, 312);
             this.dgvFirst.TabIndex = 0;
             this.dgvFirst.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvFirst_RowPrePaint);
+            this.dgvFirst.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvFirst_MouseClick);
             // 
             // Action
             // 

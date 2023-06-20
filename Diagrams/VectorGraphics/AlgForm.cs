@@ -16,6 +16,8 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
+using System.Web.UI;
+using System.Windows.Controls;
 
 namespace Diagrams
 {
@@ -34,6 +36,8 @@ namespace Diagrams
         //списки для хранения истории для каждой диаграммы отдельно
         private List<FiguresForSave> diagrams = new List<FiguresForSave>();
         private List<BlocksForSave> blocks = new List<BlocksForSave>();
+        public DrawIt draw = new DrawIt();
+        public int step = 0;
         List<Coord> coordList = new List<Coord>(); //необходимые для отрисовки балки
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -214,13 +218,13 @@ namespace Diagrams
                 {
                     using (Graphics g = Graphics.FromImage(bmp))
                     {
-                        using (Image img1 = dbDiagram.GetImage())
+                        using (System.Drawing.Image img1 = dbDiagram.GetImage())
                             g.DrawImage(img1, new Point(0, 0));
 
-                        using (Image img2 = dbDiagramS.GetImage())
+                        using (System.Drawing.Image img2 = dbDiagramS.GetImage())
                             g.DrawImage(img2, new Point(dbDiagram.GetImage().Width));
 
-                        using (Image img3 = dbDiagramT.GetImage())
+                        using (System.Drawing.Image img3 = dbDiagramT.GetImage())
                             g.DrawImage(img3, new Point(dbDiagram.GetImage().Width + dbDiagramS.Width));
                     }
                     bmp.Save(sfdImage.FileName);
@@ -577,8 +581,24 @@ namespace Diagrams
 
         private void нарисоватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DrawIt draw = new DrawIt();
-            draw.Draw(blockFirst, blockSecond, blockThird, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this, blockSchema);
+            draw.Draw(blockFirst, blockSecond, blockThird, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this, blockSchema, 0, 0);
+            List<Block> drawer1 = draw.firstDrawer;
+            List<Block> drawer2 = draw.secondDrawer;
+            List<Block> drawer3 = draw.thirdDrawer;
+            dbDiagram.selectedFigure = null;
+            dbDiagramS.selectedFigure = null;
+            dbDiagramT.selectedFigure = null;
+            dbDiagram.Invalidate();
+            dbDiagramS.Invalidate();
+            dbDiagramT.Invalidate();
+            WriteResults();
+            ZeroSelectRowsFirst();
+            ZeroSelectRowsSecond();
+            ZeroSelectRowsThird();
+        }
+
+        private void WriteResults()
+        {
             List<Block> drawer1 = draw.firstDrawer;
             List<Block> drawer2 = draw.secondDrawer;
             List<Block> drawer3 = draw.thirdDrawer;
@@ -739,7 +759,47 @@ namespace Diagrams
             dbDiagramT.markers.Clear();
             //AddInHistory();
             SaveHistory();
-
+            if (dbDiagram.selectedFigure != null && развёрткаБлоксхемToolStripMenuItem.Checked && blockSchema.dgvFirst.Rows.Count > 0)
+            {
+                ZeroSelectRowsFirst();
+                Block bl = dbDiagram.findBlockWithGraphic(dbDiagram.selectedFigure, blockFirst);
+                if (draw.selectedList != null)
+                {
+                    List<Block> blocks = draw.selectedList.FindAll(x => x == bl);
+                    int last_id = 0;
+                    foreach (Block b in blocks)
+                    {
+                        int id = draw.selectedList.IndexOf(b, last_id);
+                        last_id = id + 1;
+                        if (blockSchema.dgvFirst.Rows.Count - 1 > id)
+                            blockSchema.dgvFirst.Rows[id].Selected = true;
+                    }
+                }
+            }
+        }
+        private void ZeroSelectRowsFirst()
+        {
+            if (blockSchema != null)
+            foreach (DataGridViewRow row in blockSchema.dgvFirst.Rows)
+            {
+                row.Selected = false;
+            }
+        }
+        private void ZeroSelectRowsSecond()
+        {
+            if (blockSchema != null)
+                foreach (DataGridViewRow row in blockSchema.dgvSecond.Rows)
+            {
+                row.Selected = false;
+            }
+        }
+        private void ZeroSelectRowsThird()
+        {
+            if (blockSchema != null)
+                foreach (DataGridViewRow row in blockSchema.dgvThird.Rows)
+            {
+                row.Selected = false;
+            }
         }
         private void dbDiagramS_MouseClick(object sender, MouseEventArgs e)
         {
@@ -749,6 +809,23 @@ namespace Diagrams
             dbDiagramT.markers.Clear();
             //AddInHistory();
             SaveHistory();
+            if (dbDiagramS.selectedFigure != null && развёрткаБлоксхемToolStripMenuItem.Checked && blockSchema.dgvSecond.Rows.Count > 1)
+            {
+                ZeroSelectRowsSecond();
+                Block bl = dbDiagramS.findBlockWithGraphic(dbDiagramS.selectedFigure, blockSecond);
+                if (draw.selectedListS != null)
+                {
+                    List<Block> blocks = draw.selectedListS.FindAll(x => x == bl);
+                    int last_id = 0;
+                    foreach (Block b in blocks)
+                    {
+                        int id = draw.selectedListS.IndexOf(b, last_id);
+                        last_id = id + 1;
+                        if (blockSchema.dgvSecond.Rows.Count - 1 > id)
+                            blockSchema.dgvSecond.Rows[id].Selected = true;
+                    }
+                }
+            }
 
         }
         private void dbDiagramT_MouseClick(object sender, MouseEventArgs e)
@@ -759,6 +836,23 @@ namespace Diagrams
             dbDiagram.markers.Clear();
             //AddInHistory();
             SaveHistory();
+            if (dbDiagramT.selectedFigure != null && развёрткаБлоксхемToolStripMenuItem.Checked && blockSchema.dgvThird.Rows.Count > 1)
+            {
+                ZeroSelectRowsThird();
+                Block bl = dbDiagramT.findBlockWithGraphic(dbDiagramT.selectedFigure, blockThird);
+                if (draw.selectedListT != null)
+                {
+                    List<Block> blocks = draw.selectedListT.FindAll(x => x == bl);
+                    int last_id = 0;
+                    foreach (Block b in blocks)
+                    {
+                        int id = draw.selectedListT.IndexOf(b, last_id);
+                        last_id = id + 1;
+                        if (blockSchema.dgvThird.Rows.Count - 1 > id)
+                            blockSchema.dgvThird.Rows[id].Selected = true;
+                    }
+                }
+            }
         }
 
         private void сохранитьПодпрограммуToolStripMenuItem_Click(object sender, EventArgs e)
@@ -936,6 +1030,9 @@ namespace Diagrams
                 blockSchema.dgvThird.Rows.Clear();
                 blockSchema.dgvSecond.Rows.Clear();
             }
+            drawForm.dr = 1;
+            drawForm.pbDraw.Invalidate();
+
         }
 
         private void дваToolStripMenuItem_Click(object sender, EventArgs e)
@@ -953,14 +1050,17 @@ namespace Diagrams
             NewDiagramThird();
             if (blockSchema != null)
             {
-                blockSchema.panel1.Width = blockSchema.Width/2 - 50;
-                blockSchema.panel2.Width = blockSchema.Width/2 - 50;
+                blockSchema.panel1.Width = blockSchema.Width/2 - 30;
+                blockSchema.panel2.Width = blockSchema.Width/2 - 30;
 
                 blockSchema.panel2.Visible = true;
                 blockSchema.panel3.Visible = false;
                 blockSchema.dgvThird.Rows.Clear();
                 blockSchema.dgvSecond.Rows.Clear();
             }
+            drawForm.dr = 2;
+            drawForm.pbDraw.Invalidate();
+
         }
 
         private void триToolStripMenuItem_Click(object sender, EventArgs e)
@@ -976,15 +1076,18 @@ namespace Diagrams
             panel3.Width = (this.Width - flowLayoutPanel1.Width - 50) / 3;
             if (blockSchema != null)
             {
-                blockSchema.panel1.Width = blockSchema.Width - 50;
-                blockSchema.panel2.Width = blockSchema.Width - 50;
-                blockSchema.panel3.Width = blockSchema.Width - 50;
+                blockSchema.panel1.Width = blockSchema.Width/3 - 20;
+                blockSchema.panel2.Width = blockSchema.Width/3 - 20;
+                blockSchema.panel3.Width = blockSchema.Width/3 - 20;
 
                 blockSchema.panel2.Visible = true;
                 blockSchema.panel3.Visible = true;
                 blockSchema.dgvThird.Rows.Clear();
                 blockSchema.dgvSecond.Rows.Clear();
             }
+            drawForm.dr = 3;
+            drawForm.pbDraw.Invalidate();
+
         }
 
         private void AlgForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -1047,6 +1150,8 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(5, blockThird);
             dbDiagramT.Invalidate();
+            ZeroSteps();
+
         }
 
         private void xuiButton1_Click(object sender, EventArgs e)
@@ -1062,6 +1167,8 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(6, blockThird);
             dbDiagramT.Invalidate();
+            ZeroSteps();
+
         }
 
         private void xuiButton4_Click(object sender, EventArgs e)
@@ -1072,6 +1179,8 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(1, blockThird);
             dbDiagramT.Invalidate();
+            ZeroSteps();
+
         }
 
         private void xuiButton5_Click(object sender, EventArgs e)
@@ -1082,6 +1191,8 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(7, blockThird);
             dbDiagramT.Invalidate();
+            ZeroSteps();
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -1129,6 +1240,7 @@ namespace Diagrams
             dbDiagramS.Invalidate();
             dbDiagramT.CreateMarkers(3, blockThird);
             dbDiagramT.Invalidate();
+            ZeroSteps();
         }
 
         private void развёрткаБлоксхемToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1142,11 +1254,104 @@ namespace Diagrams
             else
             {
                 развёрткаБлоксхемToolStripMenuItem.Checked = true;
-                blockSchema= new StepsOfBlockSchema();
+                blockSchema= new StepsOfBlockSchema(this);
                 blockSchema.Show();
                 blockSchema.Left = 0;
                 blockSchema.Top = this.Height;
+                if (одинToolStripMenuItem.Checked)
+                    одинToolStripMenuItem_Click(null, null);
+                if (дваToolStripMenuItem.Checked)
+                    дваToolStripMenuItem_Click(null, null);
+                if (триToolStripMenuItem.Checked)
+                    триToolStripMenuItem_Click(null, null);
             }
+        }
+
+        private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, "Help.chm");
+        }
+
+        private void xuiButton1_Click_1(object sender, EventArgs e)
+        {
+            dbDiagram.CreateMarkers(4, blockFirst);
+            dbDiagram.Invalidate();
+            dbDiagramS.CreateMarkers(4, blockSecond);
+            dbDiagramS.Invalidate();
+            dbDiagramT.CreateMarkers(4, blockThird);
+            dbDiagramT.Invalidate();
+            ZeroSteps();
+        }
+
+        private void ZeroSteps()
+        {
+            if (step != 0)
+            {
+                step = 0;
+                dbDiagram.drawFigure = null;
+                dbDiagramS.drawFigure = null;
+                dbDiagramT.drawFigure = null;
+                dbDiagram.Invalidate();
+                dbDiagramT.Invalidate();
+                dbDiagramS.Invalidate();
+                наНачалоToolStripMenuItem_Click(null, null);
+            }
+        }
+
+        private void шагВперёдToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            dbDiagram.selectedFigure = null;
+            dbDiagramS.selectedFigure = null;
+            dbDiagramT.selectedFigure = null;
+            dbDiagram.Invalidate();
+            dbDiagramS.Invalidate();
+            dbDiagramT.Invalidate();
+            if (step == 0)
+            {
+                draw.Draw(blockFirst, blockSecond, blockThird, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this, blockSchema, 1, step);
+                draw.MoveBlock(step);
+                if (!draw.error)
+                    step++;
+            }
+            else
+            {
+                if (step > 0 && step < draw.max)
+                {
+                    draw.MoveBlock(step);
+                    step++;
+                }
+                else
+                if (step == draw.max)
+                {
+                    step = 0;
+                    dbDiagram.drawFigure = null;
+                    dbDiagramS.drawFigure = null;
+                    dbDiagramT.drawFigure = null;
+                    dbDiagram.Invalidate();
+                    dbDiagramT.Invalidate();
+                    dbDiagramS.Invalidate();
+                    WriteResults();
+                }
+            }
+        }
+
+        private void наНачалоToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            step = 0;
+            draw.Draw(blockFirst, blockSecond, blockThird, drawForm.numOfCellsX, drawForm.numOfCellsY, drawForm, this, blockSchema, 1, step);
+            dbDiagram.drawFigure = null;
+            dbDiagramS.drawFigure = null;
+            dbDiagramT.drawFigure = null;
+            dbDiagram.Invalidate();
+            dbDiagramT.Invalidate();
+            dbDiagramS.Invalidate();
+
+        }
+
+        private void dbDiagram_Load(object sender, EventArgs e)
+        {
+
         }
         //Overridden methods
 

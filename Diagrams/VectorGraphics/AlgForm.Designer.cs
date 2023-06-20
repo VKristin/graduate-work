@@ -42,13 +42,16 @@
             this.одинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.дваToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.триToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.развёрткаБлоксхемToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.miClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.развёрткаБлоксхемToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.отменитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.повторитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.нарисоватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.шагВперёдToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.наНачалоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdDiagram = new System.Windows.Forms.SaveFileDialog();
             this.ofdDiagram = new System.Windows.Forms.OpenFileDialog();
             this.sfdImage = new System.Windows.Forms.SaveFileDialog();
@@ -57,19 +60,19 @@
             this.xuiButton2 = new XanderUI.XUIButton();
             this.xuiButton3 = new XanderUI.XUIButton();
             this.xuiButton4 = new XanderUI.XUIButton();
-            this.btm2 = new System.Windows.Forms.Button();
             this.btm7 = new System.Windows.Forms.Button();
             this.xuiButton5 = new XanderUI.XUIButton();
+            this.xuiButton1 = new XanderUI.XUIButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dbDiagram = new Diagrams.DiagramBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dbDiagramS = new Diagrams.DiagramBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dbDiagramT = new Diagrams.DiagramBox();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.splitter4 = new System.Windows.Forms.Splitter();
+            this.dbDiagramT = new Diagrams.DiagramBox();
+            this.dbDiagramS = new Diagrams.DiagramBox();
+            this.dbDiagram = new Diagrams.DiagramBox();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -84,7 +87,10 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
             this.редактированиеToolStripMenuItem,
-            this.нарисоватьToolStripMenuItem});
+            this.нарисоватьToolStripMenuItem,
+            this.шагВперёдToolStripMenuItem,
+            this.наНачалоToolStripMenuItem,
+            this.справкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -195,6 +201,13 @@
             this.триToolStripMenuItem.Text = "Три";
             this.триToolStripMenuItem.Click += new System.EventHandler(this.триToolStripMenuItem_Click);
             // 
+            // развёрткаБлоксхемToolStripMenuItem
+            // 
+            this.развёрткаБлоксхемToolStripMenuItem.Name = "развёрткаБлоксхемToolStripMenuItem";
+            this.развёрткаБлоксхемToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.развёрткаБлоксхемToolStripMenuItem.Text = "Развёртка блок-схем";
+            this.развёрткаБлоксхемToolStripMenuItem.Click += new System.EventHandler(this.развёрткаБлоксхемToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
@@ -206,13 +219,6 @@
             this.miClose.Size = new System.Drawing.Size(231, 22);
             this.miClose.Text = "Выход";
             this.miClose.Click += new System.EventHandler(this.miExit_Click);
-            // 
-            // развёрткаБлоксхемToolStripMenuItem
-            // 
-            this.развёрткаБлоксхемToolStripMenuItem.Name = "развёрткаБлоксхемToolStripMenuItem";
-            this.развёрткаБлоксхемToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
-            this.развёрткаБлоксхемToolStripMenuItem.Text = "Развёртка блок-схем";
-            this.развёрткаБлоксхемToolStripMenuItem.Click += new System.EventHandler(this.развёрткаБлоксхемToolStripMenuItem_Click);
             // 
             // редактированиеToolStripMenuItem
             // 
@@ -248,6 +254,29 @@
             this.нарисоватьToolStripMenuItem.Text = "Нарисовать";
             this.нарисоватьToolStripMenuItem.Click += new System.EventHandler(this.нарисоватьToolStripMenuItem_Click);
             // 
+            // шагВперёдToolStripMenuItem
+            // 
+            this.шагВперёдToolStripMenuItem.Name = "шагВперёдToolStripMenuItem";
+            this.шагВперёдToolStripMenuItem.Size = new System.Drawing.Size(82, 24);
+            this.шагВперёдToolStripMenuItem.Text = "Шаг вперёд";
+            this.шагВперёдToolStripMenuItem.Click += new System.EventHandler(this.шагВперёдToolStripMenuItem_Click);
+            // 
+            // наНачалоToolStripMenuItem
+            // 
+            this.наНачалоToolStripMenuItem.Name = "наНачалоToolStripMenuItem";
+            this.наНачалоToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
+            this.наНачалоToolStripMenuItem.Text = "На начало";
+            this.наНачалоToolStripMenuItem.Click += new System.EventHandler(this.наНачалоToolStripMenuItem_Click);
+            // 
+            // справкаToolStripMenuItem
+            // 
+            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
+            this.справкаToolStripMenuItem.ShortcutKeyDisplayString = "F1";
+            this.справкаToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.справкаToolStripMenuItem.Text = "Справка";
+            this.справкаToolStripMenuItem.Click += new System.EventHandler(this.справкаToolStripMenuItem_Click);
+            // 
             // sfdDiagram
             // 
             this.sfdDiagram.DefaultExt = "diagram";
@@ -269,13 +298,13 @@
             this.flowLayoutPanel1.Controls.Add(this.xuiButton2);
             this.flowLayoutPanel1.Controls.Add(this.xuiButton3);
             this.flowLayoutPanel1.Controls.Add(this.xuiButton4);
-            this.flowLayoutPanel1.Controls.Add(this.btm2);
             this.flowLayoutPanel1.Controls.Add(this.btm7);
             this.flowLayoutPanel1.Controls.Add(this.xuiButton5);
+            this.flowLayoutPanel1.Controls.Add(this.xuiButton1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(137, 403);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(137, 413);
             this.flowLayoutPanel1.TabIndex = 4;
             // 
             // xuiButton6
@@ -362,22 +391,10 @@
             this.xuiButton4.Vertical_Alignment = System.Drawing.StringAlignment.Center;
             this.xuiButton4.Click += new System.EventHandler(this.xuiButton4_Click);
             // 
-            // btm2
-            // 
-            this.btm2.BackColor = System.Drawing.Color.Lavender;
-            this.btm2.Location = new System.Drawing.Point(3, 227);
-            this.btm2.Name = "btm2";
-            this.btm2.Size = new System.Drawing.Size(134, 45);
-            this.btm2.TabIndex = 6;
-            this.btm2.Text = "Развилка";
-            this.btm2.UseVisualStyleBackColor = false;
-            this.btm2.Visible = false;
-            this.btm2.Click += new System.EventHandler(this.btm2_Click);
-            // 
             // btm7
             // 
             this.btm7.BackColor = System.Drawing.Color.Lavender;
-            this.btm7.Location = new System.Drawing.Point(3, 278);
+            this.btm7.Location = new System.Drawing.Point(3, 227);
             this.btm7.Name = "btm7";
             this.btm7.Size = new System.Drawing.Size(134, 45);
             this.btm7.TabIndex = 11;
@@ -399,7 +416,7 @@
             this.xuiButton5.HoverBackgroundColor = System.Drawing.Color.Silver;
             this.xuiButton5.HoverTextColor = System.Drawing.Color.Black;
             this.xuiButton5.ImagePosition = XanderUI.XUIButton.imgPosition.Left;
-            this.xuiButton5.Location = new System.Drawing.Point(3, 329);
+            this.xuiButton5.Location = new System.Drawing.Point(3, 278);
             this.xuiButton5.Name = "xuiButton5";
             this.xuiButton5.Size = new System.Drawing.Size(134, 50);
             this.xuiButton5.TabIndex = 22;
@@ -407,13 +424,35 @@
             this.xuiButton5.Vertical_Alignment = System.Drawing.StringAlignment.Center;
             this.xuiButton5.Click += new System.EventHandler(this.xuiButton5_Click);
             // 
+            // xuiButton1
+            // 
+            this.xuiButton1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.xuiButton1.ButtonImage = null;
+            this.xuiButton1.ButtonStyle = XanderUI.XUIButton.Style.MaterialRounded;
+            this.xuiButton1.ButtonText = "Развилка";
+            this.xuiButton1.ClickBackColor = System.Drawing.Color.Silver;
+            this.xuiButton1.ClickTextColor = System.Drawing.Color.Black;
+            this.xuiButton1.CornerRadius = 5;
+            this.xuiButton1.Horizontal_Alignment = System.Drawing.StringAlignment.Center;
+            this.xuiButton1.HoverBackgroundColor = System.Drawing.Color.Silver;
+            this.xuiButton1.HoverTextColor = System.Drawing.Color.Black;
+            this.xuiButton1.ImagePosition = XanderUI.XUIButton.imgPosition.Left;
+            this.xuiButton1.Location = new System.Drawing.Point(3, 334);
+            this.xuiButton1.Name = "xuiButton1";
+            this.xuiButton1.Size = new System.Drawing.Size(134, 50);
+            this.xuiButton1.TabIndex = 24;
+            this.xuiButton1.TextColor = System.Drawing.Color.Black;
+            this.xuiButton1.Vertical_Alignment = System.Drawing.StringAlignment.Center;
+            this.xuiButton1.Visible = false;
+            this.xuiButton1.Click += new System.EventHandler(this.xuiButton1_Click_1);
+            // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(137, 28);
             this.splitter1.MinExtra = 5;
             this.splitter1.MinSize = 0;
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(1, 403);
+            this.splitter1.Size = new System.Drawing.Size(1, 413);
             this.splitter1.TabIndex = 13;
             this.splitter1.TabStop = false;
             // 
@@ -425,28 +464,9 @@
             this.panel1.Location = new System.Drawing.Point(138, 28);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(3);
-            this.panel1.Size = new System.Drawing.Size(259, 403);
+            this.panel1.Size = new System.Drawing.Size(259, 413);
             this.panel1.TabIndex = 18;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // dbDiagram
-            // 
-            this.dbDiagram.AutoScroll = true;
-            this.dbDiagram.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dbDiagram.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagram.Diagram = null;
-            this.dbDiagram.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dbDiagram.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagram.Location = new System.Drawing.Point(3, 3);
-            this.dbDiagram.Margin = new System.Windows.Forms.Padding(4);
-            this.dbDiagram.Name = "dbDiagram";
-            this.dbDiagram.SelectedFigure = null;
-            this.dbDiagram.Size = new System.Drawing.Size(253, 397);
-            this.dbDiagram.TabIndex = 4;
-            this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
-            this.dbDiagram.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseClick);
-            this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
-            this.dbDiagram.Resize += new System.EventHandler(this.dbDiagram_Resize);
             // 
             // panel2
             // 
@@ -456,27 +476,8 @@
             this.panel2.Location = new System.Drawing.Point(400, 28);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.panel2.Size = new System.Drawing.Size(259, 403);
+            this.panel2.Size = new System.Drawing.Size(259, 413);
             this.panel2.TabIndex = 19;
-            // 
-            // dbDiagramS
-            // 
-            this.dbDiagramS.AutoScroll = true;
-            this.dbDiagramS.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dbDiagramS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dbDiagramS.Diagram = null;
-            this.dbDiagramS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dbDiagramS.ForeColor = System.Drawing.Color.Black;
-            this.dbDiagramS.Location = new System.Drawing.Point(3, 3);
-            this.dbDiagramS.Margin = new System.Windows.Forms.Padding(4);
-            this.dbDiagramS.Name = "dbDiagramS";
-            this.dbDiagramS.SelectedFigure = null;
-            this.dbDiagramS.Size = new System.Drawing.Size(253, 397);
-            this.dbDiagramS.TabIndex = 10;
-            this.dbDiagramS.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramS_KeyDown);
-            this.dbDiagramS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseClick);
-            this.dbDiagramS.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseDoubleClick);
-            this.dbDiagramS.Resize += new System.EventHandler(this.dbDiagramS_Resize);
             // 
             // panel3
             // 
@@ -486,8 +487,35 @@
             this.panel3.Location = new System.Drawing.Point(662, 28);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(3);
-            this.panel3.Size = new System.Drawing.Size(259, 403);
+            this.panel3.Size = new System.Drawing.Size(259, 413);
             this.panel3.TabIndex = 19;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(397, 28);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 413);
+            this.splitter2.TabIndex = 20;
+            this.splitter2.TabStop = false;
+            this.splitter2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter2_SplitterMoved);
+            // 
+            // splitter3
+            // 
+            this.splitter3.Location = new System.Drawing.Point(659, 28);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(3, 413);
+            this.splitter3.TabIndex = 21;
+            this.splitter3.TabStop = false;
+            this.splitter3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter3_SplitterMoved);
+            // 
+            // splitter4
+            // 
+            this.splitter4.Location = new System.Drawing.Point(921, 28);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(3, 413);
+            this.splitter4.TabIndex = 22;
+            this.splitter4.TabStop = false;
+            this.splitter4.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter4_SplitterMoved);
             // 
             // dbDiagramT
             // 
@@ -501,39 +529,51 @@
             this.dbDiagramT.Margin = new System.Windows.Forms.Padding(4);
             this.dbDiagramT.Name = "dbDiagramT";
             this.dbDiagramT.SelectedFigure = null;
-            this.dbDiagramT.Size = new System.Drawing.Size(253, 397);
+            this.dbDiagramT.Size = new System.Drawing.Size(253, 407);
             this.dbDiagramT.TabIndex = 12;
             this.dbDiagramT.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramT_KeyDown);
             this.dbDiagramT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramT_MouseClick);
             this.dbDiagramT.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramT_MouseDoubleClick);
             this.dbDiagramT.Resize += new System.EventHandler(this.dbDiagramT_Resize);
             // 
-            // splitter2
+            // dbDiagramS
             // 
-            this.splitter2.Location = new System.Drawing.Point(397, 28);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 403);
-            this.splitter2.TabIndex = 20;
-            this.splitter2.TabStop = false;
-            this.splitter2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter2_SplitterMoved);
+            this.dbDiagramS.AutoScroll = true;
+            this.dbDiagramS.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dbDiagramS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dbDiagramS.Diagram = null;
+            this.dbDiagramS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbDiagramS.ForeColor = System.Drawing.Color.Black;
+            this.dbDiagramS.Location = new System.Drawing.Point(3, 3);
+            this.dbDiagramS.Margin = new System.Windows.Forms.Padding(4);
+            this.dbDiagramS.Name = "dbDiagramS";
+            this.dbDiagramS.SelectedFigure = null;
+            this.dbDiagramS.Size = new System.Drawing.Size(253, 407);
+            this.dbDiagramS.TabIndex = 10;
+            this.dbDiagramS.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramS_KeyDown);
+            this.dbDiagramS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseClick);
+            this.dbDiagramS.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseDoubleClick);
+            this.dbDiagramS.Resize += new System.EventHandler(this.dbDiagramS_Resize);
             // 
-            // splitter3
+            // dbDiagram
             // 
-            this.splitter3.Location = new System.Drawing.Point(659, 28);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(3, 403);
-            this.splitter3.TabIndex = 21;
-            this.splitter3.TabStop = false;
-            this.splitter3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter3_SplitterMoved);
-            // 
-            // splitter4
-            // 
-            this.splitter4.Location = new System.Drawing.Point(921, 28);
-            this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(3, 403);
-            this.splitter4.TabIndex = 22;
-            this.splitter4.TabStop = false;
-            this.splitter4.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter4_SplitterMoved);
+            this.dbDiagram.AutoScroll = true;
+            this.dbDiagram.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dbDiagram.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dbDiagram.Diagram = null;
+            this.dbDiagram.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dbDiagram.ForeColor = System.Drawing.Color.Black;
+            this.dbDiagram.Location = new System.Drawing.Point(3, 3);
+            this.dbDiagram.Margin = new System.Windows.Forms.Padding(4);
+            this.dbDiagram.Name = "dbDiagram";
+            this.dbDiagram.SelectedFigure = null;
+            this.dbDiagram.Size = new System.Drawing.Size(253, 407);
+            this.dbDiagram.TabIndex = 4;
+            this.dbDiagram.Load += new System.EventHandler(this.dbDiagram_Load);
+            this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
+            this.dbDiagram.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseClick);
+            this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
+            this.dbDiagram.Resize += new System.EventHandler(this.dbDiagram_Resize);
             // 
             // AlgForm
             // 
@@ -541,7 +581,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(958, 431);
+            this.ClientSize = new System.Drawing.Size(958, 441);
             this.Controls.Add(this.splitter4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.splitter3);
@@ -552,11 +592,12 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AlgForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "Чертёжник";
+            this.Text = "Карандаш";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AlgForm_FormClosing);
             this.Load += new System.EventHandler(this.AlgForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AlgForm_KeyDown);
@@ -572,7 +613,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.SaveFileDialog sfdDiagram;
         private System.Windows.Forms.OpenFileDialog ofdDiagram;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
@@ -582,7 +622,6 @@
         private System.Windows.Forms.ToolStripMenuItem miExport;
         private System.Windows.Forms.SaveFileDialog sfdImage;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btm2;
         private System.Windows.Forms.Button btm7;
         private System.Windows.Forms.ToolStripMenuItem нарисоватьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem открытьЗаданиеToolStripMenuItem;
@@ -595,9 +634,6 @@
         private System.Windows.Forms.ToolStripMenuItem отменитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem повторитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem количествоИсполнителейToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem одинToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem дваToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem триToolStripMenuItem;
         private XanderUI.XUIButton xuiButton2;
         private XanderUI.XUIButton xuiButton3;
         private XanderUI.XUIButton xuiButton4;
@@ -612,7 +648,15 @@
         private System.Windows.Forms.Splitter splitter3;
         private System.Windows.Forms.Splitter splitter4;
         private XanderUI.XUIButton xuiButton6;
-        private System.Windows.Forms.ToolStripMenuItem развёрткаБлоксхемToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem одинToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem дваToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem триToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
+        private XanderUI.XUIButton xuiButton1;
+        private System.Windows.Forms.ToolStripMenuItem шагВперёдToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem наНачалоToolStripMenuItem;
+        public System.Windows.Forms.MenuStrip menuStrip1;
+        public System.Windows.Forms.ToolStripMenuItem развёрткаБлоксхемToolStripMenuItem;
     }
 }
 

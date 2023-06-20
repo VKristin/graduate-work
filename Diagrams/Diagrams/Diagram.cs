@@ -926,7 +926,7 @@ namespace Diagrams
                 location = new PointF(line.ledgePositionX, (line.From.location.Y + line.To.location.Y) / 2);
             //if (line.ledgePositionX == (line.From.location.X + line.To.location.X) / 2) //добавить, когда условия в целом смогут быть другими
             if (line.type == 11 && (line.From is SexangleFigure || line.From is RhombFigure))
-                location = new PointF(line.To.location.X, line.To.location.Y - SolidFigure.defaultSize / 2 + 5);
+                location = new PointF((line as DoubleLedgeLineFigureS).ledgePositionX, (line.To.location.Y + line.From.location.Y)/2 - 5);
             if (line.type == 13)
                 location = new PointF(((line as TripleLedgeLineFigure).secondLedgePosX + (line as TripleLedgeLineFigure).ledgePositionX) / 2, (line as TripleLedgeLineFigure).ledgePositionY);
             if (line.type == 1 && line.From is RhombFigure && line.ledgePositionX == line.From.location.X)

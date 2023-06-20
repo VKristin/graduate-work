@@ -200,6 +200,11 @@ namespace Diagrams
                     (block as IfWithoutElseBlock).condition = Convert.ToByte(cbActions.SelectedIndex + 1);
                     (block as IfWithoutElseBlock).num_cond = Convert.ToByte(nudConditions.Value);
                 }
+                if (block is IfBlock)
+                {
+                    (block as IfBlock).condition = Convert.ToByte(cbActions.SelectedIndex + 1);
+                    (block as IfBlock).num_cond = Convert.ToByte(nudConditions.Value);
+                }
             }
             if (figure.type == 8)
             {
