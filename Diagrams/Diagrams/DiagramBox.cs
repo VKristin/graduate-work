@@ -41,7 +41,7 @@ namespace Diagrams
             ResizeRedraw = true;
 
             selectRectPen = new Pen(Color.Blue, 1);
-            drawPen = new Pen(Color.Green, 2);
+            drawPen = new Pen(Color.Green, 4);
             
             selectRectPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }

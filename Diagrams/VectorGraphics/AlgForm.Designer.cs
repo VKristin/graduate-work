@@ -64,20 +64,22 @@
             this.xuiButton5 = new XanderUI.XUIButton();
             this.xuiButton1 = new XanderUI.XUIButton();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.splitter2 = new System.Windows.Forms.Splitter();
-            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.splitter4 = new System.Windows.Forms.Splitter();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.dbDiagramT = new Diagrams.DiagramBox();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.dbDiagramS = new Diagrams.DiagramBox();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.dbDiagram = new Diagrams.DiagramBox();
             this.menuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -94,7 +96,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(958, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(977, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -179,7 +181,7 @@
             // 
             this.одинToolStripMenuItem.CheckOnClick = true;
             this.одинToolStripMenuItem.Name = "одинToolStripMenuItem";
-            this.одинToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.одинToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.одинToolStripMenuItem.Text = "Один";
             this.одинToolStripMenuItem.Click += new System.EventHandler(this.одинToolStripMenuItem_Click);
             // 
@@ -187,7 +189,7 @@
             // 
             this.дваToolStripMenuItem.CheckOnClick = true;
             this.дваToolStripMenuItem.Name = "дваToolStripMenuItem";
-            this.дваToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.дваToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.дваToolStripMenuItem.Text = "Два";
             this.дваToolStripMenuItem.Click += new System.EventHandler(this.дваToolStripMenuItem_Click);
             // 
@@ -197,7 +199,7 @@
             this.триToolStripMenuItem.CheckOnClick = true;
             this.триToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.триToolStripMenuItem.Name = "триToolStripMenuItem";
-            this.триToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.триToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.триToolStripMenuItem.Text = "Три";
             this.триToolStripMenuItem.Click += new System.EventHandler(this.триToolStripMenuItem_Click);
             // 
@@ -456,66 +458,40 @@
             this.splitter1.TabIndex = 13;
             this.splitter1.TabStop = false;
             // 
-            // panel1
+            // panel4
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Highlight;
-            this.panel1.Controls.Add(this.dbDiagram);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(138, 28);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(3);
-            this.panel1.Size = new System.Drawing.Size(259, 413);
-            this.panel1.TabIndex = 18;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel4.AutoScroll = true;
+            this.panel4.Controls.Add(this.splitter4);
+            this.panel4.Controls.Add(this.panel3);
+            this.panel4.Controls.Add(this.splitter3);
+            this.panel4.Controls.Add(this.panel2);
+            this.panel4.Controls.Add(this.splitter2);
+            this.panel4.Controls.Add(this.panel1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(138, 28);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(839, 413);
+            this.panel4.TabIndex = 23;
             // 
-            // panel2
+            // splitter4
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.panel2.Controls.Add(this.dbDiagramS);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(400, 28);
-            this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(3);
-            this.panel2.Size = new System.Drawing.Size(259, 413);
-            this.panel2.TabIndex = 19;
+            this.splitter4.Location = new System.Drawing.Point(783, 0);
+            this.splitter4.Name = "splitter4";
+            this.splitter4.Size = new System.Drawing.Size(3, 413);
+            this.splitter4.TabIndex = 28;
+            this.splitter4.TabStop = false;
+            this.splitter4.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter4_SplitterMoved);
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.panel3.Controls.Add(this.dbDiagramT);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(662, 28);
+            this.panel3.Location = new System.Drawing.Point(524, 0);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(3);
             this.panel3.Size = new System.Drawing.Size(259, 413);
-            this.panel3.TabIndex = 19;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Location = new System.Drawing.Point(397, 28);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 413);
-            this.splitter2.TabIndex = 20;
-            this.splitter2.TabStop = false;
-            this.splitter2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter2_SplitterMoved);
-            // 
-            // splitter3
-            // 
-            this.splitter3.Location = new System.Drawing.Point(659, 28);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(3, 413);
-            this.splitter3.TabIndex = 21;
-            this.splitter3.TabStop = false;
-            this.splitter3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter3_SplitterMoved);
-            // 
-            // splitter4
-            // 
-            this.splitter4.Location = new System.Drawing.Point(921, 28);
-            this.splitter4.Name = "splitter4";
-            this.splitter4.Size = new System.Drawing.Size(3, 413);
-            this.splitter4.TabIndex = 22;
-            this.splitter4.TabStop = false;
-            this.splitter4.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter4_SplitterMoved);
+            this.panel3.TabIndex = 24;
             // 
             // dbDiagramT
             // 
@@ -531,10 +507,29 @@
             this.dbDiagramT.SelectedFigure = null;
             this.dbDiagramT.Size = new System.Drawing.Size(253, 407);
             this.dbDiagramT.TabIndex = 12;
-            this.dbDiagramT.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramT_KeyDown);
             this.dbDiagramT.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramT_MouseClick);
             this.dbDiagramT.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramT_MouseDoubleClick);
             this.dbDiagramT.Resize += new System.EventHandler(this.dbDiagramT_Resize);
+            // 
+            // splitter3
+            // 
+            this.splitter3.Location = new System.Drawing.Point(521, 0);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(3, 413);
+            this.splitter3.TabIndex = 27;
+            this.splitter3.TabStop = false;
+            this.splitter3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter3_SplitterMoved);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel2.Controls.Add(this.dbDiagramS);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(262, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(3);
+            this.panel2.Size = new System.Drawing.Size(259, 413);
+            this.panel2.TabIndex = 25;
             // 
             // dbDiagramS
             // 
@@ -550,10 +545,29 @@
             this.dbDiagramS.SelectedFigure = null;
             this.dbDiagramS.Size = new System.Drawing.Size(253, 407);
             this.dbDiagramS.TabIndex = 10;
-            this.dbDiagramS.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagramS_KeyDown);
             this.dbDiagramS.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseClick);
             this.dbDiagramS.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagramS_MouseDoubleClick);
             this.dbDiagramS.Resize += new System.EventHandler(this.dbDiagramS_Resize);
+            // 
+            // splitter2
+            // 
+            this.splitter2.Location = new System.Drawing.Point(259, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 413);
+            this.splitter2.TabIndex = 26;
+            this.splitter2.TabStop = false;
+            this.splitter2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter2_SplitterMoved);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Highlight;
+            this.panel1.Controls.Add(this.dbDiagram);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(3);
+            this.panel1.Size = new System.Drawing.Size(259, 413);
+            this.panel1.TabIndex = 23;
             // 
             // dbDiagram
             // 
@@ -569,8 +583,6 @@
             this.dbDiagram.SelectedFigure = null;
             this.dbDiagram.Size = new System.Drawing.Size(253, 407);
             this.dbDiagram.TabIndex = 4;
-            this.dbDiagram.Load += new System.EventHandler(this.dbDiagram_Load);
-            this.dbDiagram.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dbDiagram_KeyDown);
             this.dbDiagram.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseClick);
             this.dbDiagram.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dbDiagram_MouseDoubleClick);
             this.dbDiagram.Resize += new System.EventHandler(this.dbDiagram_Resize);
@@ -581,13 +593,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(958, 441);
-            this.Controls.Add(this.splitter4);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.splitter3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.splitter2);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(977, 441);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.menuStrip1);
@@ -604,9 +611,10 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -638,15 +646,6 @@
         private XanderUI.XUIButton xuiButton3;
         private XanderUI.XUIButton xuiButton4;
         private XanderUI.XUIButton xuiButton5;
-        public DiagramBox dbDiagram;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        public DiagramBox dbDiagramS;
-        private System.Windows.Forms.Panel panel3;
-        public DiagramBox dbDiagramT;
-        private System.Windows.Forms.Splitter splitter2;
-        private System.Windows.Forms.Splitter splitter3;
-        private System.Windows.Forms.Splitter splitter4;
         private XanderUI.XUIButton xuiButton6;
         public System.Windows.Forms.ToolStripMenuItem одинToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem дваToolStripMenuItem;
@@ -657,6 +656,16 @@
         private System.Windows.Forms.ToolStripMenuItem наНачалоToolStripMenuItem;
         public System.Windows.Forms.MenuStrip menuStrip1;
         public System.Windows.Forms.ToolStripMenuItem развёрткаБлоксхемToolStripMenuItem;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Splitter splitter4;
+        private System.Windows.Forms.Panel panel3;
+        public DiagramBox dbDiagramT;
+        private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.Panel panel2;
+        public DiagramBox dbDiagramS;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.Panel panel1;
+        public DiagramBox dbDiagram;
     }
 }
 
